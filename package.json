@@ -6,7 +6,7 @@
   "scripts": {
     "build": "echo 'Static build ready'",
     "start": "npx serve .",
-    "test": "node test_math.js"
+    "test": "node test_all.js"
   },
   "keywords": [
     "savarbek",

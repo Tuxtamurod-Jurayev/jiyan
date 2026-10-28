@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Savarbek Edu — 2-sinf Matematika</title>
-  <meta name="description" content="Savarbek Edu — 2-sinf o'quvchisi Savarbek uchun interaktiv matematika o'yini">
+  <title>Savarbek Edu — 2-sinf Matematika va Ingliz tili</title>
+  <meta name="description" content="Savarbek Edu v2.0 — 2-sinf o'quvchisi Savarbek uchun interaktiv matematika va ingliz tili o'yini">
   <meta name="theme-color" content="#4F46E5">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +40,6 @@
       --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
       --shadow-md: 0 6px 16px rgba(0,0,0,0.06);
       --shadow-lg: 0 12px 28px rgba(0,0,0,0.1);
-      --shadow-btn: 0 4px 0px rgba(0,0,0,0.15);
     }
 
     * {
@@ -65,7 +64,6 @@
       margin: 0;
     }
 
-    /* Mobile frame container */
     #app-container {
       width: 100%;
       max-width: 480px;
@@ -89,7 +87,6 @@
       }
     }
 
-    /* Screen manager */
     .screen {
       position: absolute;
       top: 0;
@@ -115,7 +112,6 @@
       z-index: 10;
     }
 
-    /* Custom Scrollbars */
     .screen::-webkit-scrollbar {
       width: 5px;
     }
@@ -127,15 +123,12 @@
       border-radius: 10px;
     }
 
-    /* Typography */
     h1, h2, h3, h4, .font-heading {
       font-family: var(--font-heading);
       font-weight: 800;
     }
 
-    /* ==========================================================================
-       1. SPLASH SCREEN STYLES
-       ========================================================================== */
+    /* ========== 1. SPLASH SCREEN ========== */
     #screen-splash {
       background: linear-gradient(145deg, #312E81 0%, #4338CA 50%, #6366F1 100%);
       color: #FFFFFF;
@@ -258,7 +251,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* Keyframes for Splash */
     @keyframes floatMascot {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-12px) rotate(3deg); }
@@ -269,9 +261,7 @@
       100% { transform: scale(1.15); opacity: 0.8; }
     }
 
-    /* ==========================================================================
-       2. TOP BAR & SHARED HEADER STYLES
-       ========================================================================== */
+    /* ========== 2. APP HEADER ========== */
     .app-header {
       padding: 16px 20px;
       display: flex;
@@ -371,9 +361,7 @@
       color: var(--text-main);
     }
 
-    /* ==========================================================================
-       3. HOME SCREEN STYLES
-       ========================================================================== */
+    /* ========== 3. HOME SCREEN ========== */
     .home-content {
       padding: 24px 20px;
       display: flex;
@@ -462,10 +450,9 @@
     }
 
     .subject-card.english {
-      border-color: #CBD5E1;
-      border-bottom-color: #94A3B8;
-      background: #FAFAFA;
-      opacity: 0.9;
+      border-color: #38BDF8;
+      border-bottom-color: #0284C7;
+      background: linear-gradient(to bottom, #FFFFFF, #F0F9FF);
     }
 
     .subject-card-header {
@@ -492,8 +479,8 @@
     }
 
     .english .subject-icon-box {
-      background: #F1F5F9;
-      border: 2px solid #E2E8F0;
+      background: #E0F2FE;
+      border: 2px solid #BAE6FD;
     }
 
     .subject-details {
@@ -547,6 +534,10 @@
       transition: width 0.4s ease;
     }
 
+    .english .subject-progress-fill {
+      background: linear-gradient(90deg, #0284C7, #38BDF8);
+    }
+
     .home-footer-stats {
       margin-top: auto;
       padding: 16px;
@@ -571,9 +562,7 @@
       color: var(--text-main);
     }
 
-    /* ==========================================================================
-       4. MATH OPERATIONS SCREEN STYLES
-       ========================================================================== */
+    /* ========== 4. MATH & ENGLISH CATEGORIES SCREENS ========== */
     .operations-content {
       padding: 20px;
       display: flex;
@@ -614,41 +603,55 @@
       color: #FFFFFF;
     }
 
+    /* Math Theme Colors */
     .op-card.addition .op-icon {
       background: linear-gradient(135deg, #10B981, #059669);
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
     }
-    .op-card.addition {
-      border-color: #A7F3D0;
-      border-bottom-color: #059669;
-    }
+    .op-card.addition { border-color: #A7F3D0; border-bottom-color: #059669; }
 
     .op-card.subtraction .op-icon {
       background: linear-gradient(135deg, #0EA5E9, #0284C7);
       box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
     }
-    .op-card.subtraction {
-      border-color: #BAE6FD;
-      border-bottom-color: #0284C7;
-    }
+    .op-card.subtraction { border-color: #BAE6FD; border-bottom-color: #0284C7; }
 
     .op-card.multiplication .op-icon {
       background: linear-gradient(135deg, #F59E0B, #D97706);
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
     }
-    .op-card.multiplication {
-      border-color: #FDE68A;
-      border-bottom-color: #D97706;
-    }
+    .op-card.multiplication { border-color: #FDE68A; border-bottom-color: #D97706; }
 
     .op-card.division .op-icon {
       background: linear-gradient(135deg, #8B5CF6, #7C3AED);
       box-shadow: 0 4px 12px rgba(139, 92, 246, 0.35);
     }
-    .op-card.division {
-      border-color: #DDD6FE;
-      border-bottom-color: #7C3AED;
+    .op-card.division { border-color: #DDD6FE; border-bottom-color: #7C3AED; }
+
+    /* English Category Colors */
+    .op-card.vocabulary .op-icon {
+      background: linear-gradient(135deg, #EC4899, #DB2777);
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.35);
     }
+    .op-card.vocabulary { border-color: #FBCFE8; border-bottom-color: #DB2777; }
+
+    .op-card.listening .op-icon {
+      background: linear-gradient(135deg, #3B82F6, #2563EB);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+    }
+    .op-card.listening { border-color: #BFDBFE; border-bottom-color: #2563EB; }
+
+    .op-card.spelling .op-icon {
+      background: linear-gradient(135deg, #10B981, #059669);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    }
+    .op-card.spelling { border-color: #A7F3D0; border-bottom-color: #059669; }
+
+    .op-card.grammar .op-icon {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+    .op-card.grammar { border-color: #FDE68A; border-bottom-color: #D97706; }
 
     .op-info {
       flex: 1;
@@ -706,10 +709,12 @@
     .subtraction .op-progress-fill { background: #0EA5E9; }
     .multiplication .op-progress-fill { background: #F59E0B; }
     .division .op-progress-fill { background: #8B5CF6; }
+    .vocabulary .op-progress-fill { background: #EC4899; }
+    .listening .op-progress-fill { background: #3B82F6; }
+    .spelling .op-progress-fill { background: #10B981; }
+    .grammar .op-progress-fill { background: #F59E0B; }
 
-    /* ==========================================================================
-       5. STAGES SCREEN STYLES (10 Etap kartochkalari - 5 xil holat)
-       ========================================================================== */
+    /* ========== 5. STAGES SCREENS ========== */
     .stages-content {
       padding: 16px 20px 24px;
       display: flex;
@@ -755,64 +760,42 @@
     }
 
     /* 5 Micro-States of Stage Cards */
-    /* 1. YANGI */
     .stage-card.state-new {
       background: #FFFFFF;
       border-color: #93C5FD;
       border-bottom-color: #3B82F6;
     }
-    .stage-card.state-new .stage-badge {
-      background: #EFF6FF;
-      color: #1D4ED8;
-    }
+    .stage-card.state-new .stage-badge { background: #EFF6FF; color: #1D4ED8; }
 
-    /* 2. QIYIN (Past natija <= 40%) */
     .stage-card.state-hard {
       background: #FEF2F2;
       border-color: #FCA5A5;
       border-bottom-color: #EF4444;
     }
-    .stage-card.state-hard .stage-badge {
-      background: #FEE2E2;
-      color: #B91C1C;
-    }
+    .stage-card.state-hard .stage-badge { background: #FEE2E2; color: #B91C1C; }
 
-    /* 3. O'RTACHA (50% - 70%) */
     .stage-card.state-medium {
       background: #FFFBEB;
       border-color: #FCD34D;
       border-bottom-color: #F59E0B;
     }
-    .stage-card.state-medium .stage-badge {
-      background: #FEF3C7;
-      color: #B45309;
-    }
+    .stage-card.state-medium .stage-badge { background: #FEF3C7; color: #B45309; }
 
-    /* 4. YAXSHI (80% - 90%) */
     .stage-card.state-good {
       background: #F0FDF4;
       border-color: #86EFAC;
       border-bottom-color: #10B981;
     }
-    .stage-card.state-good .stage-badge {
-      background: #DCFCE7;
-      color: #15803D;
-    }
+    .stage-card.state-good .stage-badge { background: #DCFCE7; color: #15803D; }
 
-    /* 5. REKORD (100%) */
     .stage-card.state-perfect {
       background: linear-gradient(135deg, #FEFCE8 0%, #F0FDF4 100%);
       border-color: #FBBF24;
       border-bottom-color: #10B981;
       box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
     }
-    .stage-card.state-perfect .stage-badge {
-      background: #FEF3C7;
-      color: #B45309;
-      font-weight: 900;
-    }
+    .stage-card.state-perfect .stage-badge { background: #FEF3C7; color: #B45309; font-weight: 900; }
 
-    /* Locked state */
     .stage-card.locked {
       background: #F8FAFC;
       border-color: #CBD5E1;
@@ -879,7 +862,6 @@
       border-radius: var(--radius-full);
     }
 
-    /* Wiggle/Shake animation for locked / wrong */
     @keyframes shakeAnimation {
       0%, 100% { transform: translateX(0); }
       20%, 60% { transform: translateX(-8px); }
@@ -890,10 +872,8 @@
       animation: shakeAnimation 0.45s ease-in-out;
     }
 
-    /* ==========================================================================
-       6. QUIZ GAME SCREEN STYLES (10 misol, Numpad, Micro-states)
-       ========================================================================== */
-    #screen-quiz {
+    /* ========== 6. MATH QUIZ GAME SCREEN ========== */
+    #screen-quiz, #screen-eng-quiz {
       background: #F8FAFC;
       display: flex;
       flex-direction: column;
@@ -945,7 +925,6 @@
       border: 1px solid #C7D2FE;
     }
 
-    /* 10 Progress Dots */
     .progress-dots-row {
       display: flex;
       justify-content: space-between;
@@ -975,34 +954,28 @@
       animation: pulseDot 1s infinite alternate;
     }
 
-    .progress-dot.correct {
-      background: #10B981;
-    }
-
-    .progress-dot.wrong {
-      background: #EF4444;
-    }
+    .progress-dot.correct { background: #10B981; }
+    .progress-dot.wrong { background: #EF4444; }
 
     @keyframes pulseDot {
       0% { opacity: 0.7; }
       100% { opacity: 1; }
     }
 
-    /* Quiz Question Card Area */
     .quiz-center-area {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 16px 20px;
     }
 
     .question-card {
       width: 100%;
       background: #FFFFFF;
       border-radius: var(--radius-lg);
-      padding: 28px 20px;
+      padding: 24px 20px;
       border: 3px solid var(--border-color);
       box-shadow: var(--shadow-md);
       display: flex;
@@ -1011,7 +984,7 @@
       justify-content: center;
       text-align: center;
       transition: all 0.25s ease;
-      min-height: 190px;
+      min-height: 180px;
     }
 
     .question-card.correct-anim {
@@ -1076,10 +1049,9 @@
       border-style: solid;
     }
 
-    /* Feedback message below formula */
     .feedback-box {
-      margin-top: 16px;
-      font-size: 16px;
+      margin-top: 14px;
+      font-size: 15px;
       font-weight: 800;
       min-height: 28px;
       display: flex;
@@ -1088,15 +1060,8 @@
       text-align: center;
     }
 
-    .feedback-box.correct {
-      color: #15803D;
-      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .feedback-box.wrong {
-      color: #B91C1C;
-      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    .feedback-box.correct { color: #15803D; animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .feedback-box.wrong { color: #B91C1C; animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
     .btn-skip-wrong {
       margin-top: 10px;
@@ -1119,7 +1084,7 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Custom Mobile Numpad */
+    /* Math Numpad */
     .numpad-container {
       background: #FFFFFF;
       border-top: 2px solid var(--border-color);
@@ -1185,16 +1150,326 @@
       border-bottom-width: 2px;
     }
 
-    /* Disabled numpad state during animations */
     .numpad-container.locked {
       pointer-events: none;
       opacity: 0.6;
     }
 
-    /* ==========================================================================
-       7. RESULT SCREEN STYLES (Rekord taqqoslash, Xatolar tahlili)
-       ========================================================================== */
-    #screen-result {
+    /* ========== 7. ENGLISH QUIZ SPECIAL MECHANICS ========== */
+    /* Common English Prompt in card */
+    .eng-prompt-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .eng-prompt-emoji {
+      font-size: 56px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+    }
+
+    .eng-prompt-word {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eng-prompt-subtext {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .btn-speak-inline {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      background: #EEF2FF;
+      border: 1.5px solid #C7D2FE;
+      color: #4F46E5;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-speak-inline:active {
+      transform: scale(0.9);
+      background: #C7D2FE;
+    }
+
+    /* Mechanic B: Listening Central Audio Controls */
+    .listening-center-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+    }
+
+    .btn-audio-main {
+      width: 86px;
+      height: 86px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+      border: none;
+      color: #FFFFFF;
+      font-size: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: audioPulse 2s infinite;
+    }
+
+    .btn-audio-main:active {
+      transform: scale(0.92);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    @keyframes audioPulse {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
+      70% { box-shadow: 0 0 0 16px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+
+    .btn-audio-slow {
+      background: #EFF6FF;
+      border: 1.5px solid #BFDBFE;
+      color: #1D4ED8;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-audio-slow:active {
+      transform: scale(0.94);
+      background: #DBEAFE;
+    }
+
+    /* English Option Buttons (Mechanic A, B, D) */
+    .eng-options-container {
+      background: #FFFFFF;
+      border-top: 2px solid var(--border-color);
+      padding: 16px 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .eng-opt-btn {
+      min-height: 54px;
+      background: #F8FAFC;
+      border: 2px solid #CBD5E1;
+      border-bottom: 4px solid #94A3B8;
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+      text-align: center;
+      gap: 8px;
+    }
+
+    .eng-opt-btn:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+      background: #E2E8F0;
+    }
+
+    .eng-opt-btn.correct {
+      background: #DCFCE7 !important;
+      border-color: #86EFAC !important;
+      border-bottom-color: #10B981 !important;
+      color: #15803D !important;
+    }
+
+    .eng-opt-btn.wrong {
+      background: #FEE2E2 !important;
+      border-color: #FCA5A5 !important;
+      border-bottom-color: #EF4444 !important;
+      color: #B91C1C !important;
+    }
+
+    /* Mechanic C: Spelling Slot Boxes & Letter Tiles */
+    .spelling-slots-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .spelling-slots-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .spelling-slot {
+      width: 44px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: #F1F5F9;
+      border: 2.5px dashed #94A3B8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .spelling-slot.filled {
+      background: #EEF2FF;
+      border-style: solid;
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.15);
+    }
+
+    .spelling-slot.correct {
+      background: #DCFCE7;
+      border-color: #10B981;
+      color: #15803D;
+    }
+
+    .spelling-slot.wrong {
+      background: #FEE2E2;
+      border-color: #EF4444;
+      color: #B91C1C;
+    }
+
+    .spelling-bank-container {
+      background: #FFFFFF;
+      border-top: 2px solid var(--border-color);
+      padding: 16px 16px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .spelling-tiles-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 400px;
+    }
+
+    .letter-tile {
+      width: 50px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      background: #FFFFFF;
+      border: 2px solid #CBD5E1;
+      border-bottom: 4px solid #94A3B8;
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+
+    .letter-tile:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+      background: #F1F5F9;
+    }
+
+    .letter-tile.used {
+      opacity: 0.25;
+      pointer-events: none;
+      border-bottom-width: 2px;
+      background: #E2E8F0;
+    }
+
+    .spelling-action-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn-spelling-del {
+      background: #FFF1F2;
+      border: 1.5px solid #FECDD3;
+      color: #E11D48;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+    }
+
+    /* Mechanic D: Grammar Sentence Card */
+    .grammar-sentence-text {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .grammar-blank-tag {
+      display: inline-block;
+      padding: 2px 12px;
+      background: #EEF2FF;
+      border: 2px dashed var(--primary);
+      border-radius: var(--radius-sm);
+      color: var(--primary);
+      min-width: 70px;
+    }
+
+    .grammar-rule-box {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #FEF3C7;
+      border: 1.5px solid #FCD34D;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 700;
+      color: #92400E;
+      text-align: left;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      animation: popIn 0.3s ease;
+    }
+
+    /* ========== 8. RESULT SCREENS ========== */
+    #screen-result, #screen-eng-result {
       padding: 24px 20px;
       display: flex;
       flex-direction: column;
@@ -1263,7 +1538,6 @@
       margin-bottom: 8px;
     }
 
-    /* Mistakes Section */
     .mistakes-card {
       background: #FFF1F2;
       border: 2px solid #FECDD3;
@@ -1300,6 +1574,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
     }
 
     .mistake-item span.wrong-ans {
@@ -1307,7 +1582,6 @@
       font-weight: 800;
     }
 
-    /* Action Buttons in Result Screen */
     .result-actions {
       display: flex;
       flex-direction: column;
@@ -1362,9 +1636,7 @@
       border-bottom-width: 2px;
     }
 
-    /* ==========================================================================
-       8. MODAL WINDOWS & TOAST ALERTS
-       ========================================================================== */
+    /* ========== 9. MODALS & TOAST ========== */
     .modal-backdrop {
       position: absolute;
       inset: 0;
@@ -1406,22 +1678,9 @@
       transform: scale(1);
     }
 
-    .modal-icon {
-      font-size: 52px;
-    }
-
-    .modal-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-
-    .modal-body {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
+    .modal-icon { font-size: 52px; }
+    .modal-title { font-size: 20px; font-weight: 800; color: var(--text-main); }
+    .modal-body { font-size: 15px; font-weight: 700; color: var(--text-muted); line-height: 1.45; }
 
     .modal-actions {
       display: flex;
@@ -1445,29 +1704,11 @@
       transition: all 0.1s ease;
     }
 
-    .btn-modal:active {
-      transform: translateY(2px);
-    }
+    .btn-modal:active { transform: translateY(2px); }
+    .btn-modal-green { background: #10B981; border-bottom: 3px solid #059669; color: #FFFFFF; }
+    .btn-modal-red { background: #EF4444; border-bottom: 3px solid #DC2626; color: #FFFFFF; }
+    .btn-modal-gray { background: #F1F5F9; border: 1.5px solid #CBD5E1; color: var(--text-main); }
 
-    .btn-modal-green {
-      background: #10B981;
-      border-bottom: 3px solid #059669;
-      color: #FFFFFF;
-    }
-
-    .btn-modal-red {
-      background: #EF4444;
-      border-bottom: 3px solid #DC2626;
-      color: #FFFFFF;
-    }
-
-    .btn-modal-gray {
-      background: #F1F5F9;
-      border: 1.5px solid #CBD5E1;
-      color: var(--text-main);
-    }
-
-    /* Toast notification */
     #toast-notification {
       position: absolute;
       top: 24px;
@@ -1491,11 +1732,8 @@
       max-width: 90%;
     }
 
-    #toast-notification.show {
-      transform: translateX(-50%) translateY(0);
-    }
+    #toast-notification.show { transform: translateX(-50%) translateY(0); }
 
-    /* Confetti Canvas */
     #confetti-canvas {
       position: absolute;
       top: 0;
@@ -1506,7 +1744,6 @@
       z-index: 90;
     }
 
-    /* Settings input field for parent challenge */
     .parent-challenge-input {
       width: 100%;
       height: 50px;
@@ -1520,17 +1757,13 @@
       margin-top: 8px;
       outline: none;
     }
-    .parent-challenge-input:focus {
-      border-color: var(--primary);
-    }
+    .parent-challenge-input:focus { border-color: var(--primary); }
   </style>
 </head>
 <body>
 
   <!-- Main Mobile App Wrapper -->
   <div id="app-container">
-
-    <!-- Confetti Canvas -->
     <canvas id="confetti-canvas"></canvas>
 
     <!-- Toast Notification Banner -->
@@ -1540,7 +1773,7 @@
     </div>
 
     <!-- =====================================================================
-         SCREEN 1: SPLASH SCREEN (5-soniya, Motivatsiya, Progress Bar)
+         SCREEN 1: SPLASH SCREEN
          ===================================================================== -->
     <div id="screen-splash" class="screen active">
       <div class="splash-top">
@@ -1566,10 +1799,9 @@
     </div>
 
     <!-- =====================================================================
-         SCREEN 2: HOME SCREEN (Asosiy Menyu: Matematika | Ingliz tili)
+         SCREEN 2: HOME SCREEN (Matematika | Ingliz tili)
          ===================================================================== -->
     <div id="screen-home" class="screen">
-      <!-- App Header -->
       <header class="app-header">
         <div class="header-user-info">
           <div class="header-greeting">👋 Salom, Savarbek!</div>
@@ -1578,7 +1810,7 @@
         <div class="header-actions">
           <div class="stars-badge">
             <span>⭐</span>
-            <span id="home-total-stars">0 / 120</span>
+            <span id="home-total-stars">0 / 240</span>
           </div>
           <button class="icon-btn" id="btn-toggle-sound" title="Ovozni o'chirish/yoqish">
             <span id="sound-icon">🔊</span>
@@ -1586,20 +1818,17 @@
         </div>
       </header>
 
-      <!-- Home Content -->
       <div class="home-content">
-        <!-- Motivational Banner -->
         <div class="banner-card">
           <div class="banner-text">
             <h3>Katta G'alabalar Sari! 🚀</h3>
-            <p>Har kuni 10 tadan misol yechib, bilimingni mustahkamla!</p>
+            <p>Matematika va Ingliz tilidan chempion bo'l!</p>
           </div>
           <div class="banner-icon">🦁</div>
         </div>
 
         <div class="section-label">O'quv Fanlari</div>
 
-        <!-- 2 Main Cards -->
         <div class="subjects-grid">
           <!-- 1. Matematika -->
           <div class="subject-card math" id="card-open-math">
@@ -1631,25 +1860,27 @@
               <div class="subject-details">
                 <div class="subject-title">
                   Ingliz tili
-                  <span style="font-size: 12px; background: #E2E8F0; color: #475569; padding: 2px 8px; border-radius: 99px;">Tez kunda</span>
+                  <span style="font-size: 12px; background: #DCFCE7; color: #15803D; padding: 2px 8px; border-radius: 99px; font-weight: 800;">Faol 🚀</span>
                 </div>
-                <div class="subject-desc">So'z boyligi va grammatika</div>
+                <div class="subject-desc">40 ta bosqich • Lug'at & Audio & Grammatika</div>
               </div>
             </div>
             <div class="subject-meta">
               <div class="subject-stat-row">
-                <span style="color: var(--text-muted);">Holati:</span>
-                <span style="color: #64748B;">Tez kunda ochiladi 🚀</span>
+                <span style="color: var(--text-muted);">Umumiy o'zlashtirish:</span>
+                <span id="home-english-percentage" style="color: #0284C7;">0%</span>
+              </div>
+              <div class="subject-progress-track">
+                <div class="subject-progress-fill" id="home-english-progress-fill" style="width: 0%;"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Bottom stats & settings -->
         <div class="home-footer-stats">
           <div class="stat-pill">
             <span>🎯</span>
-            <span>Jami misollar: <b id="home-total-solved">0 ta</b></span>
+            <span>Jami misollar & so'zlar: <b id="home-total-solved">0 ta</b></span>
           </div>
           <button class="icon-btn" id="btn-open-settings" title="Ota-ona sozlamalari">
             <span>⚙️</span>
@@ -1667,12 +1898,11 @@
           <span>⬅️</span>
           <span>Orqaga</span>
         </button>
-        <div class="screen-title">Amalni tanla</div>
+        <div class="screen-title">Matematika</div>
         <div style="width: 70px;"></div>
       </header>
 
       <div class="operations-content">
-        <!-- ➕ Qo'shish -->
         <div class="op-card addition" data-op="addition">
           <div class="op-icon">➕</div>
           <div class="op-info">
@@ -1690,7 +1920,6 @@
           </div>
         </div>
 
-        <!-- ➖ Ayirish -->
         <div class="op-card subtraction" data-op="subtraction">
           <div class="op-icon">➖</div>
           <div class="op-info">
@@ -1708,7 +1937,6 @@
           </div>
         </div>
 
-        <!-- ✖️ Ko'paytirish -->
         <div class="op-card multiplication" data-op="multiplication">
           <div class="op-icon">✖️</div>
           <div class="op-info">
@@ -1726,7 +1954,6 @@
           </div>
         </div>
 
-        <!-- ➗ Bo'lish -->
         <div class="op-card division" data-op="division">
           <div class="op-icon">➗</div>
           <div class="op-info">
@@ -1747,7 +1974,7 @@
     </div>
 
     <!-- =====================================================================
-         SCREEN 4: STAGES SCREEN (10 ta Etap ro'yxati)
+         SCREEN 4: MATH STAGES SCREEN (10 ta Etap ro'yxati)
          ===================================================================== -->
     <div id="screen-stages" class="screen">
       <header class="app-header">
@@ -1766,19 +1993,14 @@
           </span>
           <span id="stages-summary-stars" style="font-weight: 900; color: #D97706;">⭐ 0 / 30</span>
         </div>
-
-        <!-- 10 Etap kartochkalari dinamik joylashtiriladi -->
-        <div class="stages-grid" id="stages-list-container">
-          <!-- Dynamically generated via JS -->
-        </div>
+        <div class="stages-grid" id="stages-list-container"></div>
       </div>
     </div>
 
     <!-- =====================================================================
-         SCREEN 5: QUIZ GAME SCREEN (10 ta misol yechish jarayoni)
+         SCREEN 5: MATH QUIZ GAME SCREEN
          ===================================================================== -->
     <div id="screen-quiz" class="screen">
-      <!-- Top Bar & Progress Dots -->
       <div class="quiz-top-bar">
         <div class="quiz-meta-row">
           <button class="btn-exit-quiz" id="btn-exit-quiz">
@@ -1787,29 +2009,22 @@
           </button>
           <div class="quiz-counter-tag" id="quiz-question-counter">1-Etap | Misol: 1 / 10</div>
         </div>
-        <!-- 10 ta progress nuqtachalari -->
-        <div class="progress-dots-row" id="quiz-progress-dots">
-          <!-- 10 dots generated in JS -->
-        </div>
+        <div class="progress-dots-row" id="quiz-progress-dots"></div>
       </div>
 
-      <!-- Center Question Card -->
       <div class="quiz-center-area">
         <div class="question-card" id="quiz-question-card">
           <div class="math-formula">
             <span id="quiz-operand-text">27 + 15 =</span>
             <div class="input-box-display" id="quiz-input-box">?</div>
           </div>
-          <!-- Feedback message -->
           <div class="feedback-box" id="quiz-feedback-box"></div>
-          <!-- Skip button for wrong answer -->
           <button class="btn-skip-wrong" id="btn-skip-wrong" style="display: none;">
             <span>Tushundim, keyingisi ➡️</span>
           </button>
         </div>
       </div>
 
-      <!-- Custom Numpad -->
       <div class="numpad-container" id="quiz-numpad">
         <button class="numpad-btn" data-key="1">1</button>
         <button class="numpad-btn" data-key="2">2</button>
@@ -1827,7 +2042,7 @@
     </div>
 
     <!-- =====================================================================
-         SCREEN 6: RESULT SCREEN (Natija, Rekord taqqoslash va Xatolar)
+         SCREEN 6: MATH RESULT SCREEN
          ===================================================================== -->
     <div id="screen-result" class="screen">
       <div class="result-card-main" id="result-card-main">
@@ -1843,18 +2058,14 @@
         </div>
       </div>
 
-      <!-- Mistakes Review Block (Faqat xato qilgan bo'lsa ko'rinadi) -->
       <div class="mistakes-card" id="result-mistakes-block" style="display: none;">
         <div class="mistakes-title">
           <span>🔍</span>
           <span>Xato ketgan misollar:</span>
         </div>
-        <div class="mistakes-list" id="result-mistakes-list">
-          <!-- Dynamically populated -->
-        </div>
+        <div class="mistakes-list" id="result-mistakes-list"></div>
       </div>
 
-      <!-- Action Buttons -->
       <div class="result-actions">
         <button class="btn-action-primary" id="btn-next-stage">
           <span>➡️ Keyingi etapga o'tish</span>
@@ -1869,7 +2080,191 @@
     </div>
 
     <!-- =====================================================================
-         MODAL 1: EXIT CONFIRMATION MODAL
+         SCREEN 7: ENGLISH CATEGORIES SCREEN (4 ta bo'lim)
+         ===================================================================== -->
+    <div id="screen-eng-categories" class="screen">
+      <header class="app-header">
+        <button class="btn-back" id="btn-back-eng-to-home">
+          <span>⬅️</span>
+          <span>Orqaga</span>
+        </button>
+        <div class="screen-title">🇬🇧 Ingliz tili</div>
+        <div style="width: 70px;"></div>
+      </header>
+
+      <div class="operations-content">
+        <!-- 1. Lug'at -->
+        <div class="op-card vocabulary" data-cat="vocabulary">
+          <div class="op-icon">📚</div>
+          <div class="op-info">
+            <div class="op-header-row">
+              <div class="op-title">So'z boyligi</div>
+              <div class="op-badge" id="eng-cat-stages-vocabulary">0 / 10 etap</div>
+            </div>
+            <div class="op-progress-row">
+              <span>Maksimal natija:</span>
+              <span id="eng-cat-percent-vocabulary">0%</span>
+            </div>
+            <div class="op-progress-track">
+              <div class="op-progress-fill" id="eng-cat-fill-vocabulary" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Tinglab topish -->
+        <div class="op-card listening" data-cat="listening">
+          <div class="op-icon">🎧</div>
+          <div class="op-info">
+            <div class="op-header-row">
+              <div class="op-title">Eshitib topish</div>
+              <div class="op-badge" id="eng-cat-stages-listening">0 / 10 etap</div>
+            </div>
+            <div class="op-progress-row">
+              <span>Maksimal natija:</span>
+              <span id="eng-cat-percent-listening">0%</span>
+            </div>
+            <div class="op-progress-track">
+              <div class="op-progress-fill" id="eng-cat-fill-listening" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. So'z terish -->
+        <div class="op-card spelling" data-cat="spelling">
+          <div class="op-icon">🧩</div>
+          <div class="op-info">
+            <div class="op-header-row">
+              <div class="op-title">Harflardan so'z yasash</div>
+              <div class="op-badge" id="eng-cat-stages-spelling">0 / 10 etap</div>
+            </div>
+            <div class="op-progress-row">
+              <span>Maksimal natija:</span>
+              <span id="eng-cat-percent-spelling">0%</span>
+            </div>
+            <div class="op-progress-track">
+              <div class="op-progress-fill" id="eng-cat-fill-spelling" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Grammatika -->
+        <div class="op-card grammar" data-cat="grammar">
+          <div class="op-icon">📝</div>
+          <div class="op-info">
+            <div class="op-header-row">
+              <div class="op-title">Qoidalar va Gaplar</div>
+              <div class="op-badge" id="eng-cat-stages-grammar">0 / 10 etap</div>
+            </div>
+            <div class="op-progress-row">
+              <span>Maksimal natija:</span>
+              <span id="eng-cat-percent-grammar">0%</span>
+            </div>
+            <div class="op-progress-track">
+              <div class="op-progress-fill" id="eng-cat-fill-grammar" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 8: ENGLISH STAGES SCREEN (10 ta Etap ro'yxati)
+         ===================================================================== -->
+    <div id="screen-eng-stages" class="screen">
+      <header class="app-header">
+        <button class="btn-back" id="btn-back-to-eng-cats">
+          <span>⬅️</span>
+          <span>Bo'limlar</span>
+        </button>
+        <div class="screen-title" id="eng-stages-screen-title">So'z boyligi</div>
+        <div style="width: 70px;"></div>
+      </header>
+
+      <div class="stages-content">
+        <div class="stages-header-banner">
+          <span style="font-weight: 800; font-size: 14px; color: var(--text-muted);">
+            Etapni tanla va yulduzlarni yig':
+          </span>
+          <span id="eng-stages-summary-stars" style="font-weight: 900; color: #D97706;">⭐ 0 / 30</span>
+        </div>
+        <div class="stages-grid" id="eng-stages-list-container"></div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 9: ENGLISH QUIZ GAME SCREEN (4 ta Mexanika)
+         ===================================================================== -->
+    <div id="screen-eng-quiz" class="screen">
+      <div class="quiz-top-bar">
+        <div class="quiz-meta-row">
+          <button class="btn-exit-quiz" id="btn-exit-eng-quiz">
+            <span>✖️</span>
+            <span>Chiqish</span>
+          </button>
+          <div class="quiz-counter-tag" id="eng-quiz-question-counter">1-Etap | Savol: 1 / 10</div>
+        </div>
+        <div class="progress-dots-row" id="eng-quiz-progress-dots"></div>
+      </div>
+
+      <!-- Question Card: Dynamic for 4 Mechanics -->
+      <div class="quiz-center-area">
+        <div class="question-card" id="eng-quiz-question-card">
+          <div id="eng-quiz-card-content">
+            <!-- Dynamically populated per mechanic -->
+          </div>
+          <div class="feedback-box" id="eng-quiz-feedback-box"></div>
+          <button class="btn-skip-wrong" id="btn-eng-skip-wrong" style="display: none;">
+            <span>Tushundim, keyingisi ➡️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Touch Options or Letter Tiles Bank -->
+      <div id="eng-quiz-bottom-panel">
+        <!-- Dynamically rendered (Options grid or Spelling Tiles) -->
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 10: ENGLISH RESULT SCREEN
+         ===================================================================== -->
+    <div id="screen-eng-result" class="screen">
+      <div class="result-card-main" id="eng-result-card-main">
+        <div class="result-icon-badge" id="eng-result-badge-icon">🏆</div>
+        <div class="result-headline" id="eng-result-headline">YANGI REKORD!</div>
+        <div class="result-score-tag" id="eng-result-score-percent">90%</div>
+        <div class="result-comparison-pill new-record" id="eng-result-comparison-text">
+          Oldingi eng yuqori natijang: 70% edi
+        </div>
+        <div class="result-stars-row" id="eng-result-stars-display">⭐⭐⭐</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--text-muted);" id="eng-result-summary-line">
+          10 ta savoldan 9 tasini to'g'ri topding!
+        </div>
+      </div>
+
+      <div class="mistakes-card" id="eng-result-mistakes-block" style="display: none;">
+        <div class="mistakes-title">
+          <span>📌</span>
+          <span>Xato ketgan so'zlarni eshitib ol:</span>
+        </div>
+        <div class="mistakes-list" id="eng-result-mistakes-list"></div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-action-primary" id="btn-eng-next-stage">
+          <span>➡️ Keyingi etapga o'tish</span>
+        </button>
+        <button class="btn-action-secondary" id="btn-eng-retry-stage">
+          <span>🔄 Yana urinib ko'rish</span>
+        </button>
+        <button class="btn-action-secondary" id="btn-eng-back-stages">
+          <span>📋 Bosqichlarga qaytish</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         EXIT CONFIRM MODAL
          ===================================================================== -->
     <div class="modal-backdrop" id="modal-exit-confirm">
       <div class="modal-card">
@@ -1886,23 +2281,7 @@
     </div>
 
     <!-- =====================================================================
-         MODAL 2: ENGLISH COMING SOON TOAST / MODAL
-         ===================================================================== -->
-    <div class="modal-backdrop" id="modal-english">
-      <div class="modal-card">
-        <div class="modal-icon">🇬🇧</div>
-        <div class="modal-title">Ingliz tili</div>
-        <div class="modal-body">
-          Savarbek, avval Matematikadan 1-etaplarni zabt etamiz! Ingliz tili tez kunda ochiladi 🚀
-        </div>
-        <div class="modal-actions">
-          <button class="btn-modal btn-modal-green" id="btn-close-english-modal">Tushundim, olg'a!</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- =====================================================================
-         MODAL 3: PARENTAL SETTINGS & RESET MODAL
+         PARENTAL SETTINGS MODAL
          ===================================================================== -->
     <div class="modal-backdrop" id="modal-settings">
       <div class="modal-card">
@@ -1930,17 +2309,9 @@
 
   </div>
 
-  <!-- =====================================================================
-       JAVASCRIPT ARCHITECTURE
-       1. SoundFX (Web Audio API Synthesizer)
-       2. ConfettiEngine (Physics-based celebration particle system)
-       3. DB (LocalStorage v1 database manager)
-       4. MathGenerators (40 stages accurate generator)
-       5. AppController (State machine, UI renderer & game loop)
-       ===================================================================== -->
   <script>
     /* ==========================================================================
-       1. SOUND EFFECTS (Web Audio API Synthesizer - Zero External Files)
+       1. SOUND EFFECTS & WEB SPEECH API
        ========================================================================== */
     class SoundEngine {
       constructor() {
@@ -1951,9 +2322,7 @@
       init() {
         if (!this.ctx) {
           const AudioContext = window.AudioContext || window.webkitAudioContext;
-          if (AudioContext) {
-            this.ctx = new AudioContext();
-          }
+          if (AudioContext) this.ctx = new AudioContext();
         }
         if (this.ctx && this.ctx.state === 'suspended') {
           this.ctx.resume();
@@ -1983,7 +2352,6 @@
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
-        // Two-tone cheerful ascending chime (E5 -> A5)
         const notes = [659.25, 880.00];
         notes.forEach((freq, idx) => {
           const osc = this.ctx.createOscillator();
@@ -2004,7 +2372,6 @@
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
-        // Low gentle descending wobble
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sawtooth';
@@ -2023,7 +2390,6 @@
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
-        // Joyful fanfare: C5, E5, G5, C6
         const melody = [523.25, 659.25, 783.99, 1046.50];
         melody.forEach((freq, idx) => {
           const osc = this.ctx.createOscillator();
@@ -2055,6 +2421,17 @@
         gain.connect(this.ctx.destination);
         osc.start(now);
         osc.stop(now + 0.14);
+      }
+
+      speakEnglish(text, slow = false) {
+        if (!this.enabled) return;
+        if (!('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+        const cleanText = text.replace(/[\[\]\_\-\(\)]/g, ' ').trim();
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'en-US';
+        utterance.rate = slow ? 0.6 : 0.88;
+        window.speechSynthesis.speak(utterance);
       }
     }
 
@@ -2096,9 +2473,7 @@
             opacity: 1
           });
         }
-        if (!this.animationId) {
-          this.loop();
-        }
+        if (!this.animationId) this.loop();
       }
 
       loop() {
@@ -2134,7 +2509,2906 @@
     }
 
     /* ==========================================================================
-       3. DATABASE & LOCALSTORAGE MANAGER (savarbek_edu_v1)
+       3. ENGLISH DATABASE CONTENT (4 Categories x 10 Stages = 40 Stages)
+       ========================================================================== */
+    const ENGLISH_DATA = {
+  "vocabulary": [
+    {
+      "stage": 1,
+      "title": "Ranglar",
+      "icon": "🎨",
+      "items": [
+        {
+          "en": "red",
+          "uz": "qizil",
+          "emoji": "🔴"
+        },
+        {
+          "en": "blue",
+          "uz": "ko'k",
+          "emoji": "🔵"
+        },
+        {
+          "en": "green",
+          "uz": "yashil",
+          "emoji": "🟢"
+        },
+        {
+          "en": "yellow",
+          "uz": "sariq",
+          "emoji": "🟡"
+        },
+        {
+          "en": "black",
+          "uz": "qora",
+          "emoji": "⚫"
+        },
+        {
+          "en": "white",
+          "uz": "oq",
+          "emoji": "⚪"
+        },
+        {
+          "en": "pink",
+          "uz": "pushti",
+          "emoji": "🌸"
+        },
+        {
+          "en": "orange",
+          "uz": "olovrang",
+          "emoji": "🟠"
+        },
+        {
+          "en": "brown",
+          "uz": "jigarrang",
+          "emoji": "🟤"
+        },
+        {
+          "en": "purple",
+          "uz": "binafsha",
+          "emoji": "🟣"
+        },
+        {
+          "en": "gray",
+          "uz": "kulrang",
+          "emoji": "🔘"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "Sonlar 1–20",
+      "icon": "🔢",
+      "items": [
+        {
+          "en": "one",
+          "uz": "bir (1)",
+          "emoji": "1️⃣"
+        },
+        {
+          "en": "two",
+          "uz": "ikki (2)",
+          "emoji": "2️⃣"
+        },
+        {
+          "en": "three",
+          "uz": "uch (3)",
+          "emoji": "3️⃣"
+        },
+        {
+          "en": "four",
+          "uz": "to'rt (4)",
+          "emoji": "4️⃣"
+        },
+        {
+          "en": "five",
+          "uz": "besh (5)",
+          "emoji": "5️⃣"
+        },
+        {
+          "en": "six",
+          "uz": "olti (6)",
+          "emoji": "6️⃣"
+        },
+        {
+          "en": "seven",
+          "uz": "yetti (7)",
+          "emoji": "7️⃣"
+        },
+        {
+          "en": "eight",
+          "uz": "sakkiz (8)",
+          "emoji": "8️⃣"
+        },
+        {
+          "en": "nine",
+          "uz": "to'qqiz (9)",
+          "emoji": "9️⃣"
+        },
+        {
+          "en": "ten",
+          "uz": "o'n (10)",
+          "emoji": "🔟"
+        },
+        {
+          "en": "eleven",
+          "uz": "o'n bir (11)",
+          "emoji": "🔢"
+        },
+        {
+          "en": "twelve",
+          "uz": "o'n ikki (12)",
+          "emoji": "🔢"
+        },
+        {
+          "en": "fifteen",
+          "uz": "o'n besh (15)",
+          "emoji": "🔢"
+        },
+        {
+          "en": "twenty",
+          "uz": "yigirma (20)",
+          "emoji": "🔢"
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "Oila",
+      "icon": "👨‍👩‍👧‍👦",
+      "items": [
+        {
+          "en": "mother",
+          "uz": "ona",
+          "emoji": "👩"
+        },
+        {
+          "en": "father",
+          "uz": "ota",
+          "emoji": "👨"
+        },
+        {
+          "en": "sister",
+          "uz": "opa / singil",
+          "emoji": "👧"
+        },
+        {
+          "en": "brother",
+          "uz": "aka / uka",
+          "emoji": "👦"
+        },
+        {
+          "en": "grandma",
+          "uz": "buvi",
+          "emoji": "👵"
+        },
+        {
+          "en": "grandpa",
+          "uz": "bobo",
+          "emoji": "👴"
+        },
+        {
+          "en": "baby",
+          "uz": "chaqaloq",
+          "emoji": "👶"
+        },
+        {
+          "en": "family",
+          "uz": "oila",
+          "emoji": "👨‍👩‍👦"
+        },
+        {
+          "en": "friend",
+          "uz": "do'st",
+          "emoji": "🤝"
+        },
+        {
+          "en": "boy",
+          "uz": "o'g'il bola",
+          "emoji": "🧒"
+        },
+        {
+          "en": "girl",
+          "uz": "qiz bola",
+          "emoji": "👧"
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "Uy hayvonlari",
+      "icon": "🐾",
+      "items": [
+        {
+          "en": "cat",
+          "uz": "mushuk",
+          "emoji": "🐱"
+        },
+        {
+          "en": "dog",
+          "uz": "kuchuk",
+          "emoji": "🐶"
+        },
+        {
+          "en": "cow",
+          "uz": "sigir",
+          "emoji": "🐮"
+        },
+        {
+          "en": "horse",
+          "uz": "ot",
+          "emoji": "🐴"
+        },
+        {
+          "en": "sheep",
+          "uz": "qo'y",
+          "emoji": "🐑"
+        },
+        {
+          "en": "duck",
+          "uz": "o'rdak",
+          "emoji": "🦆"
+        },
+        {
+          "en": "bird",
+          "uz": "qush",
+          "emoji": "🐦"
+        },
+        {
+          "en": "fish",
+          "uz": "baliq",
+          "emoji": "🐟"
+        },
+        {
+          "en": "rabbit",
+          "uz": "quyon",
+          "emoji": "🐰"
+        },
+        {
+          "en": "hen",
+          "uz": "tovuq",
+          "emoji": "🐔"
+        },
+        {
+          "en": "pig",
+          "uz": "cho'chqa",
+          "emoji": "🐷"
+        },
+        {
+          "en": "goat",
+          "uz": "echki",
+          "emoji": "🐐"
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "Yovvoyi hayvonlar",
+      "icon": "🦁",
+      "items": [
+        {
+          "en": "lion",
+          "uz": "sher",
+          "emoji": "🦁"
+        },
+        {
+          "en": "tiger",
+          "uz": "yo'lbars",
+          "emoji": "🐯"
+        },
+        {
+          "en": "elephant",
+          "uz": "fil",
+          "emoji": "🐘"
+        },
+        {
+          "en": "monkey",
+          "uz": "maymun",
+          "emoji": "🐒"
+        },
+        {
+          "en": "bear",
+          "uz": "ayiq",
+          "emoji": "🐻"
+        },
+        {
+          "en": "giraffe",
+          "uz": "jirafa",
+          "emoji": "🦒"
+        },
+        {
+          "en": "zebra",
+          "uz": "zebra",
+          "emoji": "🦓"
+        },
+        {
+          "en": "snake",
+          "uz": "ilon",
+          "emoji": "🐍"
+        },
+        {
+          "en": "crocodile",
+          "uz": "timsoh",
+          "emoji": "🐊"
+        },
+        {
+          "en": "fox",
+          "uz": "tulki",
+          "emoji": "🦊"
+        },
+        {
+          "en": "wolf",
+          "uz": "bo'ri",
+          "emoji": "🐺"
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "Maktab jihozlari",
+      "icon": "🎒",
+      "items": [
+        {
+          "en": "book",
+          "uz": "kitob",
+          "emoji": "📖"
+        },
+        {
+          "en": "pen",
+          "uz": "ruchka",
+          "emoji": "🖊️"
+        },
+        {
+          "en": "pencil",
+          "uz": "qalam",
+          "emoji": "✏️"
+        },
+        {
+          "en": "bag",
+          "uz": "sumka",
+          "emoji": "🎒"
+        },
+        {
+          "en": "desk",
+          "uz": "parta",
+          "emoji": "🪑"
+        },
+        {
+          "en": "chair",
+          "uz": "stul",
+          "emoji": "🪑"
+        },
+        {
+          "en": "ruler",
+          "uz": "chizg'ich",
+          "emoji": "📏"
+        },
+        {
+          "en": "rubber",
+          "uz": "o'chirg'ich",
+          "emoji": "🧽"
+        },
+        {
+          "en": "teacher",
+          "uz": "o'qituvchi",
+          "emoji": "👩‍🏫"
+        },
+        {
+          "en": "pupil",
+          "uz": "o'quvchi",
+          "emoji": "🧑‍🎓"
+        },
+        {
+          "en": "classroom",
+          "uz": "sinfxona",
+          "emoji": "🏫"
+        }
+      ]
+    },
+    {
+      "stage": 7,
+      "title": "Tana a'zolari",
+      "icon": "👀",
+      "items": [
+        {
+          "en": "head",
+          "uz": "bosh",
+          "emoji": "🗣️"
+        },
+        {
+          "en": "eye",
+          "uz": "ko'z",
+          "emoji": "👁️"
+        },
+        {
+          "en": "ear",
+          "uz": "quloq",
+          "emoji": "👂"
+        },
+        {
+          "en": "nose",
+          "uz": "burun",
+          "emoji": "👃"
+        },
+        {
+          "en": "mouth",
+          "uz": "og'iz",
+          "emoji": "👄"
+        },
+        {
+          "en": "hand",
+          "uz": "qo'l (kaft)",
+          "emoji": "✋"
+        },
+        {
+          "en": "leg",
+          "uz": "oyoq",
+          "emoji": "🦵"
+        },
+        {
+          "en": "hair",
+          "uz": "soch",
+          "emoji": "💇"
+        },
+        {
+          "en": "face",
+          "uz": "yuz",
+          "emoji": "😀"
+        },
+        {
+          "en": "finger",
+          "uz": "barmoq",
+          "emoji": "☝️"
+        },
+        {
+          "en": "arm",
+          "uz": "qo'l (bilak)",
+          "emoji": "💪"
+        }
+      ]
+    },
+    {
+      "stage": 8,
+      "title": "Meva va Oziq-ovqat",
+      "icon": "🍎",
+      "items": [
+        {
+          "en": "apple",
+          "uz": "olma",
+          "emoji": "🍎"
+        },
+        {
+          "en": "banana",
+          "uz": "banan",
+          "emoji": "🍌"
+        },
+        {
+          "en": "orange",
+          "uz": "apelsin",
+          "emoji": "🍊"
+        },
+        {
+          "en": "milk",
+          "uz": "sut",
+          "emoji": "🥛"
+        },
+        {
+          "en": "bread",
+          "uz": "non",
+          "emoji": "🍞"
+        },
+        {
+          "en": "water",
+          "uz": "suv",
+          "emoji": "💧"
+        },
+        {
+          "en": "egg",
+          "uz": "tuxum",
+          "emoji": "🥚"
+        },
+        {
+          "en": "cake",
+          "uz": "tort",
+          "emoji": "🎂"
+        },
+        {
+          "en": "cheese",
+          "uz": "pishloq",
+          "emoji": "🧀"
+        },
+        {
+          "en": "ice cream",
+          "uz": "muzqaymoq",
+          "emoji": "🍦"
+        },
+        {
+          "en": "juice",
+          "uz": "sharbat",
+          "emoji": "🧃"
+        }
+      ]
+    },
+    {
+      "stage": 9,
+      "title": "Uy va Xonalar",
+      "icon": "🏠",
+      "items": [
+        {
+          "en": "house",
+          "uz": "uy",
+          "emoji": "🏡"
+        },
+        {
+          "en": "room",
+          "uz": "xona",
+          "emoji": "🚪"
+        },
+        {
+          "en": "door",
+          "uz": "eshik",
+          "emoji": "🚪"
+        },
+        {
+          "en": "window",
+          "uz": "deraza",
+          "emoji": "🪟"
+        },
+        {
+          "en": "bed",
+          "uz": "karavot",
+          "emoji": "🛏️"
+        },
+        {
+          "en": "table",
+          "uz": "stol",
+          "emoji": "🪵"
+        },
+        {
+          "en": "sofa",
+          "uz": "divan",
+          "emoji": "🛋️"
+        },
+        {
+          "en": "TV",
+          "uz": "televizor",
+          "emoji": "📺"
+        },
+        {
+          "en": "kitchen",
+          "uz": "oshxona",
+          "emoji": "🍳"
+        },
+        {
+          "en": "garden",
+          "uz": "bog'",
+          "emoji": "🌳"
+        }
+      ]
+    },
+    {
+      "stage": 10,
+      "title": "Harakat fe'llari",
+      "icon": "🏃",
+      "items": [
+        {
+          "en": "run",
+          "uz": "yugurmoq",
+          "emoji": "🏃"
+        },
+        {
+          "en": "jump",
+          "uz": "sakramoq",
+          "emoji": "🦘"
+        },
+        {
+          "en": "swim",
+          "uz": "suzmoq",
+          "emoji": "🏊"
+        },
+        {
+          "en": "fly",
+          "uz": "uchmoq",
+          "emoji": "🦅"
+        },
+        {
+          "en": "read",
+          "uz": "o'qimoq",
+          "emoji": "📖"
+        },
+        {
+          "en": "write",
+          "uz": "yozmoq",
+          "emoji": "✍️"
+        },
+        {
+          "en": "sleep",
+          "uz": "uxlamoq",
+          "emoji": "😴"
+        },
+        {
+          "en": "eat",
+          "uz": "yemoq",
+          "emoji": "🍽️"
+        },
+        {
+          "en": "drink",
+          "uz": "ichmoq",
+          "emoji": "🥤"
+        },
+        {
+          "en": "play",
+          "uz": "o'ynamoq",
+          "emoji": "⚽"
+        }
+      ]
+    }
+  ],
+  "listening": [
+    {
+      "stage": 1,
+      "title": "Salomlashish va Odatlar",
+      "icon": "👋",
+      "items": [
+        {
+          "audio": "Hello",
+          "uz": "Salom",
+          "emoji": "👋"
+        },
+        {
+          "audio": "Goodbye",
+          "uz": "Xayr",
+          "emoji": "🙋‍♂️"
+        },
+        {
+          "audio": "Thank you",
+          "uz": "Rahmat",
+          "emoji": "🙏"
+        },
+        {
+          "audio": "Yes",
+          "uz": "Ha",
+          "emoji": "👍"
+        },
+        {
+          "audio": "No",
+          "uz": "Yo'q",
+          "emoji": "👎"
+        },
+        {
+          "audio": "Please",
+          "uz": "Iltimos",
+          "emoji": "🥺"
+        },
+        {
+          "audio": "Good morning",
+          "uz": "Xayrli tong",
+          "emoji": "🌅"
+        },
+        {
+          "audio": "Good night",
+          "uz": "Xayrli tun",
+          "emoji": "🌙"
+        },
+        {
+          "audio": "Welcome",
+          "uz": "Xush kelibsiz",
+          "emoji": "🤝"
+        },
+        {
+          "audio": "Friend",
+          "uz": "Do'st",
+          "emoji": "🧑‍🤝‍🧑"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "Ranglar va Sonlar",
+      "icon": "🔢",
+      "items": [
+        {
+          "audio": "Seven",
+          "uz": "Yetti (7)",
+          "emoji": "7️⃣"
+        },
+        {
+          "audio": "Twelve",
+          "uz": "O'n ikki (12)",
+          "emoji": "🔢"
+        },
+        {
+          "audio": "Yellow",
+          "uz": "Sariq rang",
+          "emoji": "🟡"
+        },
+        {
+          "audio": "Green",
+          "uz": "Yashil rang",
+          "emoji": "🟢"
+        },
+        {
+          "audio": "Five",
+          "uz": "Besh (5)",
+          "emoji": "5️⃣"
+        },
+        {
+          "audio": "Nine",
+          "uz": "To'qqiz (9)",
+          "emoji": "9️⃣"
+        },
+        {
+          "audio": "Red",
+          "uz": "Qizil rang",
+          "emoji": "🔴"
+        },
+        {
+          "audio": "Blue",
+          "uz": "Ko'k rang",
+          "emoji": "🔵"
+        },
+        {
+          "audio": "Twenty",
+          "uz": "Yigirma (20)",
+          "emoji": "🔢"
+        },
+        {
+          "audio": "Ten",
+          "uz": "O'n (10)",
+          "emoji": "🔟"
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "Hayvonlar va Oila",
+      "icon": "🐾",
+      "items": [
+        {
+          "audio": "Cat",
+          "uz": "Mushuk",
+          "emoji": "🐱"
+        },
+        {
+          "audio": "Dog",
+          "uz": "Kuchuk",
+          "emoji": "🐶"
+        },
+        {
+          "audio": "Mother",
+          "uz": "Ona",
+          "emoji": "👩"
+        },
+        {
+          "audio": "Father",
+          "uz": "Ota",
+          "emoji": "👨"
+        },
+        {
+          "audio": "Brother",
+          "uz": "Aka / Uka",
+          "emoji": "👦"
+        },
+        {
+          "audio": "Sister",
+          "uz": "Opa / Singil",
+          "emoji": "👧"
+        },
+        {
+          "audio": "Lion",
+          "uz": "Sher",
+          "emoji": "🦁"
+        },
+        {
+          "audio": "Elephant",
+          "uz": "Fil",
+          "emoji": "🐘"
+        },
+        {
+          "audio": "Grandma",
+          "uz": "Buvi",
+          "emoji": "👵"
+        },
+        {
+          "audio": "Grandpa",
+          "uz": "Bobo",
+          "emoji": "👴"
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "Maktab va Tana",
+      "icon": "🎒",
+      "items": [
+        {
+          "audio": "Book",
+          "uz": "Kitob",
+          "emoji": "📖"
+        },
+        {
+          "audio": "Pen",
+          "uz": "Ruchka",
+          "emoji": "🖊️"
+        },
+        {
+          "audio": "Pencil",
+          "uz": "Qalam",
+          "emoji": "✏️"
+        },
+        {
+          "audio": "Eye",
+          "uz": "Ko'z",
+          "emoji": "👁️"
+        },
+        {
+          "audio": "Nose",
+          "uz": "Burun",
+          "emoji": "👃"
+        },
+        {
+          "audio": "Hand",
+          "uz": "Qo'l",
+          "emoji": "✋"
+        },
+        {
+          "audio": "Head",
+          "uz": "Bosh",
+          "emoji": "🗣️"
+        },
+        {
+          "audio": "Bag",
+          "uz": "Sumka",
+          "emoji": "🎒"
+        },
+        {
+          "audio": "Desk",
+          "uz": "Parta",
+          "emoji": "🪑"
+        },
+        {
+          "audio": "Ruler",
+          "uz": "Chizg'ich",
+          "emoji": "📏"
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "Meva va Uy",
+      "icon": "🍎",
+      "items": [
+        {
+          "audio": "Apple",
+          "uz": "Olma",
+          "emoji": "🍎"
+        },
+        {
+          "audio": "Milk",
+          "uz": "Sut",
+          "emoji": "🥛"
+        },
+        {
+          "audio": "Bread",
+          "uz": "Non",
+          "emoji": "🍞"
+        },
+        {
+          "audio": "House",
+          "uz": "Uy",
+          "emoji": "🏡"
+        },
+        {
+          "audio": "Door",
+          "uz": "Eshik",
+          "emoji": "🚪"
+        },
+        {
+          "audio": "Window",
+          "uz": "Deraza",
+          "emoji": "🪟"
+        },
+        {
+          "audio": "Water",
+          "uz": "Suv",
+          "emoji": "💧"
+        },
+        {
+          "audio": "Cheese",
+          "uz": "Pishloq",
+          "emoji": "🧀"
+        },
+        {
+          "audio": "Cake",
+          "uz": "Tort",
+          "emoji": "🎂"
+        },
+        {
+          "audio": "Table",
+          "uz": "Stol",
+          "emoji": "🪵"
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "Rang + Buyum birikmalari",
+      "icon": "🎨",
+      "items": [
+        {
+          "audio": "A red apple",
+          "uz": "Qizil olma",
+          "emoji": "🍎"
+        },
+        {
+          "audio": "A blue car",
+          "uz": "Ko'k mashina",
+          "emoji": "🚗"
+        },
+        {
+          "audio": "A green book",
+          "uz": "Yashil kitob",
+          "emoji": "📗"
+        },
+        {
+          "audio": "A yellow sun",
+          "uz": "Sariq quyosh",
+          "emoji": "☀️"
+        },
+        {
+          "audio": "A black cat",
+          "uz": "Qora mushuk",
+          "emoji": "🐈‍⬛"
+        },
+        {
+          "audio": "A white dog",
+          "uz": "Oq kuchuk",
+          "emoji": "🐶"
+        },
+        {
+          "audio": "A brown bear",
+          "uz": "Jigarrang ayiq",
+          "emoji": "🐻"
+        },
+        {
+          "audio": "A pink bag",
+          "uz": "Pushti sumka",
+          "emoji": "🎒"
+        },
+        {
+          "audio": "A red ball",
+          "uz": "Qizil to'p",
+          "emoji": "⚽"
+        },
+        {
+          "audio": "A green tree",
+          "uz": "Yashil daraxt",
+          "emoji": "🌳"
+        }
+      ]
+    },
+    {
+      "stage": 7,
+      "title": "Son + Hayvon birikmalari",
+      "icon": "🔢",
+      "items": [
+        {
+          "audio": "Three cats",
+          "uz": "Uchta mushuk",
+          "emoji": "🐱"
+        },
+        {
+          "audio": "Five dogs",
+          "uz": "Beshta kuchuk",
+          "emoji": "🐶"
+        },
+        {
+          "audio": "Two birds",
+          "uz": "Ikkita qush",
+          "emoji": "🐦"
+        },
+        {
+          "audio": "Four fish",
+          "uz": "To'rtta baliq",
+          "emoji": "🐟"
+        },
+        {
+          "audio": "Six horses",
+          "uz": "Oltita ot",
+          "emoji": "🐴"
+        },
+        {
+          "audio": "Two lions",
+          "uz": "Ikkita sher",
+          "emoji": "🦁"
+        },
+        {
+          "audio": "Three ducks",
+          "uz": "Uchta o'rdak",
+          "emoji": "🦆"
+        },
+        {
+          "audio": "Five cows",
+          "uz": "Beshta sigir",
+          "emoji": "🐮"
+        },
+        {
+          "audio": "Seven sheep",
+          "uz": "Yettita qo'y",
+          "emoji": "🐑"
+        },
+        {
+          "audio": "Two rabbits",
+          "uz": "Ikkita quyon",
+          "emoji": "🐰"
+        }
+      ]
+    },
+    {
+      "stage": 8,
+      "title": "Sifatlar va Tasvirlar",
+      "icon": "✨",
+      "items": [
+        {
+          "audio": "A big elephant",
+          "uz": "Katta fil",
+          "emoji": "🐘"
+        },
+        {
+          "audio": "A small mouse",
+          "uz": "Kichik sichqon",
+          "emoji": "🐁"
+        },
+        {
+          "audio": "A happy boy",
+          "uz": "Xursand bola",
+          "emoji": "👦"
+        },
+        {
+          "audio": "A sad girl",
+          "uz": "Xafa qiz",
+          "emoji": "👧"
+        },
+        {
+          "audio": "A fast car",
+          "uz": "Tez mashina",
+          "emoji": "🏎️"
+        },
+        {
+          "audio": "A sweet cake",
+          "uz": "Shirin tort",
+          "emoji": "🍰"
+        },
+        {
+          "audio": "A tall giraffe",
+          "uz": "Baland jirafa",
+          "emoji": "🦒"
+        },
+        {
+          "audio": "A cold ice cream",
+          "uz": "Sovuq muzqaymoq",
+          "emoji": "🍦"
+        },
+        {
+          "audio": "A clean room",
+          "uz": "Toza xona",
+          "emoji": "🧹"
+        },
+        {
+          "audio": "A cute cat",
+          "uz": "Yoqimtoy mushuk",
+          "emoji": "🐱"
+        }
+      ]
+    },
+    {
+      "stage": 9,
+      "title": "Qisqa gaplar",
+      "icon": "💬",
+      "items": [
+        {
+          "audio": "I like milk",
+          "uz": "Men sutni yaxshi ko'raman",
+          "emoji": "🥛"
+        },
+        {
+          "audio": "I have a dog",
+          "uz": "Menda kuchuk bor",
+          "emoji": "🐶"
+        },
+        {
+          "audio": "She is my mum",
+          "uz": "U mening onam",
+          "emoji": "👩"
+        },
+        {
+          "audio": "This is my bag",
+          "uz": "Bu mening sumkam",
+          "emoji": "🎒"
+        },
+        {
+          "audio": "I can run",
+          "uz": "Men yugura olaman",
+          "emoji": "🏃"
+        },
+        {
+          "audio": "It is a cat",
+          "uz": "Bu mushuk",
+          "emoji": "🐱"
+        },
+        {
+          "audio": "He is my brother",
+          "uz": "U mening akam",
+          "emoji": "👦"
+        },
+        {
+          "audio": "I love my family",
+          "uz": "Men oilamni yaxshi ko'raman",
+          "emoji": "❤️"
+        },
+        {
+          "audio": "I can swim",
+          "uz": "Men suza olaman",
+          "emoji": "🏊"
+        },
+        {
+          "audio": "This is a book",
+          "uz": "Bu kitob",
+          "emoji": "📖"
+        }
+      ]
+    },
+    {
+      "stage": 10,
+      "title": "Super Audio Final",
+      "icon": "🏆",
+      "items": [
+        {
+          "audio": "A green tree",
+          "uz": "Yashil daraxt",
+          "emoji": "🌳"
+        },
+        {
+          "audio": "I have a red car",
+          "uz": "Menda qizil mashina bor",
+          "emoji": "🚗"
+        },
+        {
+          "audio": "She is a teacher",
+          "uz": "U o'qituvchi",
+          "emoji": "👩‍🏫"
+        },
+        {
+          "audio": "Three yellow bananas",
+          "uz": "Uchta sariq banan",
+          "emoji": "🍌"
+        },
+        {
+          "audio": "A happy family",
+          "uz": "Baxtli oila",
+          "emoji": "👨‍👩‍👧‍👦"
+        },
+        {
+          "audio": "The cat is in the box",
+          "uz": "Mushuk quti ichida",
+          "emoji": "📦"
+        },
+        {
+          "audio": "I can jump high",
+          "uz": "Men baland sakray olaman",
+          "emoji": "🦘"
+        },
+        {
+          "audio": "A big brown bear",
+          "uz": "Katta jigarrang ayiq",
+          "emoji": "🐻"
+        },
+        {
+          "audio": "This is my school",
+          "uz": "Bu mening maktabim",
+          "emoji": "🏫"
+        },
+        {
+          "audio": "Good morning, friend",
+          "uz": "Xayrli tong, do'stim",
+          "emoji": "🌅"
+        }
+      ]
+    }
+  ],
+  "spelling": [
+    {
+      "stage": 1,
+      "title": "3 harfli hayvonlar",
+      "icon": "🐱",
+      "items": [
+        {
+          "word": "CAT",
+          "uz": "Mushuk",
+          "emoji": "🐱"
+        },
+        {
+          "word": "DOG",
+          "uz": "Kuchuk",
+          "emoji": "🐶"
+        },
+        {
+          "word": "COW",
+          "uz": "Sigir",
+          "emoji": "🐮"
+        },
+        {
+          "word": "PIG",
+          "uz": "Cho'chqa",
+          "emoji": "🐷"
+        },
+        {
+          "word": "HEN",
+          "uz": "Tovuq",
+          "emoji": "🐔"
+        },
+        {
+          "word": "FOX",
+          "uz": "Tulki",
+          "emoji": "🦊"
+        },
+        {
+          "word": "BEE",
+          "uz": "Ari",
+          "emoji": "🐝"
+        },
+        {
+          "word": "ANT",
+          "uz": "Chumoli",
+          "emoji": "🐜"
+        },
+        {
+          "word": "BAT",
+          "uz": "Ko'rshapalak",
+          "emoji": "🦇"
+        },
+        {
+          "word": "RAT",
+          "uz": "Kalamush",
+          "emoji": "🐀"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "3 harfli buyum va sonlar",
+      "icon": "📦",
+      "items": [
+        {
+          "word": "ONE",
+          "uz": "Bir (1)",
+          "emoji": "1️⃣"
+        },
+        {
+          "word": "TWO",
+          "uz": "Ikki (2)",
+          "emoji": "2️⃣"
+        },
+        {
+          "word": "SIX",
+          "uz": "Olti (6)",
+          "emoji": "6️⃣"
+        },
+        {
+          "word": "TEN",
+          "uz": "O'n (10)",
+          "emoji": "🔟"
+        },
+        {
+          "word": "PEN",
+          "uz": "Ruchka",
+          "emoji": "🖊️"
+        },
+        {
+          "word": "BAG",
+          "uz": "Sumka",
+          "emoji": "🎒"
+        },
+        {
+          "word": "BED",
+          "uz": "Karavot",
+          "emoji": "🛏️"
+        },
+        {
+          "word": "CAR",
+          "uz": "Mashina",
+          "emoji": "🚗"
+        },
+        {
+          "word": "BUS",
+          "uz": "Avtobus",
+          "emoji": "🚌"
+        },
+        {
+          "word": "SUN",
+          "uz": "Quyosh",
+          "emoji": "☀️"
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "3–4 harfli tana va oila",
+      "icon": "👀",
+      "items": [
+        {
+          "word": "EYE",
+          "uz": "Ko'z",
+          "emoji": "👁️"
+        },
+        {
+          "word": "EAR",
+          "uz": "Quloq",
+          "emoji": "👂"
+        },
+        {
+          "word": "LEG",
+          "uz": "Oyoq",
+          "emoji": "🦵"
+        },
+        {
+          "word": "ARM",
+          "uz": "Qo'l (bilak)",
+          "emoji": "💪"
+        },
+        {
+          "word": "NOSE",
+          "uz": "Burun",
+          "emoji": "👃"
+        },
+        {
+          "word": "HAND",
+          "uz": "Qo'l (kaft)",
+          "emoji": "✋"
+        },
+        {
+          "word": "HEAD",
+          "uz": "Bosh",
+          "emoji": "🗣️"
+        },
+        {
+          "word": "FACE",
+          "uz": "Yuz",
+          "emoji": "😀"
+        },
+        {
+          "word": "MUM",
+          "uz": "Ona",
+          "emoji": "👩"
+        },
+        {
+          "word": "DAD",
+          "uz": "Ota",
+          "emoji": "👨"
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "4 harfli so'zlar - 1",
+      "icon": "📖",
+      "items": [
+        {
+          "word": "BOOK",
+          "uz": "Kitob",
+          "emoji": "📖"
+        },
+        {
+          "word": "DESK",
+          "uz": "Parta",
+          "emoji": "🪑"
+        },
+        {
+          "word": "DOOR",
+          "uz": "Eshik",
+          "emoji": "🚪"
+        },
+        {
+          "word": "MILK",
+          "uz": "Sut",
+          "emoji": "🥛"
+        },
+        {
+          "word": "CAKE",
+          "uz": "Tort",
+          "emoji": "🎂"
+        },
+        {
+          "word": "FISH",
+          "uz": "Baliq",
+          "emoji": "🐟"
+        },
+        {
+          "word": "DUCK",
+          "uz": "O'rdak",
+          "emoji": "🦆"
+        },
+        {
+          "word": "BIRD",
+          "uz": "Qush",
+          "emoji": "🐦"
+        },
+        {
+          "word": "LION",
+          "uz": "Sher",
+          "emoji": "🦁"
+        },
+        {
+          "word": "BEAR",
+          "uz": "Ayiq",
+          "emoji": "🐻"
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "4 harfli rang va fe'llar",
+      "icon": "🎨",
+      "items": [
+        {
+          "word": "BLUE",
+          "uz": "Ko'k",
+          "emoji": "🔵"
+        },
+        {
+          "word": "PINK",
+          "uz": "Pushti",
+          "emoji": "🌸"
+        },
+        {
+          "word": "GRAY",
+          "uz": "Kulrang",
+          "emoji": "🔘"
+        },
+        {
+          "word": "FIVE",
+          "uz": "Besh (5)",
+          "emoji": "5️⃣"
+        },
+        {
+          "word": "FOUR",
+          "uz": "To'rt (4)",
+          "emoji": "4️⃣"
+        },
+        {
+          "word": "NINE",
+          "uz": "To'qqiz (9)",
+          "emoji": "9️⃣"
+        },
+        {
+          "word": "JUMP",
+          "uz": "Sakramoq",
+          "emoji": "🦘"
+        },
+        {
+          "word": "SWIM",
+          "uz": "Suzmoq",
+          "emoji": "🏊"
+        },
+        {
+          "word": "PLAY",
+          "uz": "O'ynamoq",
+          "emoji": "⚽"
+        },
+        {
+          "word": "READ",
+          "uz": "O'qimoq",
+          "emoji": "📖"
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "5 harfli meva va ovqatlar",
+      "icon": "🍎",
+      "items": [
+        {
+          "word": "APPLE",
+          "uz": "Olma",
+          "emoji": "🍎"
+        },
+        {
+          "word": "BREAD",
+          "uz": "Non",
+          "emoji": "🍞"
+        },
+        {
+          "word": "WATER",
+          "uz": "Suv",
+          "emoji": "💧"
+        },
+        {
+          "word": "LEMON",
+          "uz": "Limon",
+          "emoji": "🍋"
+        },
+        {
+          "word": "MELON",
+          "uz": "Qovun",
+          "emoji": "🍈"
+        },
+        {
+          "word": "PIZZA",
+          "uz": "Pitsa",
+          "emoji": "🍕"
+        },
+        {
+          "word": "JUICE",
+          "uz": "Sharbat",
+          "emoji": "🧃"
+        },
+        {
+          "word": "SWEET",
+          "uz": "Shirinlik",
+          "emoji": "🍬"
+        },
+        {
+          "word": "LUNCH",
+          "uz": "Tushlik",
+          "emoji": "🍱"
+        },
+        {
+          "word": "SUGAR",
+          "uz": "Shakar",
+          "emoji": "🧂"
+        }
+      ]
+    },
+    {
+      "stage": 7,
+      "title": "5 harfli rang va sonlar",
+      "icon": "🟢",
+      "items": [
+        {
+          "word": "GREEN",
+          "uz": "Yashil",
+          "emoji": "🟢"
+        },
+        {
+          "word": "WHITE",
+          "uz": "Oq",
+          "emoji": "⚪"
+        },
+        {
+          "word": "BLACK",
+          "uz": "Qora",
+          "emoji": "⚫"
+        },
+        {
+          "word": "BROWN",
+          "uz": "Jigarrang",
+          "emoji": "🟤"
+        },
+        {
+          "word": "THREE",
+          "uz": "Uch (3)",
+          "emoji": "3️⃣"
+        },
+        {
+          "word": "SEVEN",
+          "uz": "Yetti (7)",
+          "emoji": "7️⃣"
+        },
+        {
+          "word": "EIGHT",
+          "uz": "Sakkiz (8)",
+          "emoji": "8️⃣"
+        },
+        {
+          "word": "TIGER",
+          "uz": "Yo'lbars",
+          "emoji": "🐯"
+        },
+        {
+          "word": "HORSE",
+          "uz": "Ot",
+          "emoji": "🐴"
+        },
+        {
+          "word": "SHEEP",
+          "uz": "Qo'y",
+          "emoji": "🐑"
+        }
+      ]
+    },
+    {
+      "stage": 8,
+      "title": "5–6 harfli maktab va uy",
+      "icon": "✏️",
+      "items": [
+        {
+          "word": "PENCIL",
+          "uz": "Qalam",
+          "emoji": "✏️"
+        },
+        {
+          "word": "RULER",
+          "uz": "Chizg'ich",
+          "emoji": "📏"
+        },
+        {
+          "word": "RUBBER",
+          "uz": "O'chirg'ich",
+          "emoji": "🧽"
+        },
+        {
+          "word": "SCHOOL",
+          "uz": "Maktab",
+          "emoji": "🏫"
+        },
+        {
+          "word": "WINDOW",
+          "uz": "Deraza",
+          "emoji": "🪟"
+        },
+        {
+          "word": "TABLE",
+          "uz": "Stol",
+          "emoji": "🪵"
+        },
+        {
+          "word": "CHAIR",
+          "uz": "Stul",
+          "emoji": "🪑"
+        },
+        {
+          "word": "HOUSE",
+          "uz": "Uy",
+          "emoji": "🏡"
+        },
+        {
+          "word": "GARDEN",
+          "uz": "Bog'",
+          "emoji": "🌳"
+        },
+        {
+          "word": "SOFA",
+          "uz": "Divan",
+          "emoji": "🛋️"
+        }
+      ]
+    },
+    {
+      "stage": 9,
+      "title": "6 harfli oila va hayvonlar",
+      "icon": "👨‍👩‍👧‍👦",
+      "items": [
+        {
+          "word": "MOTHER",
+          "uz": "Ona",
+          "emoji": "👩"
+        },
+        {
+          "word": "FATHER",
+          "uz": "Ota",
+          "emoji": "👨"
+        },
+        {
+          "word": "SISTER",
+          "uz": "Opa / Singil",
+          "emoji": "👧"
+        },
+        {
+          "word": "MONKEY",
+          "uz": "Maymun",
+          "emoji": "🐒"
+        },
+        {
+          "word": "RABBIT",
+          "uz": "Quyon",
+          "emoji": "🐰"
+        },
+        {
+          "word": "YELLOW",
+          "uz": "Sariq",
+          "emoji": "🟡"
+        },
+        {
+          "word": "ORANGE",
+          "uz": "Apelsin / Olovrang",
+          "emoji": "🍊"
+        },
+        {
+          "word": "PURPLE",
+          "uz": "Binafsha",
+          "emoji": "🟣"
+        },
+        {
+          "word": "TWELVE",
+          "uz": "O'n ikki (12)",
+          "emoji": "🔢"
+        },
+        {
+          "word": "TWENTY",
+          "uz": "Yigirma (20)",
+          "emoji": "🔢"
+        }
+      ]
+    },
+    {
+      "stage": 10,
+      "title": "Chempion so'zlar",
+      "icon": "🏆",
+      "items": [
+        {
+          "word": "BROTHER",
+          "uz": "Aka / Uka",
+          "emoji": "👦"
+        },
+        {
+          "word": "GRANDMA",
+          "uz": "Buvi",
+          "emoji": "👵"
+        },
+        {
+          "word": "GRANDPA",
+          "uz": "Bobo",
+          "emoji": "👴"
+        },
+        {
+          "word": "TEACHER",
+          "uz": "O'qituvchi",
+          "emoji": "👩‍🏫"
+        },
+        {
+          "word": "ELEPHANT",
+          "uz": "Fil",
+          "emoji": "🐘"
+        },
+        {
+          "word": "GIRAFFE",
+          "uz": "Jirafa",
+          "emoji": "🦒"
+        },
+        {
+          "word": "MORNING",
+          "uz": "Tong",
+          "emoji": "🌅"
+        },
+        {
+          "word": "BEDROOM",
+          "uz": "Yotoqxona",
+          "emoji": "🛏️"
+        },
+        {
+          "word": "KITCHEN",
+          "uz": "Oshxona",
+          "emoji": "🍳"
+        },
+        {
+          "word": "CHICKEN",
+          "uz": "Jo'ja / Tovuq go'shti",
+          "emoji": "🍗"
+        }
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "stage": 1,
+      "title": "a yoki an artikli",
+      "icon": "🅰️",
+      "items": [
+        {
+          "sentence": "This is [ ___ ] apple.",
+          "uz": "Bu olma.",
+          "correct": "an",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Unli harf (a, e, i, o, u) bilan boshlangan so'zlar oldidan 'an' ishlatiladi!"
+        },
+        {
+          "sentence": "I have [ ___ ] book.",
+          "uz": "Menda kitob bor.",
+          "correct": "a",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Undosh harf bilan boshlangan so'zlar oldidan 'a' ishlatiladi!"
+        },
+        {
+          "sentence": "It is [ ___ ] orange.",
+          "uz": "Bu apelsin.",
+          "correct": "an",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Unli harf (o) oldidan 'an' ishlatiladi!"
+        },
+        {
+          "sentence": "She has [ ___ ] cat.",
+          "uz": "Unda mushuk bor.",
+          "correct": "a",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Undosh harf (c) oldidan 'a' ishlatiladi!"
+        },
+        {
+          "sentence": "Look at [ ___ ] elephant.",
+          "uz": "Filga qara.",
+          "correct": "an",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Unli harf (e) oldidan 'an' ishlatiladi!"
+        },
+        {
+          "sentence": "I see [ ___ ] dog.",
+          "uz": "Men kuchukni ko'ryapman.",
+          "correct": "a",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Undosh harf (d) oldidan 'a' ishlatiladi!"
+        },
+        {
+          "sentence": "Give me [ ___ ] egg.",
+          "uz": "Menga tuxum ber.",
+          "correct": "an",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Unli harf (e) oldidan 'an' ishlatiladi!"
+        },
+        {
+          "sentence": "He is [ ___ ] boy.",
+          "uz": "U o'g'il bola.",
+          "correct": "a",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Undosh harf (b) oldidan 'a' ishlatiladi!"
+        },
+        {
+          "sentence": "I want [ ___ ] ice cream.",
+          "uz": "Men muzqaymoq xohlayman.",
+          "correct": "an",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Unli harf (i) oldidan 'an' ishlatiladi!"
+        },
+        {
+          "sentence": "This is [ ___ ] pen.",
+          "uz": "Bu ruchka.",
+          "correct": "a",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Undosh harf (p) oldidan 'a' ishlatiladi!"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "am / is / are (1-qism)",
+      "icon": "👤",
+      "items": [
+        {
+          "sentence": "I [ ___ ] a pupil.",
+          "uz": "Men o'quvchiman.",
+          "correct": "am",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "I (Men) bilan doim 'am' ishlatiladi!"
+        },
+        {
+          "sentence": "He [ ___ ] a boy.",
+          "uz": "U o'g'il bola.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "He (U o'g'il bola) bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "She [ ___ ] my sister.",
+          "uz": "U mening singlim.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "She (U qiz bola) bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "I [ ___ ] 8 years old.",
+          "uz": "Men 8 yoshdaman.",
+          "correct": "am",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "I bilan doim 'am' ishlatiladi!"
+        },
+        {
+          "sentence": "He [ ___ ] my brother.",
+          "uz": "U mening akam.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "He bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "She [ ___ ] a doctor.",
+          "uz": "U shifokor.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "She bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "I [ ___ ] happy today.",
+          "uz": "Men bugun xursandman.",
+          "correct": "am",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "I bilan doim 'am' ishlatiladi!"
+        },
+        {
+          "sentence": "He [ ___ ] strong.",
+          "uz": "U kuchli.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "He bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "She [ ___ ] my friend.",
+          "uz": "U mening do'stim.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "She bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "I [ ___ ] at home.",
+          "uz": "Men uydaman.",
+          "correct": "am",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "I bilan doim 'am' ishlatiladi!"
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "am / is / are (2-qism: Ko'plik)",
+      "icon": "👥",
+      "items": [
+        {
+          "sentence": "We [ ___ ] good friends.",
+          "uz": "Biz yaxshi do'stlarmiz.",
+          "correct": "are",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "We (Biz) bilan 'are' ishlatiladi!"
+        },
+        {
+          "sentence": "They [ ___ ] cats.",
+          "uz": "Ular mushuklar.",
+          "correct": "are",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "They (Ular) bilan 'are' ishlatiladi!"
+        },
+        {
+          "sentence": "It [ ___ ] a dog.",
+          "uz": "Bu kuchuk.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "It (U hayvon/buyum) bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "You [ ___ ] a smart boy.",
+          "uz": "Sen aqlli bolasan.",
+          "correct": "are",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "You (Sen/Siz) bilan 'are' ishlatiladi!"
+        },
+        {
+          "sentence": "We [ ___ ] pupils.",
+          "uz": "Biz o'quvchilarmiz.",
+          "correct": "are",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "We bilan 'are' ishlatiladi!"
+        },
+        {
+          "sentence": "It [ ___ ] a red ball.",
+          "uz": "Bu qizil to'p.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "It bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "They [ ___ ] in the garden.",
+          "uz": "Ular bog'dalar.",
+          "correct": "are",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "They bilan 'are' ishlatiladi!"
+        },
+        {
+          "sentence": "It [ ___ ] a pencil.",
+          "uz": "Bu qalam.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "It bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "You [ ___ ] welcome.",
+          "uz": "Arzimaydi.",
+          "correct": "are",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "You bilan 'are' ishlatiladi!"
+        },
+        {
+          "sentence": "They [ ___ ] brothers.",
+          "uz": "Ular aka-ukalar.",
+          "correct": "are",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "They bilan 'are' ishlatiladi!"
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "Ko'plik qo'shimchasi: -s / -es",
+      "icon": "➕",
+      "items": [
+        {
+          "sentence": "One cat -> Three [ ___ ].",
+          "uz": "Bitta mushuk -> Uchta mushuklar.",
+          "correct": "cats",
+          "options": [
+            "cats",
+            "cat"
+          ],
+          "rule": "Ko'plikda so'z oxiriga '-s' qo'shiladi!"
+        },
+        {
+          "sentence": "One box -> Two [ ___ ].",
+          "uz": "Bitta quti -> Ikkita qutilar.",
+          "correct": "boxes",
+          "options": [
+            "boxes",
+            "boxs"
+          ],
+          "rule": "-x bilan tugasa '-es' qo'shiladi!"
+        },
+        {
+          "sentence": "One dog -> Five [ ___ ].",
+          "uz": "Bitta kuchuk -> Beshta kuchuklar.",
+          "correct": "dogs",
+          "options": [
+            "dogs",
+            "dog"
+          ],
+          "rule": "Ko'plikda '-s' qo'shiladi!"
+        },
+        {
+          "sentence": "One bus -> Four [ ___ ].",
+          "uz": "Bitta avtobus -> To'rtta avtobuslar.",
+          "correct": "buses",
+          "options": [
+            "buses",
+            "bus"
+          ],
+          "rule": "-s bilan tugasa '-es' qo'shiladi!"
+        },
+        {
+          "sentence": "One apple -> Six [ ___ ].",
+          "uz": "Bitta olma -> Oltita olmalar.",
+          "correct": "apples",
+          "options": [
+            "apples",
+            "apple"
+          ],
+          "rule": "Ko'plikda '-s' qo'shiladi!"
+        },
+        {
+          "sentence": "One fox -> Two [ ___ ].",
+          "uz": "Bitta tulki -> Ikkita tulkilar.",
+          "correct": "foxes",
+          "options": [
+            "foxes",
+            "fox"
+          ],
+          "rule": "-x bilan tugasa '-es' qo'shiladi!"
+        },
+        {
+          "sentence": "One book -> Ten [ ___ ].",
+          "uz": "Bitta kitob -> O'nta kitoblar.",
+          "correct": "books",
+          "options": [
+            "books",
+            "book"
+          ],
+          "rule": "Ko'plikda '-s' qo'shiladi!"
+        },
+        {
+          "sentence": "One dish -> Three [ ___ ].",
+          "uz": "Bitta idish -> Uchta idishlar.",
+          "correct": "dishes",
+          "options": [
+            "dishes",
+            "dishs"
+          ],
+          "rule": "-sh bilan tugasa '-es' qo'shiladi!"
+        },
+        {
+          "sentence": "One boy -> Two [ ___ ].",
+          "uz": "Bitta o'g'il bola -> Ikkita o'g'il bolalar.",
+          "correct": "boys",
+          "options": [
+            "boys",
+            "boy"
+          ],
+          "rule": "Ko'plikda '-s' qo'shiladi!"
+        },
+        {
+          "sentence": "One pen -> Seven [ ___ ].",
+          "uz": "Bitta ruchka -> Yettita ruchkalar.",
+          "correct": "pens",
+          "options": [
+            "pens",
+            "pen"
+          ],
+          "rule": "Ko'plikda '-s' qo'shiladi!"
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "have yoki has (Bor bo'lmoq)",
+      "icon": "🤝",
+      "items": [
+        {
+          "sentence": "I [ ___ ] a red ball.",
+          "uz": "Menda qizil to'p bor.",
+          "correct": "have",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "I / You / We / They bilan 'have' ishlatiladi!"
+        },
+        {
+          "sentence": "She [ ___ ] a nice doll.",
+          "uz": "Unda chiroyli qo'g'irchoq bor.",
+          "correct": "has",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "He / She / It bilan 'has' ishlatiladi!"
+        },
+        {
+          "sentence": "He [ ___ ] a new bike.",
+          "uz": "Unda yangi velosiped bor.",
+          "correct": "has",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "He bilan 'has' ishlatiladi!"
+        },
+        {
+          "sentence": "We [ ___ ] a big house.",
+          "uz": "Bizda katta uy bor.",
+          "correct": "have",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "We bilan 'have' ishlatiladi!"
+        },
+        {
+          "sentence": "They [ ___ ] two dogs.",
+          "uz": "Ularda ikkita kuchuk bor.",
+          "correct": "have",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "They bilan 'have' ishlatiladi!"
+        },
+        {
+          "sentence": "A cat [ ___ ] four legs.",
+          "uz": "Mushukda to'rtta oyoq bor.",
+          "correct": "has",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "It (bitta hayvon) bilan 'has' ishlatiladi!"
+        },
+        {
+          "sentence": "You [ ___ ] a green pen.",
+          "uz": "Senda yashil ruchka bor.",
+          "correct": "have",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "You bilan 'have' ishlatiladi!"
+        },
+        {
+          "sentence": "She [ ___ ] an apple.",
+          "uz": "Unda olma bor.",
+          "correct": "has",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "She bilan 'has' ishlatiladi!"
+        },
+        {
+          "sentence": "I [ ___ ] a brother.",
+          "uz": "Mening akam bor.",
+          "correct": "have",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "I bilan 'have' ishlatiladi!"
+        },
+        {
+          "sentence": "We [ ___ ] many books.",
+          "uz": "Bizda ko'p kitoblar bor.",
+          "correct": "have",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "We bilan 'have' ishlatiladi!"
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "can yoki can't (Qila olmoq)",
+      "icon": "⚡",
+      "items": [
+        {
+          "sentence": "A bird [ ___ ] fly.",
+          "uz": "Qush ucha oladi.",
+          "correct": "can",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Qush ucha oladi (can)!"
+        },
+        {
+          "sentence": "A fish [ ___ ] run.",
+          "uz": "Baliq yugura olmaydi.",
+          "correct": "can't",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Baliq yugura olmaydi (can't)!"
+        },
+        {
+          "sentence": "A monkey [ ___ ] climb a tree.",
+          "uz": "Maymun daraxtga chiqa oladi.",
+          "correct": "can",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Maymun chiqa oladi (can)!"
+        },
+        {
+          "sentence": "A cat [ ___ ] fly in the sky.",
+          "uz": "Mushuk osmonda ucha olmaydi.",
+          "correct": "can't",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Mushuk ucha olmaydi (can't)!"
+        },
+        {
+          "sentence": "A dog [ ___ ] swim in water.",
+          "uz": "Kuchuk suvda suza oladi.",
+          "correct": "can",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Kuchuk suza oladi (can)!"
+        },
+        {
+          "sentence": "A frog [ ___ ] jump high.",
+          "uz": "Qurbaqa baland sakray oladi.",
+          "correct": "can",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Qurbaqa sakray oladi (can)!"
+        },
+        {
+          "sentence": "A baby [ ___ ] drive a car.",
+          "uz": "Chaqaloq mashina hayday olmaydi.",
+          "correct": "can't",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Chaqaloq mashina hayday olmaydi (can't)!"
+        },
+        {
+          "sentence": "A pupil [ ___ ] read books.",
+          "uz": "O'quvchi kitob o'qiy oladi.",
+          "correct": "can",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "O'quvchi o'qiy oladi (can)!"
+        },
+        {
+          "sentence": "A snake [ ___ ] walk.",
+          "uz": "Ilon yura olmaydi.",
+          "correct": "can't",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Ilonning oyog'i yo'q, yura olmaydi (can't)!"
+        },
+        {
+          "sentence": "An elephant [ ___ ] fly.",
+          "uz": "Fil ucha olmaydi.",
+          "correct": "can't",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Fil ucha olmaydi (can't)!"
+        }
+      ]
+    },
+    {
+      "stage": 7,
+      "title": "This is yoki These are",
+      "icon": "👉",
+      "items": [
+        {
+          "sentence": "[ ___ ] is my pen.",
+          "uz": "Bu mening ruchkam.",
+          "correct": "This",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Bitta buyum (birlik) uchun 'This is' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] are my books.",
+          "uz": "Bular mening kitoblarim.",
+          "correct": "These",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Bir nechta buyum (ko'plik) uchun 'These are' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] is an apple.",
+          "uz": "Bu olma.",
+          "correct": "This",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Bitta olma uchun 'This is' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] are two cats.",
+          "uz": "Bular ikkita mushuk.",
+          "correct": "These",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Ko'plik uchun 'These are' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] is my bag.",
+          "uz": "Bu mening sumkam.",
+          "correct": "This",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Birlik uchun 'This is' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] are five pencils.",
+          "uz": "Bular beshta qalam.",
+          "correct": "These",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Ko'plik uchun 'These are' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] is my teacher.",
+          "uz": "Bu mening o'qituvchim.",
+          "correct": "This",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Birlik uchun 'This is' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] are my friends.",
+          "uz": "Bular mening do'stlarim.",
+          "correct": "These",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Ko'plik uchun 'These are' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] is a green chair.",
+          "uz": "Bu yashil stul.",
+          "correct": "This",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Birlik uchun 'This is' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] are ten stars.",
+          "uz": "Bular o'nta yulduz.",
+          "correct": "These",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Ko'plik uchun 'These are' ishlatiladi!"
+        }
+      ]
+    },
+    {
+      "stage": 8,
+      "title": "in / on / under (Predloglar)",
+      "icon": "📦",
+      "items": [
+        {
+          "sentence": "The cat is [ ___ ] the box. (ichida)",
+          "uz": "Mushuk quti ichida.",
+          "correct": "in",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'in' — ichida degani!"
+        },
+        {
+          "sentence": "The book is [ ___ ] the table. (ustida)",
+          "uz": "Kitob stol ustida.",
+          "correct": "on",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'on' — ustida degani!"
+        },
+        {
+          "sentence": "The dog is [ ___ ] the bed. (tagida)",
+          "uz": "Kuchuk karavot tagida.",
+          "correct": "under",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'under' — tagida degani!"
+        },
+        {
+          "sentence": "The pencil is [ ___ ] the bag. (ichida)",
+          "uz": "Qalam sumka ichida.",
+          "correct": "in",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'in' — ichida degani!"
+        },
+        {
+          "sentence": "The apple is [ ___ ] the plate. (ustida)",
+          "uz": "Olma tarelka ustida.",
+          "correct": "on",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'on' — ustida degani!"
+        },
+        {
+          "sentence": "The ball is [ ___ ] the chair. (tagida)",
+          "uz": "To'p stul tagida.",
+          "correct": "under",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'under' — tagida degani!"
+        },
+        {
+          "sentence": "The fish is [ ___ ] the water. (ichida)",
+          "uz": "Baliq suv ichida.",
+          "correct": "in",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'in' — ichida degani!"
+        },
+        {
+          "sentence": "The cup is [ ___ ] the desk. (ustida)",
+          "uz": "Finjon parta ustida.",
+          "correct": "on",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'on' — ustida degani!"
+        },
+        {
+          "sentence": "The shoes are [ ___ ] the table. (tagida)",
+          "uz": "Poyabzal stol tagida.",
+          "correct": "under",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'under' — tagida degani!"
+        },
+        {
+          "sentence": "The toy is [ ___ ] the box. (ichida)",
+          "uz": "O'yinchoq quti ichida.",
+          "correct": "in",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'in' — ichida degani!"
+        }
+      ]
+    },
+    {
+      "stage": 9,
+      "title": "He / She / It / They (Olmoshlar)",
+      "icon": "👥",
+      "items": [
+        {
+          "sentence": "Aziz is a boy. [ ___ ] is 8 years old.",
+          "uz": "Aziz o'g'il bola. U 8 yoshda.",
+          "correct": "He",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "O'g'il bola (erkak) uchun 'He' ishlatiladi!"
+        },
+        {
+          "sentence": "Madina is a girl. [ ___ ] is my sister.",
+          "uz": "Madina qiz bola. U mening singlim.",
+          "correct": "She",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "Qiz bola (ayol) uchun 'She' ishlatiladi!"
+        },
+        {
+          "sentence": "The dog is small. [ ___ ] is white.",
+          "uz": "Kuchuk kichkina. U oq rangda.",
+          "correct": "It",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "Hayvon va jonsiz buyumlar uchun 'It' ishlatiladi!"
+        },
+        {
+          "sentence": "Ali and Vali are pupils. [ ___ ] are friends.",
+          "uz": "Ali va Vali o'quvchilar. Ular do'stlar.",
+          "correct": "They",
+          "options": [
+            "He",
+            "They",
+            "We"
+          ],
+          "rule": "Ko'plik (Ular) uchun 'They' ishlatiladi!"
+        },
+        {
+          "sentence": "My father is kind. [ ___ ] is a doctor.",
+          "uz": "Mening dadam mehribon. U shifokor.",
+          "correct": "He",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "Ota (erkak) uchun 'He' ishlatiladi!"
+        },
+        {
+          "sentence": "My mother is sweet. [ ___ ] is a teacher.",
+          "uz": "Mening onam yoqimtoy. U o'qituvchi.",
+          "correct": "She",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "Ona (ayol) uchun 'She' ishlatiladi!"
+        },
+        {
+          "sentence": "The cat is black. [ ___ ] can jump.",
+          "uz": "Mushuk qora. U sakray oladi.",
+          "correct": "It",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "Hayvon uchun 'It' ishlatiladi!"
+        },
+        {
+          "sentence": "The boys are happy. [ ___ ] play football.",
+          "uz": "Bolalar xursand. Ular futbol o'ynashyapti.",
+          "correct": "They",
+          "options": [
+            "He",
+            "They",
+            "It"
+          ],
+          "rule": "Ko'plik uchun 'They' ishlatiladi!"
+        },
+        {
+          "sentence": "My sister is cute. [ ___ ] has a doll.",
+          "uz": "Mening singlim yoqimtoy. Unda qo'g'irchoq bor.",
+          "correct": "She",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "Singil uchun 'She' ishlatiladi!"
+        },
+        {
+          "sentence": "The book is green. [ ___ ] is on the desk.",
+          "uz": "Kitob yashil. U parta ustida.",
+          "correct": "It",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "Buyum uchun 'It' ishlatiladi!"
+        }
+      ]
+    },
+    {
+      "stage": 10,
+      "title": "Umumiy Grammatika Super Test",
+      "icon": "🏆",
+      "items": [
+        {
+          "sentence": "I [ ___ ] an apple.",
+          "uz": "Menda olma bor.",
+          "correct": "have",
+          "options": [
+            "have",
+            "has",
+            "am"
+          ],
+          "rule": "I bilan 'have' ishlatiladi!"
+        },
+        {
+          "sentence": "She [ ___ ] a pupil.",
+          "uz": "U o'quvchi.",
+          "correct": "is",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "She bilan 'is' ishlatiladi!"
+        },
+        {
+          "sentence": "Look at [ ___ ] orange.",
+          "uz": "Apelsinga qara.",
+          "correct": "an",
+          "options": [
+            "a",
+            "an"
+          ],
+          "rule": "Unli 'o' oldidan 'an' ishlatiladi!"
+        },
+        {
+          "sentence": "We [ ___ ] happy friends.",
+          "uz": "Biz baxtli do'stlarmiz.",
+          "correct": "are",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ],
+          "rule": "We bilan 'are' ishlatiladi!"
+        },
+        {
+          "sentence": "A bird [ ___ ] fly.",
+          "uz": "Qush ucha oladi.",
+          "correct": "can",
+          "options": [
+            "can",
+            "can't"
+          ],
+          "rule": "Qush ucha oladi (can)!"
+        },
+        {
+          "sentence": "The pen is [ ___ ] the desk. (ustida)",
+          "uz": "Ruchka parta ustida.",
+          "correct": "on",
+          "options": [
+            "in",
+            "on",
+            "under"
+          ],
+          "rule": "'on' — ustida degani!"
+        },
+        {
+          "sentence": "One cat -> Two [ ___ ].",
+          "uz": "Bitta mushuk -> Ikkita mushuklar.",
+          "correct": "cats",
+          "options": [
+            "cats",
+            "cat"
+          ],
+          "rule": "Ko'plikda '-s' qo'shiladi!"
+        },
+        {
+          "sentence": "He is a boy. [ ___ ] is strong.",
+          "uz": "U o'g'il bola. U kuchli.",
+          "correct": "He",
+          "options": [
+            "He",
+            "She",
+            "It"
+          ],
+          "rule": "O'g'il bola uchun 'He' ishlatiladi!"
+        },
+        {
+          "sentence": "[ ___ ] are my books.",
+          "uz": "Bular mening kitoblarim.",
+          "correct": "These",
+          "options": [
+            "This",
+            "These"
+          ],
+          "rule": "Ko'plik uchun 'These are' ishlatiladi!"
+        },
+        {
+          "sentence": "He [ ___ ] a red car.",
+          "uz": "Unda qizil mashina bor.",
+          "correct": "has",
+          "options": [
+            "have",
+            "has"
+          ],
+          "rule": "He bilan 'has' ishlatiladi!"
+        }
+      ]
+    }
+  ]
+};
+
+    /* ==========================================================================
+       4. DATABASE & LOCALSTORAGE MANAGER (savarbek_edu_v1)
        ========================================================================== */
     const DB_KEY = 'savarbek_edu_v1';
 
@@ -2168,6 +5442,12 @@
             subtraction: createEmptyStages(),
             multiplication: createEmptyStages(),
             division: createEmptyStages()
+          },
+          english: {
+            vocabulary: createEmptyStages(),
+            listening: createEmptyStages(),
+            spelling: createEmptyStages(),
+            grammar: createEmptyStages()
           }
         };
       }
@@ -2177,8 +5457,11 @@
           const saved = localStorage.getItem(DB_KEY);
           if (saved) {
             const parsed = JSON.parse(saved);
-            // Schema migration sanity checks
+            const defaults = this.getDefaultData();
             if (parsed && parsed.math && parsed.math.addition) {
+              if (!parsed.english || !parsed.english.vocabulary) {
+                parsed.english = defaults.english;
+              }
               return parsed;
             }
           }
@@ -2201,17 +5484,45 @@
 
       resetAll() {
         const fresh = this.getDefaultData();
-        fresh.soundEnabled = this.data.soundEnabled; // Keep sound preference
+        fresh.soundEnabled = this.data.soundEnabled;
         this.save(fresh);
         return fresh;
       }
 
-      getStage(operation, stageNum) {
+      getMathStage(operation, stageNum) {
         return this.data.math[operation][stageNum - 1];
       }
 
-      saveStageResult(operation, stageNum, currentPercentage) {
-        const stage = this.getStage(operation, stageNum);
+      getEngStage(category, stageNum) {
+        return this.data.english[category][stageNum - 1];
+      }
+
+      saveMathResult(operation, stageNum, currentPercentage) {
+        const stage = this.getMathStage(operation, stageNum);
+        const oldMax = stage.maxPercentage;
+        stage.attempts += 1;
+        stage.lastPercentage = currentPercentage;
+        this.data.totalQuestionsSolved += 10;
+
+        let isNewRecord = false;
+        if (currentPercentage > oldMax) {
+          stage.maxPercentage = currentPercentage;
+          stage.updatedAt = new Date().toISOString();
+          isNewRecord = true;
+        }
+
+        this.save();
+        return {
+          oldMax,
+          currentPercentage,
+          isNewRecord,
+          isPerfect: currentPercentage === 100,
+          attempts: stage.attempts
+        };
+      }
+
+      saveEngResult(category, stageNum, currentPercentage) {
+        const stage = this.getEngStage(category, stageNum);
         const oldMax = stage.maxPercentage;
         stage.attempts += 1;
         stage.lastPercentage = currentPercentage;
@@ -2238,65 +5549,83 @@
         let sum = 0;
         const ops = ['addition', 'subtraction', 'multiplication', 'division'];
         ops.forEach(op => {
-          this.data.math[op].forEach(stage => {
-            sum += stage.maxPercentage;
-          });
+          this.data.math[op].forEach(stage => { sum += stage.maxPercentage; });
         });
         return Math.round(sum / 40);
       }
 
-      getOperationAveragePercentage(operation) {
+      getOverallEnglishPercentage() {
         let sum = 0;
-        this.data.math[operation].forEach(stage => {
-          sum += stage.maxPercentage;
+        const cats = ['vocabulary', 'listening', 'spelling', 'grammar'];
+        cats.forEach(cat => {
+          this.data.english[cat].forEach(stage => { sum += stage.maxPercentage; });
         });
+        return Math.round(sum / 40);
+      }
+
+      getMathOperationAverage(op) {
+        let sum = 0;
+        this.data.math[op].forEach(s => sum += s.maxPercentage);
         return Math.round(sum / 10);
       }
 
-      getCompletedStagesCount(operation) {
-        return this.data.math[operation].filter(s => s.maxPercentage >= 1).length;
+      getEngCategoryAverage(cat) {
+        let sum = 0;
+        this.data.english[cat].forEach(s => sum += s.maxPercentage);
+        return Math.round(sum / 10);
+      }
+
+      getMathCompletedStages(op) {
+        return this.data.math[op].filter(s => s.maxPercentage >= 1).length;
+      }
+
+      getEngCompletedStages(cat) {
+        return this.data.english[cat].filter(s => s.maxPercentage >= 1).length;
       }
 
       getTotalStars() {
         let stars = 0;
         const ops = ['addition', 'subtraction', 'multiplication', 'division'];
         ops.forEach(op => {
-          this.data.math[op].forEach(stage => {
-            if (stage.maxPercentage === 100) stars += 3;
-            else if (stage.maxPercentage >= 80) stars += 2;
-            else if (stage.maxPercentage >= 50) stars += 1;
+          this.data.math[op].forEach(s => {
+            if (s.maxPercentage === 100) stars += 3;
+            else if (s.maxPercentage >= 80) stars += 2;
+            else if (s.maxPercentage >= 50) stars += 1;
+          });
+        });
+
+        const cats = ['vocabulary', 'listening', 'spelling', 'grammar'];
+        cats.forEach(cat => {
+          this.data.english[cat].forEach(s => {
+            if (s.maxPercentage === 100) stars += 3;
+            else if (s.maxPercentage >= 80) stars += 2;
+            else if (s.maxPercentage >= 50) stars += 1;
           });
         });
         return stars;
       }
 
-      isStageUnlocked(operation, stageNum) {
+      isMathStageUnlocked(operation, stageNum) {
         if (stageNum === 1) return true;
-        const prevStage = this.getStage(operation, stageNum - 1);
-        return prevStage.maxPercentage >= 50;
+        return this.getMathStage(operation, stageNum - 1).maxPercentage >= 50;
+      }
+
+      isEngStageUnlocked(category, stageNum) {
+        if (stageNum === 1) return true;
+        return this.getEngStage(category, stageNum - 1).maxPercentage >= 50;
       }
     }
 
     const db = new DatabaseManager();
 
     /* ==========================================================================
-       4. MATHEMATICAL QUESTION GENERATORS (Strict 2nd grade curriculum)
+       5. MATH GENERATOR ALGORITHMS
        ========================================================================== */
     class MathGenerator {
       static randomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
 
-      static shuffle(array) {
-        const arr = [...array];
-        for (let i = arr.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        return arr;
-      }
-
-      // Generate 10 unique questions for an operation and stage
       static generateStageQuestions(operation, stageNum) {
         const questions = [];
         const seenKeys = new Set();
@@ -2306,18 +5635,10 @@
           attemptsCount++;
           let q = null;
           switch (operation) {
-            case 'addition':
-              q = MathGenerator.generateAddition(stageNum);
-              break;
-            case 'subtraction':
-              q = MathGenerator.generateSubtraction(stageNum);
-              break;
-            case 'multiplication':
-              q = MathGenerator.generateMultiplication(stageNum, questions.length);
-              break;
-            case 'division':
-              q = MathGenerator.generateDivision(stageNum, questions.length);
-              break;
+            case 'addition': q = MathGenerator.generateAddition(stageNum); break;
+            case 'subtraction': q = MathGenerator.generateSubtraction(stageNum); break;
+            case 'multiplication': q = MathGenerator.generateMultiplication(stageNum); break;
+            case 'division': q = MathGenerator.generateDivision(stageNum); break;
           }
 
           if (q && !seenKeys.has(q.key)) {
@@ -2325,55 +5646,53 @@
             questions.push(q);
           }
         }
-
         return questions;
       }
 
-      // 3.1 ➕ QO'SHISH (10 ta Etap)
       static generateAddition(stage) {
         let a, b, c;
         switch (stage) {
-          case 1: { // 10 ichida: A >= 1, B >= 1, A + B <= 10
+          case 1: {
             const sum = MathGenerator.randomInt(2, 10);
             a = MathGenerator.randomInt(1, sum - 1);
             b = sum - a;
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 2: { // 20 ichida xonasiz: 10 <= A <= 18, 1 <= B <= 9, A + B <= 20, (A%10) + B < 10
+          case 2: {
             const ones = MathGenerator.randomInt(0, 8);
             a = 10 + ones;
             b = MathGenerator.randomInt(1, 9 - ones);
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 3: { // 20 ichida xonadan o'tib: 2 <= A <= 9, 2 <= B <= 9, A + B > 10
+          case 3: {
             do {
               a = MathGenerator.randomInt(3, 9);
               b = MathGenerator.randomInt(3, 9);
             } while (a + b <= 10 || a + b > 18);
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 4: { // Yaxlit o'nliklar: A, B in [10..80], A%10==0, B%10==0, A+B <= 100
+          case 4: {
             const tensA = MathGenerator.randomInt(1, 8);
             const tensB = MathGenerator.randomInt(1, 10 - tensA);
             a = tensA * 10;
             b = tensB * 10;
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 5: { // 2 xonali + 1 xonali (xonasiz): 21 <= A <= 98, 1 <= B <= 8, (A%10) + B < 10
+          case 5: {
             const tens = MathGenerator.randomInt(2, 9);
             const ones = MathGenerator.randomInt(0, 8);
             a = tens * 10 + ones;
             b = MathGenerator.randomInt(1, 9 - ones);
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 6: { // 2 xonali + 1 xonali (xonadan o'tib): 12 <= A <= 89, 2 <= B <= 9, (A%10) + B >= 10
+          case 6: {
             const tens = MathGenerator.randomInt(1, 8);
             const ones = MathGenerator.randomInt(2, 9);
             a = tens * 10 + ones;
             b = MathGenerator.randomInt(10 - ones, 9);
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 7: { // 2 xonali + yaxlit o'nlik: 11 <= A <= 79 (A%10 != 0), B in [10..80], A + B < 100
+          case 7: {
             const tensA = MathGenerator.randomInt(1, 7);
             const onesA = MathGenerator.randomInt(1, 9);
             a = tensA * 10 + onesA;
@@ -2382,7 +5701,7 @@
             b = tensB * 10;
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 8: { // 2 xonali + 2 xonali (xonasiz): 11 <= A, B <= 88, (A%10)+(B%10) < 10, A + B < 100
+          case 8: {
             const tensA = MathGenerator.randomInt(1, 7);
             const tensB = MathGenerator.randomInt(1, 8 - tensA);
             const onesA = MathGenerator.randomInt(1, 8);
@@ -2391,7 +5710,7 @@
             b = tensB * 10 + onesB;
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 9: { // 2 xonali + 2 xonali (xonadan o'tib): 12 <= A, B <= 79, (A%10)+(B%10) >= 10, A + B <= 100
+          case 9: {
             let attempts = 0;
             do {
               a = MathGenerator.randomInt(12, 69);
@@ -2400,7 +5719,7 @@
             } while (((a % 10) + (b % 10) < 10 || a + b > 100) && attempts < 100);
             return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
           }
-          case 10: { // 3 ta sonni qo'shish: A + B + C <= 100 (A, B, C in [5..45])
+          case 10: {
             a = MathGenerator.randomInt(5, 35);
             b = MathGenerator.randomInt(5, 35);
             const maxC = 100 - a - b;
@@ -2412,49 +5731,48 @@
         }
       }
 
-      // 3.2 ➖ AYIRISH (10 ta Etap, A >= B doimo)
       static generateSubtraction(stage) {
         let a, b, c;
         switch (stage) {
-          case 1: { // 10 ichida: 2 <= A <= 10, 1 <= B < A
+          case 1: {
             a = MathGenerator.randomInt(2, 10);
             b = MathGenerator.randomInt(1, a - 1);
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 2: { // 20 ichida xonasiz: 11 <= A <= 19, 1 <= B <= (A % 10)
+          case 2: {
             const ones = MathGenerator.randomInt(1, 9);
             a = 10 + ones;
             b = MathGenerator.randomInt(1, ones);
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 3: { // 20 ichida xonadan o'tib: 11 <= A <= 18, (A % 10) < B <= 9
+          case 3: {
             const ones = MathGenerator.randomInt(1, 8);
             a = 10 + ones;
             b = MathGenerator.randomInt(ones + 1, 9);
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 4: { // Yaxlit o'nliklar: A, B in [10, 20..100], A > B
+          case 4: {
             const tensA = MathGenerator.randomInt(2, 10);
             const tensB = MathGenerator.randomInt(1, tensA - 1);
             a = tensA * 10;
             b = tensB * 10;
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 5: { // 2 xonali - 1 xonali (xonasiz): 21 <= A <= 99, 1 <= B <= (A % 10)
+          case 5: {
             const tens = MathGenerator.randomInt(2, 9);
             const ones = MathGenerator.randomInt(1, 9);
             a = tens * 10 + ones;
             b = MathGenerator.randomInt(1, ones);
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 6: { // 2 xonali - 1 xonali (xonadan o'tib): 21 <= A <= 98, (A % 10) < B <= 9
+          case 6: {
             const tens = MathGenerator.randomInt(2, 9);
             const ones = MathGenerator.randomInt(0, 8);
             a = tens * 10 + ones;
             b = MathGenerator.randomInt(ones + 1, 9);
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 7: { // 2 xonali - yaxlit o'nlik: 21 <= A <= 99, B in [10, 20..80], A > B
+          case 7: {
             const tensA = MathGenerator.randomInt(2, 9);
             const onesA = MathGenerator.randomInt(1, 9);
             a = tensA * 10 + onesA;
@@ -2462,7 +5780,7 @@
             b = tensB * 10;
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 8: { // 2 xonali - 2 xonali (xonasiz): 22 <= A <= 99, 11 <= B < A, (A % 10) >= (B % 10)
+          case 8: {
             const tensA = MathGenerator.randomInt(2, 9);
             const tensB = MathGenerator.randomInt(1, tensA - 1);
             const onesA = MathGenerator.randomInt(1, 9);
@@ -2471,7 +5789,7 @@
             b = tensB * 10 + onesB;
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 9: { // 2 xonali - 2 xonali (xonadan o'tib): 31 <= A <= 98, 12 <= B < A, (A % 10) < (B % 10)
+          case 9: {
             let attempts = 0;
             do {
               a = MathGenerator.randomInt(31, 98);
@@ -2480,7 +5798,7 @@
             } while (((a % 10) >= (b % 10) || a <= b) && attempts < 100);
             return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
           }
-          case 10: { // 100 dan ayirish yoki 3 ta son: A - B - C >= 0
+          case 10: {
             if (Math.random() > 0.4) {
               a = 100;
               b = MathGenerator.randomInt(11, 89);
@@ -2497,11 +5815,8 @@
         }
       }
 
-      // 3.3 ✖️ KO'PAYTIRISH (10 ta Etap)
-      static generateMultiplication(stage, qIndex) {
-        let k;
-        let m;
-        // Stages 1-4 and 6-9 focus on a specific number k
+      static generateMultiplication(stage) {
+        let k, m;
         if (stage === 1) k = 2;
         else if (stage === 2) k = 3;
         else if (stage === 3) k = 4;
@@ -2511,10 +5826,10 @@
         else if (stage === 8) k = 8;
         else if (stage === 9) k = 9;
 
-        if (stage === 5) { // Oraliq nazorat: 2, 3, 4, 5 karra aralash
+        if (stage === 5) {
           k = [2, 3, 4, 5][MathGenerator.randomInt(0, 3)];
           m = MathGenerator.randomInt(1, 10);
-        } else if (stage === 10) { // Super Final: 2..9 + 0 va 10
+        } else if (stage === 10) {
           k = MathGenerator.randomInt(2, 9);
           const pool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
           m = pool[MathGenerator.randomInt(0, pool.length - 1)];
@@ -2522,20 +5837,14 @@
           m = MathGenerator.randomInt(1, 10);
         }
 
-        // Commutative property: randomly alternate k * m or m * k
         const flip = Math.random() > 0.5;
         const op1 = flip ? k : m;
         const op2 = flip ? m : k;
-        return {
-          formula: `${op1} × ${op2} =`,
-          answer: op1 * op2,
-          key: `${op1}*${op2}`
-        };
+        return { formula: `${op1} × ${op2} =`, answer: op1 * op2, key: `${op1}*${op2}` };
       }
 
-      // 3.4 ➗ BO'LISH (10 ta Etap, C ÷ A = B, doimo qoldiqsiz)
-      static generateDivision(stage, qIndex) {
-        let a;
+      static generateDivision(stage) {
+        let a, b;
         if (stage === 1) a = 2;
         else if (stage === 2) a = 3;
         else if (stage === 3) a = 4;
@@ -2545,11 +5854,10 @@
         else if (stage === 8) a = 8;
         else if (stage === 9) a = 9;
 
-        let b;
-        if (stage === 5) { // Oraliq nazorat: 2, 3, 4, 5 ga bo'lish aralash
+        if (stage === 5) {
           a = [2, 3, 4, 5][MathGenerator.randomInt(0, 3)];
           b = MathGenerator.randomInt(1, 10);
-        } else if (stage === 10) { // Super Final: 2..10 ga qoldiqsiz bo'lish
+        } else if (stage === 10) {
           a = MathGenerator.randomInt(2, 10);
           b = MathGenerator.randomInt(1, 10);
         } else {
@@ -2557,55 +5865,153 @@
         }
 
         const c = a * b;
-        return {
-          formula: `${c} ÷ ${a} =`,
-          answer: b,
-          key: `${c}/${a}`
-        };
+        return { formula: `${c} ÷ ${a} =`, answer: b, key: `${c}/${a}` };
       }
     }
 
     /* ==========================================================================
-       5. MOTIVATIONAL QUOTES (Splash screen, anti-repeat)
+       6. ENGLISH QUIZ GENERATOR (Smart Distractors & 4 Mechanics)
+       ========================================================================== */
+    class EnglishGenerator {
+      static shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      static generateStageQuestions(category, stageNum) {
+        const stageData = ENGLISH_DATA[category][stageNum - 1];
+        const allItems = stageData.items;
+        const shuffledPool = EnglishGenerator.shuffle(allItems);
+        const selected = shuffledPool.slice(0, 10);
+
+        return selected.map(item => {
+          if (category === 'vocabulary') {
+            // Smart distractors from same stage items
+            const wrongOptions = stageData.items
+              .filter(x => x.en !== item.en)
+              .map(x => x.uz);
+            const chosenDistractors = EnglishGenerator.shuffle(wrongOptions).slice(0, 3);
+            const options = EnglishGenerator.shuffle([item.uz, ...chosenDistractors]);
+
+            return {
+              type: 'vocabulary',
+              word: item.en,
+              uz: item.uz,
+              emoji: item.emoji,
+              correct: item.uz,
+              options: options,
+              speakText: item.en
+            };
+          } else if (category === 'listening') {
+            // Audio test with smart distractors
+            const wrongOptions = stageData.items
+              .filter(x => x.audio !== item.audio)
+              .map(x => `${x.emoji} ${x.uz}`);
+            const chosenDistractors = EnglishGenerator.shuffle(wrongOptions).slice(0, 3);
+            const correctText = `${item.emoji} ${item.uz}`;
+            const options = EnglishGenerator.shuffle([correctText, ...chosenDistractors]);
+
+            return {
+              type: 'listening',
+              audioText: item.audio,
+              uz: item.uz,
+              emoji: item.emoji,
+              correct: correctText,
+              options: options,
+              speakText: item.audio
+            };
+          } else if (category === 'spelling') {
+            // Word letter tiles with 1-2 random distractor letters
+            const cleanWord = item.word.toUpperCase();
+            const correctLetters = cleanWord.split('');
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const distractors = [];
+            for (let i = 0; i < 2; i++) {
+              const randChar = alphabet[Math.floor(Math.random() * alphabet.length)];
+              distractors.push(randChar);
+            }
+            const allTiles = EnglishGenerator.shuffle([...correctLetters, ...distractors]);
+
+            return {
+              type: 'spelling',
+              word: cleanWord,
+              uz: item.uz,
+              emoji: item.emoji,
+              slotsCount: cleanWord.length,
+              tiles: allTiles,
+              speakText: cleanWord
+            };
+          } else if (category === 'grammar') {
+            return {
+              type: 'grammar',
+              sentence: item.sentence,
+              uz: item.uz,
+              correct: item.correct,
+              options: EnglishGenerator.shuffle(item.options),
+              rule: item.rule,
+              speakText: item.sentence.replace('[ ___ ]', item.correct)
+            };
+          }
+        });
+      }
+    }
+
+    /* ==========================================================================
+       7. MOTIVATIONAL QUOTES
        ========================================================================== */
     const MOTIVATIONAL_QUOTES = [
       "Bugun yangi marralarni zabt etamiz, Savarbek! 🚀",
       "Har bir yechilgan misol seni yanada kuchli qiladi! 💪",
-      "Matematika — aqlli bolalarning sevimli o'yini! 🧠",
+      "Matematika va Ingliz tili — aqlli bolalarning do'sti! 🧠",
       "Savarbek, bugun 100% natija ko'rsatishga tayyormisan? 🏆",
       "Xatolar — bu yangi narsalarni o'rganish imkoniyati! 🌟",
       "Katta g'alabalar kichik qadamlardan boshlanadi! 🦁",
-      "Sen har qanday qiyin misolni oson yechasan! ✨",
+      "Sen har qanday qiyin vazifani oson yechasan! ✨",
       "Qani, bugun yana bir rekord o'rnatamiz! 🎯",
       "Bilim — eng katta qudrat, olg'a Savarbek! 📚",
-      "Miyangni charxla va tezroq hisobla! ⚡",
+      "Miyangni charxla va inglizcha so'zlarni eslab qol! ⚡",
       "2-sinf a'lochisi har doim birinchi bo'ladi! 🥇",
-      "Bugungi mashq seni chempionga aylantiradi! ⚽",
+      "Bugungi mashq seni haqiqiy chempionga aylantiradi! ⚽",
       "Sabr va mehnat bilan barcha cho'qqilar zabt etiladi! 🏔️",
       "Har bir to'g'ri javob — bu yangi yulduzcha! ⭐",
       "Olg'a, Savarbek! Sen albatta uddalaysan! 🎈",
-      "Zukko va epchil Savarbek bilan matematika juda qiziq! 🧩"
+      "Zukko va epchil Savarbek bilan o'qish juda qiziq! 🧩"
     ];
 
     /* ==========================================================================
-       6. MAIN APPLICATION CONTROLLER (State Machine & Views)
+       8. MAIN APPLICATION CONTROLLER
        ========================================================================== */
     class AppController {
       constructor() {
         this.confetti = new ConfettiEngine('confetti-canvas');
         this.currentScreen = 'screen-splash';
-        this.selectedOperation = 'addition';
-        this.selectedStageNumber = 1;
+        
+        // Math state
+        this.selectedMathOp = 'addition';
+        this.selectedMathStage = 1;
+        this.mathQuestions = [];
+        this.mathIndex = 0;
+        this.mathCorrectCount = 0;
+        this.mathMistakes = [];
+        this.mathCurrentInput = '';
+        this.mathQuestionLocked = false;
 
-        // Quiz session state
-        this.quizQuestions = [];
-        this.quizIndex = 0;
-        this.quizCorrectCount = 0;
-        this.quizMistakes = [];
-        this.currentInput = '';
-        this.isQuestionLocked = false;
+        // English state
+        this.selectedEngCat = 'vocabulary';
+        this.selectedEngStage = 1;
+        this.engQuestions = [];
+        this.engIndex = 0;
+        this.engCorrectCount = 0;
+        this.engMistakes = [];
+        this.engQuestionLocked = false;
+        this.spellingFilledSlots = []; // For spelling mechanic
+        this.spellingUsedTileIndices = new Set();
 
-        // Parental challenge
+        // Parental gatekeeper
         this.parentChallengeAnswer = 500;
 
         // Splash screen state
@@ -2625,14 +6031,18 @@
           operations: document.getElementById('screen-operations'),
           stages: document.getElementById('screen-stages'),
           quiz: document.getElementById('screen-quiz'),
-          result: document.getElementById('screen-result')
+          result: document.getElementById('screen-result'),
+          engCategories: document.getElementById('screen-eng-categories'),
+          engStages: document.getElementById('screen-eng-stages'),
+          engQuiz: document.getElementById('screen-eng-quiz'),
+          engResult: document.getElementById('screen-eng-result')
         };
       }
 
       navigateTo(screenId) {
         sound.playTap();
         Object.keys(this.screens).forEach(key => {
-          this.screens[key].classList.remove('active');
+          if (this.screens[key]) this.screens[key].classList.remove('active');
         });
         const target = document.getElementById(screenId);
         if (target) {
@@ -2641,14 +6051,11 @@
           this.currentScreen = screenId;
         }
 
-        // Screen-specific render hooks
-        if (screenId === 'screen-home') {
-          this.renderHomeScreen();
-        } else if (screenId === 'screen-operations') {
-          this.renderOperationsScreen();
-        } else if (screenId === 'screen-stages') {
-          this.renderStagesScreen();
-        }
+        if (screenId === 'screen-home') this.renderHomeScreen();
+        else if (screenId === 'screen-operations') this.renderMathOperations();
+        else if (screenId === 'screen-stages') this.renderMathStages();
+        else if (screenId === 'screen-eng-categories') this.renderEngCategories();
+        else if (screenId === 'screen-eng-stages') this.renderEngStages();
       }
 
       showToast(text, icon = '🚀') {
@@ -2656,14 +6063,11 @@
         document.getElementById('toast-icon').textContent = icon;
         document.getElementById('toast-text').textContent = text;
         toast.classList.add('show');
-        setTimeout(() => {
-          toast.classList.remove('show');
-        }, 2600);
+        setTimeout(() => toast.classList.remove('show'), 2600);
       }
 
-      /* ---------- 2.1 SPLASH SCREEN LOGIC ---------- */
+      /* ---------- SPLASH SCREEN ---------- */
       startSplashTimer() {
-        // 1. Anti-repeat quote selection
         const lastIdx = db.data.lastQuoteIndex;
         let newIdx;
         do {
@@ -2674,7 +6078,6 @@
         db.save();
         document.getElementById('splash-quote-text').textContent = `"${MOTIVATIONAL_QUOTES[newIdx]}"`;
 
-        // 2. Tab visibility tracking & smooth 5000ms countdown
         this.splashRemainingMs = 5000;
         const progressBar = document.getElementById('splash-progress-bar');
         const countdownLabel = document.getElementById('splash-countdown');
@@ -2684,11 +6087,8 @@
             this.splashLastTimestamp = null;
             return;
           }
-
           const now = Date.now();
-          if (!this.splashLastTimestamp) {
-            this.splashLastTimestamp = now;
-          }
+          if (!this.splashLastTimestamp) this.splashLastTimestamp = now;
           const delta = now - this.splashLastTimestamp;
           this.splashLastTimestamp = now;
 
@@ -2708,56 +6108,51 @@
         };
 
         this.splashInterval = setInterval(step, 40);
-
         document.addEventListener('visibilitychange', () => {
-          if (document.visibilityState === 'visible') {
-            this.splashLastTimestamp = Date.now();
-          }
+          if (document.visibilityState === 'visible') this.splashLastTimestamp = Date.now();
         });
       }
 
-      /* ---------- 2.2 HOME SCREEN RENDER ---------- */
+      /* ---------- HOME SCREEN ---------- */
       renderHomeScreen() {
-        // Sound toggle icon
         document.getElementById('sound-icon').textContent = db.data.soundEnabled ? '🔊' : '🔇';
-
-        // Total stars
         const totalStars = db.getTotalStars();
-        document.getElementById('home-total-stars').textContent = `${totalStars} / 120`;
+        document.getElementById('home-total-stars').textContent = `${totalStars} / 240`;
 
-        // Overall Math Percentage
         const overallMath = db.getOverallMathPercentage();
         document.getElementById('home-math-percentage').textContent = `${overallMath}%`;
         document.getElementById('home-math-progress-fill').style.width = `${overallMath}%`;
 
-        // Total questions solved
+        const overallEng = db.getOverallEnglishPercentage();
+        document.getElementById('home-english-percentage').textContent = `${overallEng}%`;
+        document.getElementById('home-english-progress-fill').style.width = `${overallEng}%`;
+
         document.getElementById('home-total-solved').textContent = `${db.data.totalQuestionsSolved} ta`;
       }
 
-      /* ---------- 2.3 OPERATIONS SCREEN RENDER ---------- */
-      renderOperationsScreen() {
+      /* ---------- MATH SCREENS ---------- */
+      renderMathOperations() {
         const ops = ['addition', 'subtraction', 'multiplication', 'division'];
         ops.forEach(op => {
-          const completed = db.getCompletedStagesCount(op);
-          const avgPercent = db.getOperationAveragePercentage(op);
+          const completed = db.getMathCompletedStages(op);
+          const avgPercent = db.getMathOperationAverage(op);
           document.getElementById(`op-stages-${op}`).textContent = `${completed} / 10 etap`;
           document.getElementById(`op-percent-${op}`).textContent = `${avgPercent}%`;
           document.getElementById(`op-fill-${op}`).style.width = `${avgPercent}%`;
         });
       }
 
-      /* ---------- 2.4 STAGES SCREEN RENDER (5 States + Locking) ---------- */
-      renderStagesScreen() {
+      renderMathStages() {
         const opTitles = {
-          addition: '➕ Qo\'shish',
-          subtraction: '➖ Ayirish',
-          multiplication: '✖️ Ko\'paytirish',
-          division: '➗ Bo\'lish'
+          addition: "➕ Qo'shish",
+          subtraction: "➖ Ayirish",
+          multiplication: "✖️ Ko'paytirish",
+          division: "➗ Bo'lish"
         };
-        document.getElementById('stages-screen-title').textContent = opTitles[this.selectedOperation];
+        document.getElementById('stages-screen-title').textContent = opTitles[this.selectedMathOp];
 
         let opStars = 0;
-        const stagesList = db.data.math[this.selectedOperation];
+        const stagesList = db.data.math[this.selectedMathOp];
         stagesList.forEach(s => {
           if (s.maxPercentage === 100) opStars += 3;
           else if (s.maxPercentage >= 80) opStars += 2;
@@ -2769,20 +6164,19 @@
         container.innerHTML = '';
 
         stagesList.forEach(stage => {
-          const isUnlocked = db.isStageUnlocked(this.selectedOperation, stage.stageNumber);
+          const isUnlocked = db.isMathStageUnlocked(this.selectedMathOp, stage.stageNumber);
           const card = document.createElement('div');
           card.className = 'stage-card';
 
-          // Determine Micro-State
           let stateClass = 'state-new';
           let starsIcon = '⚪⚪⚪';
-          let subtitleText = `Rekord: 0% (Yangi)`;
-          let badgeText = 'Yangi';
+          let subtitleText = 'Rekord: 0% (Yangi)';
+          let badgeText = 'Boshlash';
 
           if (!isUnlocked) {
             card.classList.add('locked');
             starsIcon = '🔒 Qulflangan';
-            subtitleText = 'Oldingi etapda kamida 50% to\'pla';
+            subtitleText = "Oldingi etapda kamida 50% to'pla";
             badgeText = 'Qulf';
           } else if (stage.attempts === 0) {
             stateClass = 'state-new';
@@ -2807,13 +6201,11 @@
           } else if (stage.maxPercentage === 100) {
             stateClass = 'state-perfect';
             starsIcon = '⭐⭐⭐';
-            subtitleText = `Rekord: 100% (Mukammal!)`;
+            subtitleText = 'Rekord: 100% (Mukammal!)';
             badgeText = '100% 🏆';
           }
 
-          if (isUnlocked) {
-            card.classList.add(stateClass);
-          }
+          if (isUnlocked) card.classList.add(stateClass);
 
           card.innerHTML = `
             <div class="stage-left">
@@ -2838,7 +6230,7 @@
               setTimeout(() => card.classList.remove('shake'), 450);
               this.showToast("Avval oldingi etapda kamida 50% to'pla! 🔒", "⚠️");
             } else {
-              this.startQuizGame(stage.stageNumber);
+              this.startMathQuiz(stage.stageNumber);
             }
           });
 
@@ -2846,17 +6238,15 @@
         });
       }
 
-      /* ---------- 2.5 QUIZ GAME FLOW ---------- */
-      startQuizGame(stageNumber) {
-        this.selectedStageNumber = stageNumber;
-        this.quizQuestions = MathGenerator.generateStageQuestions(this.selectedOperation, stageNumber);
-        this.quizIndex = 0;
-        this.quizCorrectCount = 0;
-        this.quizMistakes = [];
-        this.currentInput = '';
-        this.isQuestionLocked = false;
+      startMathQuiz(stageNumber) {
+        this.selectedMathStage = stageNumber;
+        this.mathQuestions = MathGenerator.generateStageQuestions(this.selectedMathOp, stageNumber);
+        this.mathIndex = 0;
+        this.mathCorrectCount = 0;
+        this.mathMistakes = [];
+        this.mathCurrentInput = '';
+        this.mathQuestionLocked = false;
 
-        // Render 10 Dots
         const dotsContainer = document.getElementById('quiz-progress-dots');
         dotsContainer.innerHTML = '';
         for (let i = 0; i < 10; i++) {
@@ -2867,28 +6257,23 @@
         }
 
         this.navigateTo('screen-quiz');
-        this.renderCurrentQuestion();
+        this.renderCurrentMathQuestion();
       }
 
-      renderCurrentQuestion() {
-        const q = this.quizQuestions[this.quizIndex];
-        this.currentInput = '';
-        this.isQuestionLocked = false;
+      renderCurrentMathQuestion() {
+        const q = this.mathQuestions[this.mathIndex];
+        this.mathCurrentInput = '';
+        this.mathQuestionLocked = false;
 
-        // Header info
         document.getElementById('quiz-question-counter').textContent = 
-          `${this.selectedStageNumber}-Etap | Misol: ${this.quizIndex + 1} / 10`;
+          `${this.selectedMathStage}-Etap | Misol: ${this.mathIndex + 1} / 10`;
 
-        // Update Dots
         for (let i = 0; i < 10; i++) {
           const dot = document.getElementById(`quiz-dot-${i}`);
           dot.classList.remove('current');
-          if (i === this.quizIndex) {
-            dot.classList.add('current');
-          }
+          if (i === this.mathIndex) dot.classList.add('current');
         }
 
-        // Question card reset
         const card = document.getElementById('quiz-question-card');
         card.classList.remove('correct-anim', 'wrong-anim');
         document.getElementById('quiz-operand-text').textContent = q.formula;
@@ -2896,82 +6281,68 @@
         inputBox.textContent = '?';
         inputBox.className = 'input-box-display';
 
-        // Feedback reset
         const feedback = document.getElementById('quiz-feedback-box');
         feedback.textContent = '';
         feedback.className = 'feedback-box';
         document.getElementById('btn-skip-wrong').style.display = 'none';
 
-        // Numpad unlock
         document.getElementById('quiz-numpad').classList.remove('locked');
-        this.updateSubmitButton();
+        this.updateMathSubmitButton();
       }
 
-      handleNumpadInput(key) {
-        if (this.isQuestionLocked) return;
-
+      handleMathNumpadInput(key) {
+        if (this.mathQuestionLocked) return;
         sound.playTap();
 
         if (key === 'del') {
-          if (this.currentInput.length > 0) {
-            this.currentInput = this.currentInput.slice(0, -1);
+          if (this.mathCurrentInput.length > 0) {
+            this.mathCurrentInput = this.mathCurrentInput.slice(0, -1);
           }
         } else if (key === 'submit') {
-          if (this.currentInput.length > 0) {
-            this.submitAnswer();
-          }
+          if (this.mathCurrentInput.length > 0) this.submitMathAnswer();
         } else {
-          // Max 3 digits (2nd grade arithmetic <= 100)
-          if (this.currentInput.length >= 3) return;
-
-          // Leading zero handling: 0 then 5 becomes 5
-          if (this.currentInput === '0') {
-            this.currentInput = key;
-          } else {
-            this.currentInput += key;
-          }
+          if (this.mathCurrentInput.length >= 3) return;
+          if (this.mathCurrentInput === '0') this.mathCurrentInput = key;
+          else this.mathCurrentInput += key;
         }
 
-        // Update display
         const box = document.getElementById('quiz-input-box');
-        if (this.currentInput.length > 0) {
-          box.textContent = this.currentInput;
+        if (this.mathCurrentInput.length > 0) {
+          box.textContent = this.mathCurrentInput;
           box.classList.add('filled');
         } else {
           box.textContent = '?';
           box.classList.remove('filled');
         }
-
-        this.updateSubmitButton();
+        this.updateMathSubmitButton();
       }
 
-      updateSubmitButton() {
+      updateMathSubmitButton() {
         const btn = document.getElementById('btn-quiz-submit');
-        if (this.currentInput.length > 0 && !this.isQuestionLocked) {
+        if (this.mathCurrentInput.length > 0 && !this.mathQuestionLocked) {
           btn.classList.add('active');
         } else {
           btn.classList.remove('active');
         }
       }
 
-      submitAnswer() {
-        if (this.isQuestionLocked || this.currentInput.length === 0) return;
-        this.isQuestionLocked = true;
+      submitMathAnswer() {
+        if (this.mathQuestionLocked || this.mathCurrentInput.length === 0) return;
+        this.mathQuestionLocked = true;
         document.getElementById('quiz-numpad').classList.add('locked');
 
-        const q = this.quizQuestions[this.quizIndex];
-        const userAns = parseInt(this.currentInput, 10);
+        const q = this.mathQuestions[this.mathIndex];
+        const userAns = parseInt(this.mathCurrentInput, 10);
         const isCorrect = userAns === q.answer;
 
         const card = document.getElementById('quiz-question-card');
         const box = document.getElementById('quiz-input-box');
         const feedback = document.getElementById('quiz-feedback-box');
-        const dot = document.getElementById(`quiz-dot-${this.quizIndex}`);
+        const dot = document.getElementById(`quiz-dot-${this.mathIndex}`);
 
         if (isCorrect) {
-          /* --- ANSWER_CORRECT (0.9s anim) --- */
           sound.playCorrect();
-          this.quizCorrectCount++;
+          this.mathCorrectCount++;
           card.classList.add('correct-anim');
           box.className = 'input-box-display correct';
           feedback.className = 'feedback-box correct';
@@ -2979,18 +6350,10 @@
           dot.className = 'progress-dot correct';
           dot.textContent = '✓';
 
-          setTimeout(() => {
-            this.advanceToNextQuestion();
-          }, 900);
+          setTimeout(() => this.advanceMathQuestion(), 900);
         } else {
-          /* --- ANSWER_WRONG (Shake, Red, Explanation, Skip option) --- */
           sound.playWrong();
-          this.quizMistakes.push({
-            formula: q.formula,
-            userAns: userAns,
-            correctAns: q.answer
-          });
-
+          this.mathMistakes.push({ formula: q.formula, userAns: userAns, correctAns: q.answer });
           card.classList.add('wrong-anim', 'shake');
           setTimeout(() => card.classList.remove('shake'), 450);
 
@@ -3000,34 +6363,24 @@
           dot.className = 'progress-dot wrong';
           dot.textContent = '✕';
 
-          // Show skip button so Savarbek can advance right away if ready
-          const skipBtn = document.getElementById('btn-skip-wrong');
-          skipBtn.style.display = 'inline-flex';
-
-          this.wrongTimer = setTimeout(() => {
-            this.advanceToNextQuestion();
-          }, 2000);
+          document.getElementById('btn-skip-wrong').style.display = 'inline-flex';
+          this.mathWrongTimer = setTimeout(() => this.advanceMathQuestion(), 2000);
         }
       }
 
-      advanceToNextQuestion() {
-        if (this.wrongTimer) {
-          clearTimeout(this.wrongTimer);
-          this.wrongTimer = null;
+      advanceMathQuestion() {
+        if (this.mathWrongTimer) {
+          clearTimeout(this.mathWrongTimer);
+          this.mathWrongTimer = null;
         }
-
-        this.quizIndex++;
-        if (this.quizIndex < 10) {
-          this.renderCurrentQuestion();
-        } else {
-          this.finishQuizSession();
-        }
+        this.mathIndex++;
+        if (this.mathIndex < 10) this.renderCurrentMathQuestion();
+        else this.finishMathQuiz();
       }
 
-      /* ---------- 2.6 RESULT SCREEN RENDER ---------- */
-      finishQuizSession() {
-        const currentPercentage = this.quizCorrectCount * 10;
-        const res = db.saveStageResult(this.selectedOperation, this.selectedStageNumber, currentPercentage);
+      finishMathQuiz() {
+        const currentPercentage = this.mathCorrectCount * 10;
+        const res = db.saveMathResult(this.selectedMathOp, this.selectedMathStage, currentPercentage);
 
         const badgeIcon = document.getElementById('result-badge-icon');
         const headline = document.getElementById('result-headline');
@@ -3037,18 +6390,15 @@
         const summaryLine = document.getElementById('result-summary-line');
 
         scorePercent.textContent = `${currentPercentage}%`;
-        summaryLine.textContent = `10 ta misoldan ${this.quizCorrectCount} tasini to'g'ri yechding!`;
+        summaryLine.textContent = `10 ta misoldan ${this.mathCorrectCount} tasini to'g'ri yechding!`;
 
-        // Stars display
         let starsStr = '⚪⚪⚪';
         if (currentPercentage === 100) starsStr = '⭐⭐⭐';
         else if (currentPercentage >= 80) starsStr = '⭐⭐⚪';
         else if (currentPercentage >= 50) starsStr = '⭐⚪⚪';
         starsDisplay.textContent = starsStr;
 
-        // 3 Scenarios
         if (res.isPerfect) {
-          // Scenario C: 100% Mukammal natija
           badgeIcon.textContent = '🏆';
           headline.textContent = "BARAKALLA, SAVARBEK!";
           comparisonPill.className = 'result-comparison-pill new-record';
@@ -3056,7 +6406,6 @@
           sound.playFanfare();
           this.confetti.fire(120);
         } else if (res.isNewRecord) {
-          // Scenario A: Yangi rekord
           badgeIcon.textContent = '🥇';
           headline.textContent = "YANGI REKORD!";
           comparisonPill.className = 'result-comparison-pill new-record';
@@ -3064,21 +6413,19 @@
           sound.playFanfare();
           this.confetti.fire(90);
         } else {
-          // Scenario B: Oldingi rekorddan past yoki teng
           badgeIcon.textContent = currentPercentage >= 50 ? '👍' : '💪';
           headline.textContent = currentPercentage >= 50 ? "Yaxshi Natija!" : "Yana Harakat Qil!";
           comparisonPill.className = 'result-comparison-pill kept-record';
           comparisonPill.textContent = `🛡️ Eng yuqori rekording: ${res.oldMax}% (Saqlandi)`;
         }
 
-        // Mistakes Review Block
         const mistakesBlock = document.getElementById('result-mistakes-block');
         const mistakesList = document.getElementById('result-mistakes-list');
         mistakesList.innerHTML = '';
 
-        if (this.quizMistakes.length > 0) {
+        if (this.mathMistakes.length > 0) {
           mistakesBlock.style.display = 'flex';
-          this.quizMistakes.forEach((m, idx) => {
+          this.mathMistakes.forEach((m, idx) => {
             const item = document.createElement('div');
             item.className = 'mistake-item';
             item.innerHTML = `
@@ -3091,11 +6438,10 @@
           mistakesBlock.style.display = 'none';
         }
 
-        // Next stage button logic
         const nextBtn = document.getElementById('btn-next-stage');
-        if (this.selectedStageNumber < 10 && currentPercentage >= 50) {
+        if (this.selectedMathStage < 10 && currentPercentage >= 50) {
           nextBtn.style.display = 'flex';
-          nextBtn.innerHTML = `<span>➡️ ${this.selectedStageNumber + 1}-Etapga o'tish</span>`;
+          nextBtn.innerHTML = `<span>➡️ ${this.selectedMathStage + 1}-Etapga o'tish</span>`;
         } else {
           nextBtn.style.display = 'none';
         }
@@ -3103,7 +6449,606 @@
         this.navigateTo('screen-result');
       }
 
-      /* ---------- EVENTS & BUTTON LISTENERS ---------- */
+      /* ---------- ENGLISH SCREENS ---------- */
+      renderEngCategories() {
+        const cats = ['vocabulary', 'listening', 'spelling', 'grammar'];
+        cats.forEach(cat => {
+          const completed = db.getEngCompletedStages(cat);
+          const avgPercent = db.getEngCategoryAverage(cat);
+          document.getElementById(`eng-cat-stages-${cat}`).textContent = `${completed} / 10 etap`;
+          document.getElementById(`eng-cat-percent-${cat}`).textContent = `${avgPercent}%`;
+          document.getElementById(`eng-cat-fill-${cat}`).style.width = `${avgPercent}%`;
+        });
+      }
+
+      renderEngStages() {
+        const catTitles = {
+          vocabulary: "📚 So'z boyligi",
+          listening: "🎧 Eshitib topish",
+          spelling: "🧩 Harflardan so'z yasash",
+          grammar: "📝 Qoidalar va Gaplar"
+        };
+        document.getElementById('eng-stages-screen-title').textContent = catTitles[this.selectedEngCat];
+
+        let catStars = 0;
+        const stagesList = db.data.english[this.selectedEngCat];
+        stagesList.forEach(s => {
+          if (s.maxPercentage === 100) catStars += 3;
+          else if (s.maxPercentage >= 80) catStars += 2;
+          else if (s.maxPercentage >= 50) catStars += 1;
+        });
+        document.getElementById('eng-stages-summary-stars').textContent = `⭐ ${catStars} / 30`;
+
+        const container = document.getElementById('eng-stages-list-container');
+        container.innerHTML = '';
+
+        const metaStages = ENGLISH_DATA[this.selectedEngCat];
+
+        stagesList.forEach(stage => {
+          const meta = metaStages[stage.stageNumber - 1];
+          const isUnlocked = db.isEngStageUnlocked(this.selectedEngCat, stage.stageNumber);
+          const card = document.createElement('div');
+          card.className = 'stage-card';
+
+          let stateClass = 'state-new';
+          let starsIcon = '⚪⚪⚪';
+          let subtitleText = `${meta.icon} ${meta.title} • 10 ta savol`;
+          let badgeText = 'Boshlash';
+
+          if (!isUnlocked) {
+            card.classList.add('locked');
+            starsIcon = '🔒 Qulflangan';
+            subtitleText = "Oldingi etapda kamida 50% to'pla";
+            badgeText = 'Qulf';
+          } else if (stage.attempts === 0) {
+            stateClass = 'state-new';
+            starsIcon = '⚪⚪⚪';
+            badgeText = 'Yangi';
+          } else if (stage.maxPercentage <= 40) {
+            stateClass = 'state-hard';
+            starsIcon = '🔴 Yana harakat qil!';
+            badgeText = `${stage.maxPercentage}%`;
+          } else if (stage.maxPercentage <= 70) {
+            stateClass = 'state-medium';
+            starsIcon = '⭐⚪⚪';
+            badgeText = `${stage.maxPercentage}%`;
+          } else if (stage.maxPercentage <= 90) {
+            stateClass = 'state-good';
+            starsIcon = '⭐⭐⚪';
+            badgeText = `${stage.maxPercentage}%`;
+          } else if (stage.maxPercentage === 100) {
+            stateClass = 'state-perfect';
+            starsIcon = '⭐⭐⭐';
+            badgeText = '100% 🏆';
+          }
+
+          if (isUnlocked) card.classList.add(stateClass);
+
+          card.innerHTML = `
+            <div class="stage-left">
+              <div class="stage-number-box">${stage.stageNumber}</div>
+              <div class="stage-info-text">
+                <div class="stage-title">
+                  ${stage.stageNumber}-Etap ${stage.maxPercentage === 100 ? '🏆' : ''}
+                </div>
+                <div class="stage-subtitle">${subtitleText}</div>
+              </div>
+            </div>
+            <div class="stage-right">
+              <div class="stage-stars">${starsIcon}</div>
+              <div class="stage-badge">${badgeText}</div>
+            </div>
+          `;
+
+          card.addEventListener('click', () => {
+            if (!isUnlocked) {
+              sound.playLock();
+              card.classList.add('shake');
+              setTimeout(() => card.classList.remove('shake'), 450);
+              this.showToast("Avval oldingi etapda kamida 50% to'pla! 🔒", "⚠️");
+            } else {
+              this.startEngQuiz(stage.stageNumber);
+            }
+          });
+
+          container.appendChild(card);
+        });
+      }
+
+      startEngQuiz(stageNumber) {
+        this.selectedEngStage = stageNumber;
+        this.engQuestions = EnglishGenerator.generateStageQuestions(this.selectedEngCat, stageNumber);
+        this.engIndex = 0;
+        this.engCorrectCount = 0;
+        this.engMistakes = [];
+        this.engQuestionLocked = false;
+
+        const dotsContainer = document.getElementById('eng-quiz-progress-dots');
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < 10; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'progress-dot';
+          dot.id = `eng-quiz-dot-${i}`;
+          dotsContainer.appendChild(dot);
+        }
+
+        this.navigateTo('screen-eng-quiz');
+        this.renderCurrentEngQuestion();
+      }
+
+      renderCurrentEngQuestion() {
+        const q = this.engQuestions[this.engIndex];
+        this.engQuestionLocked = false;
+
+        document.getElementById('eng-quiz-question-counter').textContent = 
+          `${this.selectedEngStage}-Etap | Savol: ${this.engIndex + 1} / 10`;
+
+        for (let i = 0; i < 10; i++) {
+          const dot = document.getElementById(`eng-quiz-dot-${i}`);
+          dot.classList.remove('current');
+          if (i === this.engIndex) dot.classList.add('current');
+        }
+
+        const card = document.getElementById('eng-quiz-question-card');
+        card.classList.remove('correct-anim', 'wrong-anim');
+
+        const feedback = document.getElementById('eng-quiz-feedback-box');
+        feedback.textContent = '';
+        feedback.className = 'feedback-box';
+        document.getElementById('btn-eng-skip-wrong').style.display = 'none';
+
+        const cardContent = document.getElementById('eng-quiz-card-content');
+        const bottomPanel = document.getElementById('eng-quiz-bottom-panel');
+
+        if (q.type === 'vocabulary') {
+          cardContent.innerHTML = `
+            <div class="eng-prompt-box">
+              <div class="eng-prompt-emoji">${q.emoji}</div>
+              <div class="eng-prompt-word">
+                <span>${q.word}</span>
+                <button class="btn-speak-inline" id="btn-speak-word" title="Talaffuzni eshitish">🔊</button>
+              </div>
+              <div class="eng-prompt-subtext">O'zbekcha ma'nosi qaysi?</div>
+            </div>
+          `;
+
+          document.getElementById('btn-speak-word').addEventListener('click', (e) => {
+            e.stopPropagation();
+            sound.speakEnglish(q.speakText);
+          });
+
+          // Pronounce on question display
+          setTimeout(() => sound.speakEnglish(q.speakText), 250);
+
+          // 4 Option Buttons
+          bottomPanel.innerHTML = `
+            <div class="eng-options-container">
+              ${q.options.map(opt => `<button class="eng-opt-btn" data-val="${opt}">${opt}</button>`).join('')}
+            </div>
+          `;
+
+          bottomPanel.querySelectorAll('.eng-opt-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              if (this.engQuestionLocked) return;
+              this.handleChoiceAnswer(btn, btn.dataset.val, q.correct, q.word, q.speakText);
+            });
+          });
+
+        } else if (q.type === 'listening') {
+          // Listening Mechanic: word hidden, central pulsating audio button
+          cardContent.innerHTML = `
+            <div class="eng-prompt-box">
+              <div class="listening-center-controls">
+                <button class="btn-audio-main" id="btn-audio-play" title="Eshitish">🔊</button>
+                <button class="btn-audio-slow" id="btn-audio-slow">🐢 Sekin eshitish</button>
+              </div>
+              <div class="eng-prompt-subtext">Ovozni tingla va to'g'ri ma'noni top:</div>
+            </div>
+          `;
+
+          document.getElementById('btn-audio-play').addEventListener('click', () => {
+            sound.speakEnglish(q.speakText, false);
+          });
+
+          document.getElementById('btn-audio-slow').addEventListener('click', () => {
+            sound.speakEnglish(q.speakText, true);
+          });
+
+          setTimeout(() => sound.speakEnglish(q.speakText), 250);
+
+          bottomPanel.innerHTML = `
+            <div class="eng-options-container">
+              ${q.options.map(opt => `<button class="eng-opt-btn" data-val="${opt}">${opt}</button>`).join('')}
+            </div>
+          `;
+
+          bottomPanel.querySelectorAll('.eng-opt-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              if (this.engQuestionLocked) return;
+              this.handleChoiceAnswer(btn, btn.dataset.val, q.correct, q.audioText, q.speakText);
+            });
+          });
+
+        } else if (q.type === 'spelling') {
+          // Spelling Mechanic: Slot boxes + Tile bank
+          this.spellingFilledSlots = new Array(q.slotsCount).fill('');
+          this.spellingUsedTileIndices.clear();
+
+          cardContent.innerHTML = `
+            <div class="spelling-slots-wrapper">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 34px;">${q.emoji}</span>
+                <span style="font-size: 20px; font-weight: 800; color: var(--text-main);">${q.uz}</span>
+                <button class="btn-speak-inline" id="btn-spelling-speak">🔊</button>
+              </div>
+              <div class="spelling-slots-row" id="spelling-slots-row">
+                ${Array.from({ length: q.slotsCount }).map((_, i) => `
+                  <div class="spelling-slot" data-index="${i}"></div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+
+          document.getElementById('btn-spelling-speak').addEventListener('click', () => {
+            sound.speakEnglish(q.speakText);
+          });
+          setTimeout(() => sound.speakEnglish(q.speakText), 250);
+
+          bottomPanel.innerHTML = `
+            <div class="spelling-bank-container">
+              <div class="spelling-tiles-row" id="spelling-tiles-row">
+                ${q.tiles.map((letter, idx) => `
+                  <button class="letter-tile" data-letter="${letter}" data-tile-index="${idx}">${letter}</button>
+                `).join('')}
+              </div>
+              <div class="spelling-action-row">
+                <button class="btn-spelling-del" id="btn-spelling-backspace">⌫ Bitta o'chirish</button>
+              </div>
+            </div>
+          `;
+
+          this.bindSpellingEvents(q);
+
+        } else if (q.type === 'grammar') {
+          // Grammar Mechanic: Sentence with blank + Rule explanation on wrong
+          cardContent.innerHTML = `
+            <div class="eng-prompt-box">
+              <div style="font-size: 14px; font-weight: 700; color: var(--text-muted); margin-bottom: 2px;">
+                Tarjimasi: ${q.uz}
+              </div>
+              <div class="grammar-sentence-text">
+                ${q.sentence.replace('[ ___ ]', '<span class="grammar-blank-tag">?</span>')}
+              </div>
+              <div id="grammar-rule-container"></div>
+            </div>
+          `;
+
+          bottomPanel.innerHTML = `
+            <div class="eng-options-container" style="grid-template-columns: repeat(${q.options.length <= 2 ? 2 : 1}, 1fr);">
+              ${q.options.map(opt => `<button class="eng-opt-btn" data-val="${opt}">${opt}</button>`).join('')}
+            </div>
+          `;
+
+          bottomPanel.querySelectorAll('.eng-opt-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              if (this.engQuestionLocked) return;
+              this.handleGrammarAnswer(btn, btn.dataset.val, q.correct, q.rule, q.speakText);
+            });
+          });
+        }
+      }
+
+      handleChoiceAnswer(btn, selectedVal, correctVal, displayWord, speakText) {
+        this.engQuestionLocked = true;
+        const isCorrect = selectedVal === correctVal;
+        const card = document.getElementById('eng-quiz-question-card');
+        const feedback = document.getElementById('eng-quiz-feedback-box');
+        const dot = document.getElementById(`eng-quiz-dot-${this.engIndex}`);
+
+        if (isCorrect) {
+          sound.playCorrect();
+          sound.speakEnglish(speakText);
+          this.engCorrectCount++;
+          btn.classList.add('correct');
+          card.classList.add('correct-anim');
+          feedback.className = 'feedback-box correct';
+          feedback.textContent = "🎉 Barakalla, to'g'ri!";
+          dot.className = 'progress-dot correct';
+          dot.textContent = '✓';
+
+          setTimeout(() => this.advanceEngQuestion(), 1000);
+        } else {
+          sound.playWrong();
+          this.engMistakes.push({
+            prompt: displayWord,
+            userAns: selectedVal,
+            correctAns: correctVal,
+            speakText: speakText
+          });
+
+          btn.classList.add('wrong');
+          card.classList.add('wrong-anim', 'shake');
+          setTimeout(() => card.classList.remove('shake'), 450);
+
+          feedback.className = 'feedback-box wrong';
+          feedback.textContent = `❌ To'g'ri javob: ${correctVal}`;
+          dot.className = 'progress-dot wrong';
+          dot.textContent = '✕';
+
+          document.getElementById('btn-eng-skip-wrong').style.display = 'inline-flex';
+          this.engWrongTimer = setTimeout(() => this.advanceEngQuestion(), 2200);
+        }
+      }
+
+      handleGrammarAnswer(btn, selectedVal, correctVal, rule, speakText) {
+        this.engQuestionLocked = true;
+        const isCorrect = selectedVal === correctVal;
+        const card = document.getElementById('eng-quiz-question-card');
+        const feedback = document.getElementById('eng-quiz-feedback-box');
+        const dot = document.getElementById(`eng-quiz-dot-${this.engIndex}`);
+        const blank = card.querySelector('.grammar-blank-tag');
+
+        if (blank) {
+          blank.textContent = selectedVal;
+          blank.style.borderColor = isCorrect ? '#10B981' : '#EF4444';
+        }
+
+        if (isCorrect) {
+          sound.playCorrect();
+          sound.speakEnglish(speakText);
+          this.engCorrectCount++;
+          btn.classList.add('correct');
+          card.classList.add('correct-anim');
+          feedback.className = 'feedback-box correct';
+          feedback.textContent = "🎉 Barakalla, to'g'ri!";
+          dot.className = 'progress-dot correct';
+          dot.textContent = '✓';
+
+          setTimeout(() => this.advanceEngQuestion(), 1100);
+        } else {
+          sound.playWrong();
+          const q = this.engQuestions[this.engIndex];
+          this.engMistakes.push({
+            prompt: q.sentence,
+            userAns: selectedVal,
+            correctAns: correctVal,
+            speakText: speakText
+          });
+
+          btn.classList.add('wrong');
+          card.classList.add('wrong-anim', 'shake');
+          setTimeout(() => card.classList.remove('shake'), 450);
+
+          const ruleContainer = document.getElementById('grammar-rule-container');
+          if (ruleContainer) {
+            ruleContainer.innerHTML = `<div class="grammar-rule-box"><span>💡</span><span>${rule}</span></div>`;
+          }
+
+          feedback.className = 'feedback-box wrong';
+          feedback.textContent = `❌ To'g'ri javob: ${correctVal}`;
+          dot.className = 'progress-dot wrong';
+          dot.textContent = '✕';
+
+          document.getElementById('btn-eng-skip-wrong').style.display = 'inline-flex';
+          this.engWrongTimer = setTimeout(() => this.advanceEngQuestion(), 2800);
+        }
+      }
+
+      bindSpellingEvents(q) {
+        const slotEls = document.querySelectorAll('.spelling-slot');
+        const tileBtns = document.querySelectorAll('.letter-tile');
+
+        tileBtns.forEach(tile => {
+          tile.addEventListener('click', () => {
+            if (this.engQuestionLocked) return;
+            const tileIdx = parseInt(tile.dataset.tileIndex, 10);
+            const letter = tile.dataset.letter;
+
+            // Find first empty slot
+            const emptyIdx = this.spellingFilledSlots.findIndex(s => s === '');
+            if (emptyIdx === -1) return;
+
+            sound.playTap();
+            this.spellingFilledSlots[emptyIdx] = { letter, tileIdx };
+            this.spellingUsedTileIndices.add(tileIdx);
+            tile.classList.add('used');
+
+            this.updateSpellingSlotsView(q);
+          });
+        });
+
+        // Slot click to return letter
+        slotEls.forEach(slot => {
+          slot.addEventListener('click', () => {
+            if (this.engQuestionLocked) return;
+            const idx = parseInt(slot.dataset.index, 10);
+            const item = this.spellingFilledSlots[idx];
+            if (!item) return;
+
+            sound.playTap();
+            this.spellingUsedTileIndices.delete(item.tileIdx);
+            const matchingTile = document.querySelector(`.letter-tile[data-tile-index="${item.tileIdx}"]`);
+            if (matchingTile) matchingTile.classList.remove('used');
+
+            this.spellingFilledSlots[idx] = '';
+            this.updateSpellingSlotsView(q);
+          });
+        });
+
+        document.getElementById('btn-spelling-backspace').addEventListener('click', () => {
+          if (this.engQuestionLocked) return;
+          // Find last filled slot
+          for (let i = this.spellingFilledSlots.length - 1; i >= 0; i--) {
+            if (this.spellingFilledSlots[i] !== '') {
+              sound.playTap();
+              const item = this.spellingFilledSlots[i];
+              this.spellingUsedTileIndices.delete(item.tileIdx);
+              const matchingTile = document.querySelector(`.letter-tile[data-tile-index="${item.tileIdx}"]`);
+              if (matchingTile) matchingTile.classList.remove('used');
+              this.spellingFilledSlots[i] = '';
+              this.updateSpellingSlotsView(q);
+              break;
+            }
+          }
+        });
+      }
+
+      updateSpellingSlotsView(q) {
+        const slotEls = document.querySelectorAll('.spelling-slot');
+        slotEls.forEach((slot, i) => {
+          const item = this.spellingFilledSlots[i];
+          if (item && item.letter) {
+            slot.textContent = item.letter;
+            slot.classList.add('filled');
+          } else {
+            slot.textContent = '';
+            slot.classList.remove('filled');
+          }
+        });
+
+        // Check if all slots filled
+        const allFilled = this.spellingFilledSlots.every(s => s && s.letter);
+        if (allFilled) {
+          this.validateSpellingWord(q);
+        }
+      }
+
+      validateSpellingWord(q) {
+        this.engQuestionLocked = true;
+        const formedWord = this.spellingFilledSlots.map(s => s.letter).join('');
+        const isCorrect = formedWord === q.word;
+
+        const card = document.getElementById('eng-quiz-question-card');
+        const feedback = document.getElementById('eng-quiz-feedback-box');
+        const dot = document.getElementById(`eng-quiz-dot-${this.engIndex}`);
+        const slotEls = document.querySelectorAll('.spelling-slot');
+
+        if (isCorrect) {
+          sound.playCorrect();
+          sound.speakEnglish(q.speakText);
+          this.engCorrectCount++;
+          slotEls.forEach(s => s.classList.add('correct'));
+          card.classList.add('correct-anim');
+          feedback.className = 'feedback-box correct';
+          feedback.textContent = `🎉 Barakalla! "${q.word}" to'g'ri yozildi!`;
+          dot.className = 'progress-dot correct';
+          dot.textContent = '✓';
+
+          setTimeout(() => this.advanceEngQuestion(), 1100);
+        } else {
+          sound.playWrong();
+          this.engMistakes.push({
+            prompt: `${q.emoji} ${q.uz}`,
+            userAns: formedWord,
+            correctAns: q.word,
+            speakText: q.speakText
+          });
+
+          slotEls.forEach(s => s.classList.add('wrong'));
+          card.classList.add('wrong-anim', 'shake');
+          setTimeout(() => card.classList.remove('shake'), 450);
+
+          feedback.className = 'feedback-box wrong';
+          feedback.textContent = `❌ To'g'ri yozilishi: ${q.word}`;
+          dot.className = 'progress-dot wrong';
+          dot.textContent = '✕';
+
+          document.getElementById('btn-eng-skip-wrong').style.display = 'inline-flex';
+          this.engWrongTimer = setTimeout(() => this.advanceEngQuestion(), 2400);
+        }
+      }
+
+      advanceEngQuestion() {
+        if (this.engWrongTimer) {
+          clearTimeout(this.engWrongTimer);
+          this.engWrongTimer = null;
+        }
+        this.engIndex++;
+        if (this.engIndex < 10) this.renderCurrentEngQuestion();
+        else this.finishEngQuiz();
+      }
+
+      finishEngQuiz() {
+        const currentPercentage = this.engCorrectCount * 10;
+        const res = db.saveEngResult(this.selectedEngCat, this.selectedEngStage, currentPercentage);
+
+        const badgeIcon = document.getElementById('eng-result-badge-icon');
+        const headline = document.getElementById('eng-result-headline');
+        const scorePercent = document.getElementById('eng-result-score-percent');
+        const comparisonPill = document.getElementById('eng-result-comparison-text');
+        const starsDisplay = document.getElementById('eng-result-stars-display');
+        const summaryLine = document.getElementById('eng-result-summary-line');
+
+        scorePercent.textContent = `${currentPercentage}%`;
+        summaryLine.textContent = `10 ta savoldan ${this.engCorrectCount} tasini to'g'ri topding!`;
+
+        let starsStr = '⚪⚪⚪';
+        if (currentPercentage === 100) starsStr = '⭐⭐⭐';
+        else if (currentPercentage >= 80) starsStr = '⭐⭐⚪';
+        else if (currentPercentage >= 50) starsStr = '⭐⚪⚪';
+        starsDisplay.textContent = starsStr;
+
+        if (res.isPerfect) {
+          badgeIcon.textContent = '🏆';
+          headline.textContent = "BARAKALLA, SAVARBEK!";
+          comparisonPill.className = 'result-comparison-pill new-record';
+          comparisonPill.textContent = "🌟 100% Mukammal zabt etding!";
+          sound.playFanfare();
+          this.confetti.fire(120);
+        } else if (res.isNewRecord) {
+          badgeIcon.textContent = '🥇';
+          headline.textContent = "YANGI REKORD!";
+          comparisonPill.className = 'result-comparison-pill new-record';
+          comparisonPill.textContent = `Oldingi eng yuqori natijang: ${res.oldMax}% edi`;
+          sound.playFanfare();
+          this.confetti.fire(90);
+        } else {
+          badgeIcon.textContent = currentPercentage >= 50 ? '👍' : '💪';
+          headline.textContent = currentPercentage >= 50 ? "Yaxshi Natija!" : "Yana Harakat Qil!";
+          comparisonPill.className = 'result-comparison-pill kept-record';
+          comparisonPill.textContent = `🛡️ Eng yuqori rekording: ${res.oldMax}% (Saqlandi)`;
+        }
+
+        const mistakesBlock = document.getElementById('eng-result-mistakes-block');
+        const mistakesList = document.getElementById('eng-result-mistakes-list');
+        mistakesList.innerHTML = '';
+
+        if (this.engMistakes.length > 0) {
+          mistakesBlock.style.display = 'flex';
+          this.engMistakes.forEach((m, idx) => {
+            const item = document.createElement('div');
+            item.className = 'mistake-item';
+            item.innerHTML = `
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <button class="btn-speak-inline mistake-audio-btn" data-audio="${m.speakText}">🔊</button>
+                <span>${idx + 1}) <b>${m.correctAns}</b></span>
+              </div>
+              <span class="wrong-ans">Sening javobing: ${m.userAns} ❌</span>
+            `;
+            mistakesList.appendChild(item);
+          });
+
+          mistakesList.querySelectorAll('.mistake-audio-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              sound.speakEnglish(btn.dataset.audio);
+            });
+          });
+        } else {
+          mistakesBlock.style.display = 'none';
+        }
+
+        const nextBtn = document.getElementById('btn-eng-next-stage');
+        if (this.selectedEngStage < 10 && currentPercentage >= 50) {
+          nextBtn.style.display = 'flex';
+          nextBtn.innerHTML = `<span>➡️ ${this.selectedEngStage + 1}-Etapga o'tish</span>`;
+        } else {
+          nextBtn.style.display = 'none';
+        }
+
+        this.navigateTo('screen-eng-result');
+      }
+
+      /* ---------- EVENTS ---------- */
       initEvents() {
         // Sound toggle
         document.getElementById('btn-toggle-sound').addEventListener('click', () => {
@@ -3114,67 +7059,67 @@
           if (sound.enabled) sound.playTap();
         });
 
-        // Home screen cards
+        // Home card navigations
         document.getElementById('card-open-math').addEventListener('click', () => {
           this.navigateTo('screen-operations');
         });
 
         document.getElementById('card-open-english').addEventListener('click', () => {
-          sound.playTap();
-          document.getElementById('modal-english').classList.add('active');
+          this.navigateTo('screen-eng-categories');
         });
 
-        document.getElementById('btn-close-english-modal').addEventListener('click', () => {
-          sound.playTap();
-          document.getElementById('modal-english').classList.remove('active');
-        });
+        // Math back buttons
+        document.getElementById('btn-back-to-home').addEventListener('click', () => this.navigateTo('screen-home'));
+        document.getElementById('btn-back-to-ops').addEventListener('click', () => this.navigateTo('screen-operations'));
 
-        // Navigation back buttons
-        document.getElementById('btn-back-to-home').addEventListener('click', () => {
-          this.navigateTo('screen-home');
-        });
+        // English back buttons
+        document.getElementById('btn-back-eng-to-home').addEventListener('click', () => this.navigateTo('screen-home'));
+        document.getElementById('btn-back-to-eng-cats').addEventListener('click', () => this.navigateTo('screen-eng-categories'));
 
-        document.getElementById('btn-back-to-ops').addEventListener('click', () => {
-          this.navigateTo('screen-operations');
-        });
-
-        // Operation Card clicks
-        document.querySelectorAll('.op-card').forEach(card => {
+        // Math Op Card clicks
+        document.querySelectorAll('.op-card[data-op]').forEach(card => {
           card.addEventListener('click', () => {
-            this.selectedOperation = card.dataset.op;
+            this.selectedMathOp = card.dataset.op;
             this.navigateTo('screen-stages');
           });
         });
 
-        // Numpad key clicks
+        // English Category Card clicks
+        document.querySelectorAll('.op-card[data-cat]').forEach(card => {
+          card.addEventListener('click', () => {
+            this.selectedEngCat = card.dataset.cat;
+            this.navigateTo('screen-eng-stages');
+          });
+        });
+
+        // Math Numpad
         document.getElementById('quiz-numpad').addEventListener('click', (e) => {
           const btn = e.target.closest('.numpad-btn');
-          if (btn) {
-            const key = btn.dataset.key;
-            this.handleNumpadInput(key);
-          }
+          if (btn) this.handleMathNumpadInput(btn.dataset.key);
         });
 
-        // Physical Keyboard listener for PC/laptop users
+        // Physical keyboard for PC
         window.addEventListener('keydown', (e) => {
-          if (this.currentScreen !== 'screen-quiz') return;
-          if (e.key >= '0' && e.key <= '9') {
-            this.handleNumpadInput(e.key);
-          } else if (e.key === 'Backspace') {
-            this.handleNumpadInput('del');
-          } else if (e.key === 'Enter') {
-            this.handleNumpadInput('submit');
+          if (this.currentScreen === 'screen-quiz') {
+            if (e.key >= '0' && e.key <= '9') this.handleMathNumpadInput(e.key);
+            else if (e.key === 'Backspace') this.handleMathNumpadInput('del');
+            else if (e.key === 'Enter') this.handleMathNumpadInput('submit');
           }
         });
 
-        // Skip wrong answer button
-        document.getElementById('btn-skip-wrong').addEventListener('click', () => {
-          this.advanceToNextQuestion();
-        });
+        document.getElementById('btn-skip-wrong').addEventListener('click', () => this.advanceMathQuestion());
+        document.getElementById('btn-eng-skip-wrong').addEventListener('click', () => this.advanceEngQuestion());
 
-        // Quiz exit confirmation modal
+        // Exit Confirm Modals
         document.getElementById('btn-exit-quiz').addEventListener('click', () => {
           sound.playTap();
+          this.exitTargetScreen = 'screen-stages';
+          document.getElementById('modal-exit-confirm').classList.add('active');
+        });
+
+        document.getElementById('btn-exit-eng-quiz').addEventListener('click', () => {
+          sound.playTap();
+          this.exitTargetScreen = 'screen-eng-stages';
           document.getElementById('modal-exit-confirm').classList.add('active');
         });
 
@@ -3186,28 +7131,34 @@
         document.getElementById('btn-exit-confirm').addEventListener('click', () => {
           sound.playTap();
           document.getElementById('modal-exit-confirm').classList.remove('active');
-          this.navigateTo('screen-stages');
+          this.navigateTo(this.exitTargetScreen || 'screen-home');
         });
 
-        // Result screen action buttons
+        // Math Result Buttons
         document.getElementById('btn-retry-stage').addEventListener('click', () => {
-          this.startQuizGame(this.selectedStageNumber);
+          this.startMathQuiz(this.selectedMathStage);
         });
-
         document.getElementById('btn-next-stage').addEventListener('click', () => {
-          if (this.selectedStageNumber < 10) {
-            this.startQuizGame(this.selectedStageNumber + 1);
-          }
+          if (this.selectedMathStage < 10) this.startMathQuiz(this.selectedMathStage + 1);
         });
-
         document.getElementById('btn-back-stages-from-result').addEventListener('click', () => {
           this.navigateTo('screen-stages');
         });
 
-        // Settings / Parental gate modal
+        // English Result Buttons
+        document.getElementById('btn-eng-retry-stage').addEventListener('click', () => {
+          this.startEngQuiz(this.selectedEngStage);
+        });
+        document.getElementById('btn-eng-next-stage').addEventListener('click', () => {
+          if (this.selectedEngStage < 10) this.startEngQuiz(this.selectedEngStage + 1);
+        });
+        document.getElementById('btn-eng-back-stages').addEventListener('click', () => {
+          this.navigateTo('screen-eng-stages');
+        });
+
+        // Settings / Parental Gate
         document.getElementById('btn-open-settings').addEventListener('click', () => {
           sound.playTap();
-          // Generate new adult math challenge
           const challenges = [
             { q: "125 × 4 = ?", a: 500 },
             { q: "250 + 350 = ?", a: 600 },
@@ -3232,7 +7183,7 @@
           if (inputVal === this.parentChallengeAnswer) {
             db.resetAll();
             document.getElementById('modal-settings').classList.remove('active');
-            this.showToast("Barcha natijalar muvaffaqiyatli tozalandi! 🧹", "✅");
+            this.showToast("Barcha natijalar tozalandi! 🧹", "✅");
             this.renderHomeScreen();
           } else {
             sound.playWrong();
@@ -3242,7 +7193,6 @@
       }
     }
 
-    // Launch App when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
       window.app = new AppController();
     });
