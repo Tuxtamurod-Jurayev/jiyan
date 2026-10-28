@@ -1,0 +1,3251 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Savarbek Edu — 2-sinf Matematika</title>
+  <meta name="description" content="Savarbek Edu — 2-sinf o'quvchisi Savarbek uchun interaktiv matematika o'yini">
+  <meta name="theme-color" content="#4F46E5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ========== CSS RESET & BASE VARIABLES ========== */
+    :root {
+      --primary: #4F46E5;
+      --primary-dark: #4338CA;
+      --primary-light: #EEF2FF;
+      --success: #10B981;
+      --success-dark: #059669;
+      --danger: #EF4444;
+      --danger-dark: #DC2626;
+      --warning: #F59E0B;
+      --warning-dark: #D97706;
+      --purple: #8B5CF6;
+      --purple-dark: #7C3AED;
+      --blue: #0EA5E9;
+      --blue-dark: #0284C7;
+      --bg-main: #F1F5F9;
+      --card-bg: #FFFFFF;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Nunito', sans-serif;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-md: 0 6px 16px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 28px rgba(0,0,0,0.1);
+      --shadow-btn: 0 4px 0px rgba(0,0,0,0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #0F172A;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    /* Mobile frame container */
+    #app-container {
+      width: 100%;
+      max-width: 480px;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--bg-main);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (min-width: 481px) {
+      #app-container {
+        height: 94vh;
+        height: 94dvh;
+        max-height: 920px;
+        border-radius: 36px;
+        border: 4px solid #334155;
+      }
+    }
+
+    /* Screen manager */
+    .screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.98);
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg-main);
+    }
+
+    .screen.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+      z-index: 10;
+    }
+
+    /* Custom Scrollbars */
+    .screen::-webkit-scrollbar {
+      width: 5px;
+    }
+    .screen::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .screen::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 10px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, .font-heading {
+      font-family: var(--font-heading);
+      font-weight: 800;
+    }
+
+    /* ==========================================================================
+       1. SPLASH SCREEN STYLES
+       ========================================================================== */
+    #screen-splash {
+      background: linear-gradient(145deg, #312E81 0%, #4338CA 50%, #6366F1 100%);
+      color: #FFFFFF;
+      justify-content: space-between;
+      align-items: center;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .splash-top {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .splash-mascot-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin-bottom: 24px;
+      animation: floatMascot 3s ease-in-out infinite;
+    }
+
+    .splash-mascot-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(253, 224, 71, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+      border-radius: 50%;
+      animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+
+    .splash-mascot {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 84px;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+    }
+
+    .splash-title {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      background: linear-gradient(to right, #FFFFFF, #FEF08A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .splash-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 700;
+      color: #FEF08A;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .splash-quote-box {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.45;
+      color: #F8FAFC;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      max-width: 380px;
+    }
+
+    .splash-bottom {
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .splash-progress-track {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      padding: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .splash-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #F59E0B, #10B981);
+      border-radius: var(--radius-full);
+      transition: width 0.1s linear;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+    }
+
+    .splash-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Keyframes for Splash */
+    @keyframes floatMascot {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.9); opacity: 0.4; }
+      100% { transform: scale(1.15); opacity: 0.8; }
+    }
+
+    /* ==========================================================================
+       2. TOP BAR & SHARED HEADER STYLES
+       ========================================================================== */
+    .app-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--border-color);
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .header-user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-greeting {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-subtext {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stars-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #FFFBEB;
+      border: 1.5px solid #FCD34D;
+      color: #B45309;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: #F1F5F9;
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      color: var(--text-main);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.92);
+      background: #E2E8F0;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #F1F5F9;
+      border: 1.5px solid var(--border-color);
+      padding: 8px 14px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-back:active {
+      transform: scale(0.94);
+      background: #E2E8F0;
+    }
+
+    .screen-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       3. HOME SCREEN STYLES
+       ========================================================================== */
+    .home-content {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .banner-card {
+      background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+      color: #FFFFFF;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 20px rgba(79, 70, 229, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .banner-text h3 {
+      font-size: 19px;
+      margin-bottom: 4px;
+    }
+
+    .banner-text p {
+      font-size: 13px;
+      opacity: 0.9;
+      font-weight: 600;
+    }
+
+    .banner-icon {
+      font-size: 48px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    }
+
+    .section-label {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .subjects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .subject-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      border: 2.5px solid var(--border-color);
+      border-bottom: 5px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .subject-card:active {
+      transform: translateY(2px);
+      border-bottom-width: 2.5px;
+    }
+
+    .subject-card.math {
+      border-color: #6366F1;
+      border-bottom-color: #4F46E5;
+      background: linear-gradient(to bottom, #FFFFFF, #F8FAFC);
+    }
+
+    .subject-card.english {
+      border-color: #CBD5E1;
+      border-bottom-color: #94A3B8;
+      background: #FAFAFA;
+      opacity: 0.9;
+    }
+
+    .subject-card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .subject-icon-box {
+      width: 58px;
+      height: 58px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .math .subject-icon-box {
+      background: #EEF2FF;
+      border: 2px solid #C7D2FE;
+    }
+
+    .english .subject-icon-box {
+      background: #F1F5F9;
+      border: 2px solid #E2E8F0;
+    }
+
+    .subject-details {
+      flex: 1;
+    }
+
+    .subject-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subject-desc {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .subject-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .subject-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .subject-progress-track {
+      width: 100%;
+      height: 10px;
+      background: #E2E8F0;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .subject-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #6366F1, #10B981);
+      border-radius: var(--radius-full);
+      transition: width 0.4s ease;
+    }
+
+    .home-footer-stats {
+      margin-top: auto;
+      padding: 16px;
+      background: #FFFFFF;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .stat-pill b {
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       4. MATH OPERATIONS SCREEN STYLES
+       ========================================================================== */
+    .operations-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .op-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      border: 2.5px solid var(--border-color);
+      border-bottom: 5px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .op-card:active {
+      transform: translateY(2px);
+      border-bottom-width: 2.5px;
+    }
+
+    .op-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 900;
+      flex-shrink: 0;
+      color: #FFFFFF;
+    }
+
+    .op-card.addition .op-icon {
+      background: linear-gradient(135deg, #10B981, #059669);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    }
+    .op-card.addition {
+      border-color: #A7F3D0;
+      border-bottom-color: #059669;
+    }
+
+    .op-card.subtraction .op-icon {
+      background: linear-gradient(135deg, #0EA5E9, #0284C7);
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
+    }
+    .op-card.subtraction {
+      border-color: #BAE6FD;
+      border-bottom-color: #0284C7;
+    }
+
+    .op-card.multiplication .op-icon {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    }
+    .op-card.multiplication {
+      border-color: #FDE68A;
+      border-bottom-color: #D97706;
+    }
+
+    .op-card.division .op-icon {
+      background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.35);
+    }
+    .op-card.division {
+      border-color: #DDD6FE;
+      border-bottom-color: #7C3AED;
+    }
+
+    .op-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .op-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .op-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .op-badge {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      background: #F1F5F9;
+      color: var(--text-muted);
+    }
+
+    .op-progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .op-progress-track {
+      width: 100%;
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .op-progress-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+    }
+
+    .addition .op-progress-fill { background: #10B981; }
+    .subtraction .op-progress-fill { background: #0EA5E9; }
+    .multiplication .op-progress-fill { background: #F59E0B; }
+    .division .op-progress-fill { background: #8B5CF6; }
+
+    /* ==========================================================================
+       5. STAGES SCREEN STYLES (10 Etap kartochkalari - 5 xil holat)
+       ========================================================================== */
+    .stages-content {
+      padding: 16px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .stages-header-banner {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      border: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stages-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .stage-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      border: 2.5px solid var(--border-color);
+      border-bottom: 5px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .stage-card:active {
+      transform: translateY(2px);
+      border-bottom-width: 2.5px;
+    }
+
+    /* 5 Micro-States of Stage Cards */
+    /* 1. YANGI */
+    .stage-card.state-new {
+      background: #FFFFFF;
+      border-color: #93C5FD;
+      border-bottom-color: #3B82F6;
+    }
+    .stage-card.state-new .stage-badge {
+      background: #EFF6FF;
+      color: #1D4ED8;
+    }
+
+    /* 2. QIYIN (Past natija <= 40%) */
+    .stage-card.state-hard {
+      background: #FEF2F2;
+      border-color: #FCA5A5;
+      border-bottom-color: #EF4444;
+    }
+    .stage-card.state-hard .stage-badge {
+      background: #FEE2E2;
+      color: #B91C1C;
+    }
+
+    /* 3. O'RTACHA (50% - 70%) */
+    .stage-card.state-medium {
+      background: #FFFBEB;
+      border-color: #FCD34D;
+      border-bottom-color: #F59E0B;
+    }
+    .stage-card.state-medium .stage-badge {
+      background: #FEF3C7;
+      color: #B45309;
+    }
+
+    /* 4. YAXSHI (80% - 90%) */
+    .stage-card.state-good {
+      background: #F0FDF4;
+      border-color: #86EFAC;
+      border-bottom-color: #10B981;
+    }
+    .stage-card.state-good .stage-badge {
+      background: #DCFCE7;
+      color: #15803D;
+    }
+
+    /* 5. REKORD (100%) */
+    .stage-card.state-perfect {
+      background: linear-gradient(135deg, #FEFCE8 0%, #F0FDF4 100%);
+      border-color: #FBBF24;
+      border-bottom-color: #10B981;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+    }
+    .stage-card.state-perfect .stage-badge {
+      background: #FEF3C7;
+      color: #B45309;
+      font-weight: 900;
+    }
+
+    /* Locked state */
+    .stage-card.locked {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+      border-bottom-color: #94A3B8;
+      opacity: 0.65;
+    }
+
+    .stage-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .stage-number-box {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--bg-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .stage-info-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stage-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stage-subtitle {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .stage-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .stage-stars {
+      font-size: 15px;
+      letter-spacing: 2px;
+    }
+
+    .stage-badge {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+    }
+
+    /* Wiggle/Shake animation for locked / wrong */
+    @keyframes shakeAnimation {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    .shake {
+      animation: shakeAnimation 0.45s ease-in-out;
+    }
+
+    /* ==========================================================================
+       6. QUIZ GAME SCREEN STYLES (10 misol, Numpad, Micro-states)
+       ========================================================================== */
+    #screen-quiz {
+      background: #F8FAFC;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quiz-top-bar {
+      padding: 12px 18px;
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-exit-quiz {
+      border: 1.5px solid #FCA5A5;
+      background: #FEF2F2;
+      color: #DC2626;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-exit-quiz:active {
+      transform: scale(0.92);
+      background: #FEE2E2;
+    }
+
+    .quiz-counter-tag {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid #C7D2FE;
+    }
+
+    /* 10 Progress Dots */
+    .progress-dots-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 4px;
+    }
+
+    .progress-dot {
+      flex: 1;
+      height: 12px;
+      border-radius: var(--radius-full);
+      background: #E2E8F0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #FFFFFF;
+      font-weight: 900;
+    }
+
+    .progress-dot.current {
+      background: #3B82F6;
+      transform: scaleY(1.35);
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+      animation: pulseDot 1s infinite alternate;
+    }
+
+    .progress-dot.correct {
+      background: #10B981;
+    }
+
+    .progress-dot.wrong {
+      background: #EF4444;
+    }
+
+    @keyframes pulseDot {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    /* Quiz Question Card Area */
+    .quiz-center-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .question-card {
+      width: 100%;
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 28px 20px;
+      border: 3px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.25s ease;
+      min-height: 190px;
+    }
+
+    .question-card.correct-anim {
+      border-color: #10B981;
+      background: #F0FDF4;
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+    }
+
+    .question-card.wrong-anim {
+      border-color: #EF4444;
+      background: #FEF2F2;
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
+    }
+
+    .math-formula {
+      font-family: var(--font-heading);
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .input-box-display {
+      min-width: 80px;
+      height: 64px;
+      padding: 0 16px;
+      border-radius: var(--radius-md);
+      background: #F8FAFC;
+      border: 3px dashed var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--primary);
+      transition: all 0.15s ease;
+    }
+
+    .input-box-display.filled {
+      border-style: solid;
+      background: #EEF2FF;
+      color: var(--primary-dark);
+      border-color: var(--primary);
+    }
+
+    .input-box-display.correct {
+      border-color: #10B981;
+      background: #DCFCE7;
+      color: #15803D;
+      border-style: solid;
+    }
+
+    .input-box-display.wrong {
+      border-color: #EF4444;
+      background: #FEE2E2;
+      color: #B91C1C;
+      border-style: solid;
+    }
+
+    /* Feedback message below formula */
+    .feedback-box {
+      margin-top: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .feedback-box.correct {
+      color: #15803D;
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .feedback-box.wrong {
+      color: #B91C1C;
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-skip-wrong {
+      margin-top: 10px;
+      background: #EF4444;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 8px rgba(239, 68, 68, 0.4);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Custom Mobile Numpad */
+    .numpad-container {
+      background: #FFFFFF;
+      border-top: 2px solid var(--border-color);
+      padding: 12px 16px 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .numpad-btn {
+      height: 60px;
+      background: #F8FAFC;
+      border: 2px solid #CBD5E1;
+      border-bottom: 4px solid #94A3B8;
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+
+    .numpad-btn:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+      background: #E2E8F0;
+    }
+
+    .numpad-btn.btn-delete {
+      font-size: 17px;
+      background: #FFF1F2;
+      border-color: #FECDD3;
+      border-bottom-color: #F43F5E;
+      color: #E11D48;
+      gap: 4px;
+    }
+
+    .numpad-btn.btn-submit {
+      font-size: 15px;
+      background: #E2E8F0;
+      border-color: #CBD5E1;
+      border-bottom-color: #94A3B8;
+      color: #94A3B8;
+      cursor: not-allowed;
+      gap: 4px;
+    }
+
+    .numpad-btn.btn-submit.active {
+      background: #10B981;
+      border-color: #34D399;
+      border-bottom-color: #059669;
+      color: #FFFFFF;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .numpad-btn.btn-submit.active:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+
+    /* Disabled numpad state during animations */
+    .numpad-container.locked {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* ==========================================================================
+       7. RESULT SCREEN STYLES (Rekord taqqoslash, Xatolar tahlili)
+       ========================================================================== */
+    #screen-result {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .result-card-main {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 26px 20px;
+      border: 3px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .result-icon-badge {
+      font-size: 64px;
+      margin-bottom: 12px;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .result-headline {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .result-score-tag {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .result-comparison-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .result-comparison-pill.new-record {
+      background: #FEF3C7;
+      color: #B45309;
+      border: 1.5px solid #FCD34D;
+    }
+
+    .result-comparison-pill.kept-record {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1.5px solid #BFDBFE;
+    }
+
+    .result-stars-row {
+      font-size: 32px;
+      letter-spacing: 6px;
+      margin-bottom: 8px;
+    }
+
+    /* Mistakes Section */
+    .mistakes-card {
+      background: #FFF1F2;
+      border: 2px solid #FECDD3;
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mistakes-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #BE123C;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mistakes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mistake-item {
+      background: #FFFFFF;
+      border: 1.5px solid #FFE4E6;
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mistake-item span.wrong-ans {
+      color: #E11D48;
+      font-weight: 800;
+    }
+
+    /* Action Buttons in Result Screen */
+    .result-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .btn-action-primary {
+      height: 54px;
+      background: #10B981;
+      border: none;
+      border-bottom: 4px solid #059669;
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 800;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-action-primary:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+
+    .btn-action-secondary {
+      height: 52px;
+      background: #FFFFFF;
+      border: 2px solid #CBD5E1;
+      border-bottom: 4px solid #94A3B8;
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+
+    .btn-action-secondary:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+
+    /* ==========================================================================
+       8. MODAL WINDOWS & TOAST ALERTS
+       ========================================================================== */
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      border: 3px solid var(--border-color);
+      transform: scale(0.92);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .modal-backdrop.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      font-size: 52px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .modal-body {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .btn-modal {
+      flex: 1;
+      height: 48px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      transition: all 0.1s ease;
+    }
+
+    .btn-modal:active {
+      transform: translateY(2px);
+    }
+
+    .btn-modal-green {
+      background: #10B981;
+      border-bottom: 3px solid #059669;
+      color: #FFFFFF;
+    }
+
+    .btn-modal-red {
+      background: #EF4444;
+      border-bottom: 3px solid #DC2626;
+      color: #FFFFFF;
+    }
+
+    .btn-modal-gray {
+      background: #F1F5F9;
+      border: 1.5px solid #CBD5E1;
+      color: var(--text-main);
+    }
+
+    /* Toast notification */
+    #toast-notification {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #1E293B;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      z-index: 200;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      text-align: center;
+      width: max-content;
+      max-width: 90%;
+    }
+
+    #toast-notification.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Confetti Canvas */
+    #confetti-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 90;
+    }
+
+    /* Settings input field for parent challenge */
+    .parent-challenge-input {
+      width: 100%;
+      height: 50px;
+      border: 2.5px solid #CBD5E1;
+      border-radius: var(--radius-md);
+      font-size: 20px;
+      font-weight: 800;
+      text-align: center;
+      font-family: var(--font-heading);
+      color: var(--text-main);
+      margin-top: 8px;
+      outline: none;
+    }
+    .parent-challenge-input:focus {
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Mobile App Wrapper -->
+  <div id="app-container">
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Toast Notification Banner -->
+    <div id="toast-notification">
+      <span id="toast-icon">🚀</span>
+      <span id="toast-text">Xabar</span>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 1: SPLASH SCREEN (5-soniya, Motivatsiya, Progress Bar)
+         ===================================================================== -->
+    <div id="screen-splash" class="screen active">
+      <div class="splash-top">
+        <div class="splash-mascot-wrapper">
+          <div class="splash-mascot-bg"></div>
+          <div class="splash-mascot">🦁</div>
+        </div>
+        <div class="splash-badge">👑 2-Sinf A'lochisi</div>
+        <h1 class="splash-title">Salom, Savarbek!</h1>
+        <div class="splash-quote-box" id="splash-quote-text">
+          "Bugun yangi marralarni zabt etamiz, Savarbek! 🚀"
+        </div>
+      </div>
+      <div class="splash-bottom">
+        <div class="splash-info-row">
+          <span>Tayyorgarlik...</span>
+          <span id="splash-countdown">5 soniya</span>
+        </div>
+        <div class="splash-progress-track">
+          <div class="splash-progress-fill" id="splash-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 2: HOME SCREEN (Asosiy Menyu: Matematika | Ingliz tili)
+         ===================================================================== -->
+    <div id="screen-home" class="screen">
+      <!-- App Header -->
+      <header class="app-header">
+        <div class="header-user-info">
+          <div class="header-greeting">👋 Salom, Savarbek!</div>
+          <div class="header-subtext">2-sinf a'lochisi 🎓</div>
+        </div>
+        <div class="header-actions">
+          <div class="stars-badge">
+            <span>⭐</span>
+            <span id="home-total-stars">0 / 120</span>
+          </div>
+          <button class="icon-btn" id="btn-toggle-sound" title="Ovozni o'chirish/yoqish">
+            <span id="sound-icon">🔊</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Home Content -->
+      <div class="home-content">
+        <!-- Motivational Banner -->
+        <div class="banner-card">
+          <div class="banner-text">
+            <h3>Katta G'alabalar Sari! 🚀</h3>
+            <p>Har kuni 10 tadan misol yechib, bilimingni mustahkamla!</p>
+          </div>
+          <div class="banner-icon">🦁</div>
+        </div>
+
+        <div class="section-label">O'quv Fanlari</div>
+
+        <!-- 2 Main Cards -->
+        <div class="subjects-grid">
+          <!-- 1. Matematika -->
+          <div class="subject-card math" id="card-open-math">
+            <div class="subject-card-header">
+              <div class="subject-icon-box">🧮</div>
+              <div class="subject-details">
+                <div class="subject-title">
+                  Matematika
+                  <span style="font-size: 14px;">⚡</span>
+                </div>
+                <div class="subject-desc">40 ta bosqich • 4 ta amal</div>
+              </div>
+            </div>
+            <div class="subject-meta">
+              <div class="subject-stat-row">
+                <span style="color: var(--text-muted);">Umumiy o'zlashtirish:</span>
+                <span id="home-math-percentage" style="color: #4F46E5;">0%</span>
+              </div>
+              <div class="subject-progress-track">
+                <div class="subject-progress-fill" id="home-math-progress-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Ingliz Tili -->
+          <div class="subject-card english" id="card-open-english">
+            <div class="subject-card-header">
+              <div class="subject-icon-box">🇬🇧</div>
+              <div class="subject-details">
+                <div class="subject-title">
+                  Ingliz tili
+                  <span style="font-size: 12px; background: #E2E8F0; color: #475569; padding: 2px 8px; border-radius: 99px;">Tez kunda</span>
+                </div>
+                <div class="subject-desc">So'z boyligi va grammatika</div>
+              </div>
+            </div>
+            <div class="subject-meta">
+              <div class="subject-stat-row">
+                <span style="color: var(--text-muted);">Holati:</span>
+                <span style="color: #64748B;">Tez kunda ochiladi 🚀</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom stats & settings -->
+        <div class="home-footer-stats">
+          <div class="stat-pill">
+            <span>🎯</span>
+            <span>Jami misollar: <b id="home-total-solved">0 ta</b></span>
+          </div>
+          <button class="icon-btn" id="btn-open-settings" title="Ota-ona sozlamalari">
+            <span>⚙️</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 3: MATH OPERATIONS SCREEN (4 ta amal)
+         ===================================================================== -->
+    <div id="screen-operations" class="screen">
+      <header class="app-header">
+        <button class="btn-back" id="btn-back-to-home">
+          <span>⬅️</span>
+          <span>Orqaga</span>
+        </button>
+        <div class="screen-title">Amalni tanla</div>
+        <div style="width: 70px;"></div>
+      </header>
+
+      <div class="operations-content">
+        <!-- ➕ Qo'shish -->
+        <div class="op-card addition" data-op="addition">
+          <div class="op-icon">➕</div>
+          <div class="op-info">
+            <div class="op-header-row">
+              <div class="op-title">Qo'shish</div>
+              <div class="op-badge" id="op-stages-addition">0 / 10 etap</div>
+            </div>
+            <div class="op-progress-row">
+              <span>Maksimal natija:</span>
+              <span id="op-percent-addition">0%</span>
+            </div>
+            <div class="op-progress-track">
+              <div class="op-progress-fill" id="op-fill-addition" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ➖ Ayirish -->
+        <div class="op-card subtraction" data-op="subtraction">
+          <div class="op-icon">➖</div>
+          <div class="op-info">
+            <div class="op-header-row">
+              <div class="op-title">Ayirish</div>
+              <div class="op-badge" id="op-stages-subtraction">0 / 10 etap</div>
+            </div>
+            <div class="op-progress-row">
+              <span>Maksimal natija:</span>
+              <span id="op-percent-subtraction">0%</span>
+            </div>
+            <div class="op-progress-track">
+              <div class="op-progress-fill" id="op-fill-subtraction" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ✖️ Ko'paytirish -->
+        <div class="op-card multiplication" data-op="multiplication">
+          <div class="op-icon">✖️</div>
+          <div class="op-info">
+            <div class="op-header-row">
+              <div class="op-title">Ko'paytirish</div>
+              <div class="op-badge" id="op-stages-multiplication">0 / 10 etap</div>
+            </div>
+            <div class="op-progress-row">
+              <span>Maksimal natija:</span>
+              <span id="op-percent-multiplication">0%</span>
+            </div>
+            <div class="op-progress-track">
+              <div class="op-progress-fill" id="op-fill-multiplication" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ➗ Bo'lish -->
+        <div class="op-card division" data-op="division">
+          <div class="op-icon">➗</div>
+          <div class="op-info">
+            <div class="op-header-row">
+              <div class="op-title">Bo'lish</div>
+              <div class="op-badge" id="op-stages-division">0 / 10 etap</div>
+            </div>
+            <div class="op-progress-row">
+              <span>Maksimal natija:</span>
+              <span id="op-percent-division">0%</span>
+            </div>
+            <div class="op-progress-track">
+              <div class="op-progress-fill" id="op-fill-division" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 4: STAGES SCREEN (10 ta Etap ro'yxati)
+         ===================================================================== -->
+    <div id="screen-stages" class="screen">
+      <header class="app-header">
+        <button class="btn-back" id="btn-back-to-ops">
+          <span>⬅️</span>
+          <span>Amallar</span>
+        </button>
+        <div class="screen-title" id="stages-screen-title">Qo'shish</div>
+        <div style="width: 70px;"></div>
+      </header>
+
+      <div class="stages-content">
+        <div class="stages-header-banner">
+          <span style="font-weight: 800; font-size: 14px; color: var(--text-muted);">
+            Bosqichni tanla va misollarni yech:
+          </span>
+          <span id="stages-summary-stars" style="font-weight: 900; color: #D97706;">⭐ 0 / 30</span>
+        </div>
+
+        <!-- 10 Etap kartochkalari dinamik joylashtiriladi -->
+        <div class="stages-grid" id="stages-list-container">
+          <!-- Dynamically generated via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 5: QUIZ GAME SCREEN (10 ta misol yechish jarayoni)
+         ===================================================================== -->
+    <div id="screen-quiz" class="screen">
+      <!-- Top Bar & Progress Dots -->
+      <div class="quiz-top-bar">
+        <div class="quiz-meta-row">
+          <button class="btn-exit-quiz" id="btn-exit-quiz">
+            <span>✖️</span>
+            <span>Chiqish</span>
+          </button>
+          <div class="quiz-counter-tag" id="quiz-question-counter">1-Etap | Misol: 1 / 10</div>
+        </div>
+        <!-- 10 ta progress nuqtachalari -->
+        <div class="progress-dots-row" id="quiz-progress-dots">
+          <!-- 10 dots generated in JS -->
+        </div>
+      </div>
+
+      <!-- Center Question Card -->
+      <div class="quiz-center-area">
+        <div class="question-card" id="quiz-question-card">
+          <div class="math-formula">
+            <span id="quiz-operand-text">27 + 15 =</span>
+            <div class="input-box-display" id="quiz-input-box">?</div>
+          </div>
+          <!-- Feedback message -->
+          <div class="feedback-box" id="quiz-feedback-box"></div>
+          <!-- Skip button for wrong answer -->
+          <button class="btn-skip-wrong" id="btn-skip-wrong" style="display: none;">
+            <span>Tushundim, keyingisi ➡️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Custom Numpad -->
+      <div class="numpad-container" id="quiz-numpad">
+        <button class="numpad-btn" data-key="1">1</button>
+        <button class="numpad-btn" data-key="2">2</button>
+        <button class="numpad-btn" data-key="3">3</button>
+        <button class="numpad-btn" data-key="4">4</button>
+        <button class="numpad-btn" data-key="5">5</button>
+        <button class="numpad-btn" data-key="6">6</button>
+        <button class="numpad-btn" data-key="7">7</button>
+        <button class="numpad-btn" data-key="8">8</button>
+        <button class="numpad-btn" data-key="9">9</button>
+        <button class="numpad-btn btn-delete" data-key="del">⌫ O'chirish</button>
+        <button class="numpad-btn" data-key="0">0</button>
+        <button class="numpad-btn btn-submit" id="btn-quiz-submit" data-key="submit">✅ TEKSHIRISH</button>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         SCREEN 6: RESULT SCREEN (Natija, Rekord taqqoslash va Xatolar)
+         ===================================================================== -->
+    <div id="screen-result" class="screen">
+      <div class="result-card-main" id="result-card-main">
+        <div class="result-icon-badge" id="result-badge-icon">🏆</div>
+        <div class="result-headline" id="result-headline">YANGI REKORD!</div>
+        <div class="result-score-tag" id="result-score-percent">90%</div>
+        <div class="result-comparison-pill new-record" id="result-comparison-text">
+          Oldingi eng yuqori natijang: 70% edi
+        </div>
+        <div class="result-stars-row" id="result-stars-display">⭐⭐⭐</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--text-muted);" id="result-summary-line">
+          10 ta misoldan 9 tasini to'g'ri yechding!
+        </div>
+      </div>
+
+      <!-- Mistakes Review Block (Faqat xato qilgan bo'lsa ko'rinadi) -->
+      <div class="mistakes-card" id="result-mistakes-block" style="display: none;">
+        <div class="mistakes-title">
+          <span>🔍</span>
+          <span>Xato ketgan misollar:</span>
+        </div>
+        <div class="mistakes-list" id="result-mistakes-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="result-actions">
+        <button class="btn-action-primary" id="btn-next-stage">
+          <span>➡️ Keyingi etapga o'tish</span>
+        </button>
+        <button class="btn-action-secondary" id="btn-retry-stage">
+          <span>🔄 Yana urinib ko'rish</span>
+        </button>
+        <button class="btn-action-secondary" id="btn-back-stages-from-result">
+          <span>📋 Bosqichlarga qaytish</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL 1: EXIT CONFIRMATION MODAL
+         ===================================================================== -->
+    <div class="modal-backdrop" id="modal-exit-confirm">
+      <div class="modal-card">
+        <div class="modal-icon">⚠️</div>
+        <div class="modal-title">O'yindan chiqish</div>
+        <div class="modal-body">
+          Savarbek, haqiqatan ham chiqmoqchimisan? Hozirgi yechgan misollaring saqlanmaydi!
+        </div>
+        <div class="modal-actions">
+          <button class="btn-modal btn-modal-green" id="btn-exit-cancel">Yo'q, davom etaman</button>
+          <button class="btn-modal btn-modal-red" id="btn-exit-confirm">Ha, chiqish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL 2: ENGLISH COMING SOON TOAST / MODAL
+         ===================================================================== -->
+    <div class="modal-backdrop" id="modal-english">
+      <div class="modal-card">
+        <div class="modal-icon">🇬🇧</div>
+        <div class="modal-title">Ingliz tili</div>
+        <div class="modal-body">
+          Savarbek, avval Matematikadan 1-etaplarni zabt etamiz! Ingliz tili tez kunda ochiladi 🚀
+        </div>
+        <div class="modal-actions">
+          <button class="btn-modal btn-modal-green" id="btn-close-english-modal">Tushundim, olg'a!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         MODAL 3: PARENTAL SETTINGS & RESET MODAL
+         ===================================================================== -->
+    <div class="modal-backdrop" id="modal-settings">
+      <div class="modal-card">
+        <div class="modal-icon">⚙️</div>
+        <div class="modal-title">Ota-ona sozlamalari</div>
+        <div class="modal-body" style="text-align: left; font-size: 13px;">
+          <p>Ushbu bo'lim faqat kattalar uchun mo'ljallangan.</p>
+          <hr style="margin: 10px 0; border: none; border-top: 1px solid #E2E8F0;">
+          <div id="settings-parent-challenge-box">
+            <p style="font-weight: 800; color: var(--danger-dark); margin-bottom: 6px;">
+              🔒 Natijalarni tozalash uchun tekshiruv:
+            </p>
+            <p id="parent-math-question" style="font-size: 16px; font-weight: 900; color: var(--text-main);">
+              125 × 4 = ?
+            </p>
+            <input type="number" id="parent-math-answer" class="parent-challenge-input" placeholder="Javobni yozing">
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-modal btn-modal-gray" id="btn-close-settings">Yopish</button>
+          <button class="btn-modal btn-modal-red" id="btn-confirm-reset-db">Natijalarni tozalash</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- =====================================================================
+       JAVASCRIPT ARCHITECTURE
+       1. SoundFX (Web Audio API Synthesizer)
+       2. ConfettiEngine (Physics-based celebration particle system)
+       3. DB (LocalStorage v1 database manager)
+       4. MathGenerators (40 stages accurate generator)
+       5. AppController (State machine, UI renderer & game loop)
+       ===================================================================== -->
+  <script>
+    /* ==========================================================================
+       1. SOUND EFFECTS (Web Audio API Synthesizer - Zero External Files)
+       ========================================================================== */
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+        this.enabled = true;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      playTap() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(450, now);
+        osc.frequency.exponentialRampToValueAtTime(150, now + 0.04);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      }
+
+      playCorrect() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        // Two-tone cheerful ascending chime (E5 -> A5)
+        const notes = [659.25, 880.00];
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+          gain.gain.setValueAtTime(0.2, now + idx * 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.25);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + idx * 0.1);
+          osc.stop(now + idx * 0.1 + 0.28);
+        });
+      }
+
+      playWrong() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        // Low gentle descending wobble
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(130, now + 0.25);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      }
+
+      playFanfare() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        // Joyful fanfare: C5, E5, G5, C6
+        const melody = [523.25, 659.25, 783.99, 1046.50];
+        melody.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+          gain.gain.setValueAtTime(0.25, now + idx * 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 0.35);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now + idx * 0.12);
+          osc.stop(now + idx * 0.12 + 0.38);
+        });
+      }
+
+      playLock() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.setValueAtTime(140, now + 0.06);
+        gain.gain.setValueAtTime(0.1, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.14);
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    /* ==========================================================================
+       2. CONFETTI CELEBRATION ENGINE
+       ========================================================================== */
+    class ConfettiEngine {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.animationId = null;
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+      }
+
+      resize() {
+        const rect = this.canvas.parentElement.getBoundingClientRect();
+        this.canvas.width = rect.width;
+        this.canvas.height = rect.height;
+      }
+
+      fire(count = 80) {
+        this.resize();
+        const colors = ['#F59E0B', '#10B981', '#3B82F6', '#EC4899', '#8B5CF6', '#EF4444', '#FBBF24'];
+        for (let i = 0; i < count; i++) {
+          this.particles.push({
+            x: this.canvas.width / 2 + (Math.random() - 0.5) * 120,
+            y: this.canvas.height * 0.35,
+            vx: (Math.random() - 0.5) * 14,
+            vy: (Math.random() - 0.8) * 15 - 4,
+            size: Math.random() * 8 + 6,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 12,
+            gravity: 0.38,
+            opacity: 1
+          });
+        }
+        if (!this.animationId) {
+          this.loop();
+        }
+      }
+
+      loop() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.rotation += p.rotationSpeed;
+          p.opacity -= 0.009;
+
+          if (p.opacity <= 0 || p.y > this.canvas.height) {
+            this.particles.splice(i, 1);
+            continue;
+          }
+
+          this.ctx.save();
+          this.ctx.translate(p.x, p.y);
+          this.ctx.rotate((p.rotation * Math.PI) / 180);
+          this.ctx.fillStyle = p.color;
+          this.ctx.globalAlpha = Math.max(0, p.opacity);
+          this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+          this.ctx.restore();
+        }
+
+        if (this.particles.length > 0) {
+          this.animationId = requestAnimationFrame(() => this.loop());
+        } else {
+          this.animationId = null;
+        }
+      }
+    }
+
+    /* ==========================================================================
+       3. DATABASE & LOCALSTORAGE MANAGER (savarbek_edu_v1)
+       ========================================================================== */
+    const DB_KEY = 'savarbek_edu_v1';
+
+    class DatabaseManager {
+      constructor() {
+        this.data = this.load();
+      }
+
+      getDefaultData() {
+        const createEmptyStages = () => {
+          const list = [];
+          for (let i = 1; i <= 10; i++) {
+            list.push({
+              stageNumber: i,
+              maxPercentage: 0,
+              lastPercentage: 0,
+              attempts: 0,
+              updatedAt: null
+            });
+          }
+          return list;
+        };
+
+        return {
+          userName: "Savarbek",
+          soundEnabled: true,
+          lastQuoteIndex: -1,
+          totalQuestionsSolved: 0,
+          math: {
+            addition: createEmptyStages(),
+            subtraction: createEmptyStages(),
+            multiplication: createEmptyStages(),
+            division: createEmptyStages()
+          }
+        };
+      }
+
+      load() {
+        try {
+          const saved = localStorage.getItem(DB_KEY);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            // Schema migration sanity checks
+            if (parsed && parsed.math && parsed.math.addition) {
+              return parsed;
+            }
+          }
+        } catch (e) {
+          console.error('LocalStorage load error:', e);
+        }
+        const defaultData = this.getDefaultData();
+        this.save(defaultData);
+        return defaultData;
+      }
+
+      save(newData = this.data) {
+        try {
+          localStorage.setItem(DB_KEY, JSON.stringify(newData));
+          this.data = newData;
+        } catch (e) {
+          console.error('LocalStorage save error:', e);
+        }
+      }
+
+      resetAll() {
+        const fresh = this.getDefaultData();
+        fresh.soundEnabled = this.data.soundEnabled; // Keep sound preference
+        this.save(fresh);
+        return fresh;
+      }
+
+      getStage(operation, stageNum) {
+        return this.data.math[operation][stageNum - 1];
+      }
+
+      saveStageResult(operation, stageNum, currentPercentage) {
+        const stage = this.getStage(operation, stageNum);
+        const oldMax = stage.maxPercentage;
+        stage.attempts += 1;
+        stage.lastPercentage = currentPercentage;
+        this.data.totalQuestionsSolved += 10;
+
+        let isNewRecord = false;
+        if (currentPercentage > oldMax) {
+          stage.maxPercentage = currentPercentage;
+          stage.updatedAt = new Date().toISOString();
+          isNewRecord = true;
+        }
+
+        this.save();
+        return {
+          oldMax,
+          currentPercentage,
+          isNewRecord,
+          isPerfect: currentPercentage === 100,
+          attempts: stage.attempts
+        };
+      }
+
+      getOverallMathPercentage() {
+        let sum = 0;
+        const ops = ['addition', 'subtraction', 'multiplication', 'division'];
+        ops.forEach(op => {
+          this.data.math[op].forEach(stage => {
+            sum += stage.maxPercentage;
+          });
+        });
+        return Math.round(sum / 40);
+      }
+
+      getOperationAveragePercentage(operation) {
+        let sum = 0;
+        this.data.math[operation].forEach(stage => {
+          sum += stage.maxPercentage;
+        });
+        return Math.round(sum / 10);
+      }
+
+      getCompletedStagesCount(operation) {
+        return this.data.math[operation].filter(s => s.maxPercentage >= 1).length;
+      }
+
+      getTotalStars() {
+        let stars = 0;
+        const ops = ['addition', 'subtraction', 'multiplication', 'division'];
+        ops.forEach(op => {
+          this.data.math[op].forEach(stage => {
+            if (stage.maxPercentage === 100) stars += 3;
+            else if (stage.maxPercentage >= 80) stars += 2;
+            else if (stage.maxPercentage >= 50) stars += 1;
+          });
+        });
+        return stars;
+      }
+
+      isStageUnlocked(operation, stageNum) {
+        if (stageNum === 1) return true;
+        const prevStage = this.getStage(operation, stageNum - 1);
+        return prevStage.maxPercentage >= 50;
+      }
+    }
+
+    const db = new DatabaseManager();
+
+    /* ==========================================================================
+       4. MATHEMATICAL QUESTION GENERATORS (Strict 2nd grade curriculum)
+       ========================================================================== */
+    class MathGenerator {
+      static randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      static shuffle(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // Generate 10 unique questions for an operation and stage
+      static generateStageQuestions(operation, stageNum) {
+        const questions = [];
+        const seenKeys = new Set();
+        let attemptsCount = 0;
+
+        while (questions.length < 10 && attemptsCount < 500) {
+          attemptsCount++;
+          let q = null;
+          switch (operation) {
+            case 'addition':
+              q = MathGenerator.generateAddition(stageNum);
+              break;
+            case 'subtraction':
+              q = MathGenerator.generateSubtraction(stageNum);
+              break;
+            case 'multiplication':
+              q = MathGenerator.generateMultiplication(stageNum, questions.length);
+              break;
+            case 'division':
+              q = MathGenerator.generateDivision(stageNum, questions.length);
+              break;
+          }
+
+          if (q && !seenKeys.has(q.key)) {
+            seenKeys.add(q.key);
+            questions.push(q);
+          }
+        }
+
+        return questions;
+      }
+
+      // 3.1 ➕ QO'SHISH (10 ta Etap)
+      static generateAddition(stage) {
+        let a, b, c;
+        switch (stage) {
+          case 1: { // 10 ichida: A >= 1, B >= 1, A + B <= 10
+            const sum = MathGenerator.randomInt(2, 10);
+            a = MathGenerator.randomInt(1, sum - 1);
+            b = sum - a;
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 2: { // 20 ichida xonasiz: 10 <= A <= 18, 1 <= B <= 9, A + B <= 20, (A%10) + B < 10
+            const ones = MathGenerator.randomInt(0, 8);
+            a = 10 + ones;
+            b = MathGenerator.randomInt(1, 9 - ones);
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 3: { // 20 ichida xonadan o'tib: 2 <= A <= 9, 2 <= B <= 9, A + B > 10
+            do {
+              a = MathGenerator.randomInt(3, 9);
+              b = MathGenerator.randomInt(3, 9);
+            } while (a + b <= 10 || a + b > 18);
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 4: { // Yaxlit o'nliklar: A, B in [10..80], A%10==0, B%10==0, A+B <= 100
+            const tensA = MathGenerator.randomInt(1, 8);
+            const tensB = MathGenerator.randomInt(1, 10 - tensA);
+            a = tensA * 10;
+            b = tensB * 10;
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 5: { // 2 xonali + 1 xonali (xonasiz): 21 <= A <= 98, 1 <= B <= 8, (A%10) + B < 10
+            const tens = MathGenerator.randomInt(2, 9);
+            const ones = MathGenerator.randomInt(0, 8);
+            a = tens * 10 + ones;
+            b = MathGenerator.randomInt(1, 9 - ones);
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 6: { // 2 xonali + 1 xonali (xonadan o'tib): 12 <= A <= 89, 2 <= B <= 9, (A%10) + B >= 10
+            const tens = MathGenerator.randomInt(1, 8);
+            const ones = MathGenerator.randomInt(2, 9);
+            a = tens * 10 + ones;
+            b = MathGenerator.randomInt(10 - ones, 9);
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 7: { // 2 xonali + yaxlit o'nlik: 11 <= A <= 79 (A%10 != 0), B in [10..80], A + B < 100
+            const tensA = MathGenerator.randomInt(1, 7);
+            const onesA = MathGenerator.randomInt(1, 9);
+            a = tensA * 10 + onesA;
+            const maxTensB = 9 - tensA;
+            const tensB = MathGenerator.randomInt(1, maxTensB);
+            b = tensB * 10;
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 8: { // 2 xonali + 2 xonali (xonasiz): 11 <= A, B <= 88, (A%10)+(B%10) < 10, A + B < 100
+            const tensA = MathGenerator.randomInt(1, 7);
+            const tensB = MathGenerator.randomInt(1, 8 - tensA);
+            const onesA = MathGenerator.randomInt(1, 8);
+            const onesB = MathGenerator.randomInt(1, 9 - onesA);
+            a = tensA * 10 + onesA;
+            b = tensB * 10 + onesB;
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 9: { // 2 xonali + 2 xonali (xonadan o'tib): 12 <= A, B <= 79, (A%10)+(B%10) >= 10, A + B <= 100
+            let attempts = 0;
+            do {
+              a = MathGenerator.randomInt(12, 69);
+              b = MathGenerator.randomInt(12, 69);
+              attempts++;
+            } while (((a % 10) + (b % 10) < 10 || a + b > 100) && attempts < 100);
+            return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+          }
+          case 10: { // 3 ta sonni qo'shish: A + B + C <= 100 (A, B, C in [5..45])
+            a = MathGenerator.randomInt(5, 35);
+            b = MathGenerator.randomInt(5, 35);
+            const maxC = 100 - a - b;
+            c = MathGenerator.randomInt(5, Math.min(35, maxC));
+            return { formula: `${a} + ${b} + ${c} =`, answer: a + b + c, key: `${a}+${b}+${c}` };
+          }
+          default:
+            return { formula: `5 + 5 =`, answer: 10, key: `5+5` };
+        }
+      }
+
+      // 3.2 ➖ AYIRISH (10 ta Etap, A >= B doimo)
+      static generateSubtraction(stage) {
+        let a, b, c;
+        switch (stage) {
+          case 1: { // 10 ichida: 2 <= A <= 10, 1 <= B < A
+            a = MathGenerator.randomInt(2, 10);
+            b = MathGenerator.randomInt(1, a - 1);
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 2: { // 20 ichida xonasiz: 11 <= A <= 19, 1 <= B <= (A % 10)
+            const ones = MathGenerator.randomInt(1, 9);
+            a = 10 + ones;
+            b = MathGenerator.randomInt(1, ones);
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 3: { // 20 ichida xonadan o'tib: 11 <= A <= 18, (A % 10) < B <= 9
+            const ones = MathGenerator.randomInt(1, 8);
+            a = 10 + ones;
+            b = MathGenerator.randomInt(ones + 1, 9);
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 4: { // Yaxlit o'nliklar: A, B in [10, 20..100], A > B
+            const tensA = MathGenerator.randomInt(2, 10);
+            const tensB = MathGenerator.randomInt(1, tensA - 1);
+            a = tensA * 10;
+            b = tensB * 10;
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 5: { // 2 xonali - 1 xonali (xonasiz): 21 <= A <= 99, 1 <= B <= (A % 10)
+            const tens = MathGenerator.randomInt(2, 9);
+            const ones = MathGenerator.randomInt(1, 9);
+            a = tens * 10 + ones;
+            b = MathGenerator.randomInt(1, ones);
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 6: { // 2 xonali - 1 xonali (xonadan o'tib): 21 <= A <= 98, (A % 10) < B <= 9
+            const tens = MathGenerator.randomInt(2, 9);
+            const ones = MathGenerator.randomInt(0, 8);
+            a = tens * 10 + ones;
+            b = MathGenerator.randomInt(ones + 1, 9);
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 7: { // 2 xonali - yaxlit o'nlik: 21 <= A <= 99, B in [10, 20..80], A > B
+            const tensA = MathGenerator.randomInt(2, 9);
+            const onesA = MathGenerator.randomInt(1, 9);
+            a = tensA * 10 + onesA;
+            const tensB = MathGenerator.randomInt(1, tensA - 1);
+            b = tensB * 10;
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 8: { // 2 xonali - 2 xonali (xonasiz): 22 <= A <= 99, 11 <= B < A, (A % 10) >= (B % 10)
+            const tensA = MathGenerator.randomInt(2, 9);
+            const tensB = MathGenerator.randomInt(1, tensA - 1);
+            const onesA = MathGenerator.randomInt(1, 9);
+            const onesB = MathGenerator.randomInt(0, onesA);
+            a = tensA * 10 + onesA;
+            b = tensB * 10 + onesB;
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 9: { // 2 xonali - 2 xonali (xonadan o'tib): 31 <= A <= 98, 12 <= B < A, (A % 10) < (B % 10)
+            let attempts = 0;
+            do {
+              a = MathGenerator.randomInt(31, 98);
+              b = MathGenerator.randomInt(12, a - 1);
+              attempts++;
+            } while (((a % 10) >= (b % 10) || a <= b) && attempts < 100);
+            return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+          }
+          case 10: { // 100 dan ayirish yoki 3 ta son: A - B - C >= 0
+            if (Math.random() > 0.4) {
+              a = 100;
+              b = MathGenerator.randomInt(11, 89);
+              return { formula: `100 - ${b} =`, answer: 100 - b, key: `100-${b}` };
+            } else {
+              a = MathGenerator.randomInt(60, 100);
+              b = MathGenerator.randomInt(10, Math.floor(a / 2));
+              c = MathGenerator.randomInt(5, a - b - 5);
+              return { formula: `${a} - ${b} - ${c} =`, answer: a - b - c, key: `${a}-${b}-${c}` };
+            }
+          }
+          default:
+            return { formula: `10 - 4 =`, answer: 6, key: `10-4` };
+        }
+      }
+
+      // 3.3 ✖️ KO'PAYTIRISH (10 ta Etap)
+      static generateMultiplication(stage, qIndex) {
+        let k;
+        let m;
+        // Stages 1-4 and 6-9 focus on a specific number k
+        if (stage === 1) k = 2;
+        else if (stage === 2) k = 3;
+        else if (stage === 3) k = 4;
+        else if (stage === 4) k = 5;
+        else if (stage === 6) k = 6;
+        else if (stage === 7) k = 7;
+        else if (stage === 8) k = 8;
+        else if (stage === 9) k = 9;
+
+        if (stage === 5) { // Oraliq nazorat: 2, 3, 4, 5 karra aralash
+          k = [2, 3, 4, 5][MathGenerator.randomInt(0, 3)];
+          m = MathGenerator.randomInt(1, 10);
+        } else if (stage === 10) { // Super Final: 2..9 + 0 va 10
+          k = MathGenerator.randomInt(2, 9);
+          const pool = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+          m = pool[MathGenerator.randomInt(0, pool.length - 1)];
+        } else {
+          m = MathGenerator.randomInt(1, 10);
+        }
+
+        // Commutative property: randomly alternate k * m or m * k
+        const flip = Math.random() > 0.5;
+        const op1 = flip ? k : m;
+        const op2 = flip ? m : k;
+        return {
+          formula: `${op1} × ${op2} =`,
+          answer: op1 * op2,
+          key: `${op1}*${op2}`
+        };
+      }
+
+      // 3.4 ➗ BO'LISH (10 ta Etap, C ÷ A = B, doimo qoldiqsiz)
+      static generateDivision(stage, qIndex) {
+        let a;
+        if (stage === 1) a = 2;
+        else if (stage === 2) a = 3;
+        else if (stage === 3) a = 4;
+        else if (stage === 4) a = 5;
+        else if (stage === 6) a = 6;
+        else if (stage === 7) a = 7;
+        else if (stage === 8) a = 8;
+        else if (stage === 9) a = 9;
+
+        let b;
+        if (stage === 5) { // Oraliq nazorat: 2, 3, 4, 5 ga bo'lish aralash
+          a = [2, 3, 4, 5][MathGenerator.randomInt(0, 3)];
+          b = MathGenerator.randomInt(1, 10);
+        } else if (stage === 10) { // Super Final: 2..10 ga qoldiqsiz bo'lish
+          a = MathGenerator.randomInt(2, 10);
+          b = MathGenerator.randomInt(1, 10);
+        } else {
+          b = MathGenerator.randomInt(1, 10);
+        }
+
+        const c = a * b;
+        return {
+          formula: `${c} ÷ ${a} =`,
+          answer: b,
+          key: `${c}/${a}`
+        };
+      }
+    }
+
+    /* ==========================================================================
+       5. MOTIVATIONAL QUOTES (Splash screen, anti-repeat)
+       ========================================================================== */
+    const MOTIVATIONAL_QUOTES = [
+      "Bugun yangi marralarni zabt etamiz, Savarbek! 🚀",
+      "Har bir yechilgan misol seni yanada kuchli qiladi! 💪",
+      "Matematika — aqlli bolalarning sevimli o'yini! 🧠",
+      "Savarbek, bugun 100% natija ko'rsatishga tayyormisan? 🏆",
+      "Xatolar — bu yangi narsalarni o'rganish imkoniyati! 🌟",
+      "Katta g'alabalar kichik qadamlardan boshlanadi! 🦁",
+      "Sen har qanday qiyin misolni oson yechasan! ✨",
+      "Qani, bugun yana bir rekord o'rnatamiz! 🎯",
+      "Bilim — eng katta qudrat, olg'a Savarbek! 📚",
+      "Miyangni charxla va tezroq hisobla! ⚡",
+      "2-sinf a'lochisi har doim birinchi bo'ladi! 🥇",
+      "Bugungi mashq seni chempionga aylantiradi! ⚽",
+      "Sabr va mehnat bilan barcha cho'qqilar zabt etiladi! 🏔️",
+      "Har bir to'g'ri javob — bu yangi yulduzcha! ⭐",
+      "Olg'a, Savarbek! Sen albatta uddalaysan! 🎈",
+      "Zukko va epchil Savarbek bilan matematika juda qiziq! 🧩"
+    ];
+
+    /* ==========================================================================
+       6. MAIN APPLICATION CONTROLLER (State Machine & Views)
+       ========================================================================== */
+    class AppController {
+      constructor() {
+        this.confetti = new ConfettiEngine('confetti-canvas');
+        this.currentScreen = 'screen-splash';
+        this.selectedOperation = 'addition';
+        this.selectedStageNumber = 1;
+
+        // Quiz session state
+        this.quizQuestions = [];
+        this.quizIndex = 0;
+        this.quizCorrectCount = 0;
+        this.quizMistakes = [];
+        this.currentInput = '';
+        this.isQuestionLocked = false;
+
+        // Parental challenge
+        this.parentChallengeAnswer = 500;
+
+        // Splash screen state
+        this.splashRemainingMs = 5000;
+        this.splashInterval = null;
+        this.splashLastTimestamp = null;
+
+        this.initDOM();
+        this.initEvents();
+        this.startSplashTimer();
+      }
+
+      initDOM() {
+        this.screens = {
+          splash: document.getElementById('screen-splash'),
+          home: document.getElementById('screen-home'),
+          operations: document.getElementById('screen-operations'),
+          stages: document.getElementById('screen-stages'),
+          quiz: document.getElementById('screen-quiz'),
+          result: document.getElementById('screen-result')
+        };
+      }
+
+      navigateTo(screenId) {
+        sound.playTap();
+        Object.keys(this.screens).forEach(key => {
+          this.screens[key].classList.remove('active');
+        });
+        const target = document.getElementById(screenId);
+        if (target) {
+          target.classList.add('active');
+          target.scrollTop = 0;
+          this.currentScreen = screenId;
+        }
+
+        // Screen-specific render hooks
+        if (screenId === 'screen-home') {
+          this.renderHomeScreen();
+        } else if (screenId === 'screen-operations') {
+          this.renderOperationsScreen();
+        } else if (screenId === 'screen-stages') {
+          this.renderStagesScreen();
+        }
+      }
+
+      showToast(text, icon = '🚀') {
+        const toast = document.getElementById('toast-notification');
+        document.getElementById('toast-icon').textContent = icon;
+        document.getElementById('toast-text').textContent = text;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2600);
+      }
+
+      /* ---------- 2.1 SPLASH SCREEN LOGIC ---------- */
+      startSplashTimer() {
+        // 1. Anti-repeat quote selection
+        const lastIdx = db.data.lastQuoteIndex;
+        let newIdx;
+        do {
+          newIdx = Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length);
+        } while (newIdx === lastIdx && MOTIVATIONAL_QUOTES.length > 1);
+
+        db.data.lastQuoteIndex = newIdx;
+        db.save();
+        document.getElementById('splash-quote-text').textContent = `"${MOTIVATIONAL_QUOTES[newIdx]}"`;
+
+        // 2. Tab visibility tracking & smooth 5000ms countdown
+        this.splashRemainingMs = 5000;
+        const progressBar = document.getElementById('splash-progress-bar');
+        const countdownLabel = document.getElementById('splash-countdown');
+
+        const step = () => {
+          if (document.visibilityState === 'hidden') {
+            this.splashLastTimestamp = null;
+            return;
+          }
+
+          const now = Date.now();
+          if (!this.splashLastTimestamp) {
+            this.splashLastTimestamp = now;
+          }
+          const delta = now - this.splashLastTimestamp;
+          this.splashLastTimestamp = now;
+
+          this.splashRemainingMs -= delta;
+          if (this.splashRemainingMs < 0) this.splashRemainingMs = 0;
+
+          const progressPercent = ((5000 - this.splashRemainingMs) / 5000) * 100;
+          progressBar.style.width = `${progressPercent}%`;
+
+          const secondsLeft = Math.ceil(this.splashRemainingMs / 1000);
+          countdownLabel.textContent = `${secondsLeft} soniya`;
+
+          if (this.splashRemainingMs <= 0) {
+            clearInterval(this.splashInterval);
+            this.navigateTo('screen-home');
+          }
+        };
+
+        this.splashInterval = setInterval(step, 40);
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') {
+            this.splashLastTimestamp = Date.now();
+          }
+        });
+      }
+
+      /* ---------- 2.2 HOME SCREEN RENDER ---------- */
+      renderHomeScreen() {
+        // Sound toggle icon
+        document.getElementById('sound-icon').textContent = db.data.soundEnabled ? '🔊' : '🔇';
+
+        // Total stars
+        const totalStars = db.getTotalStars();
+        document.getElementById('home-total-stars').textContent = `${totalStars} / 120`;
+
+        // Overall Math Percentage
+        const overallMath = db.getOverallMathPercentage();
+        document.getElementById('home-math-percentage').textContent = `${overallMath}%`;
+        document.getElementById('home-math-progress-fill').style.width = `${overallMath}%`;
+
+        // Total questions solved
+        document.getElementById('home-total-solved').textContent = `${db.data.totalQuestionsSolved} ta`;
+      }
+
+      /* ---------- 2.3 OPERATIONS SCREEN RENDER ---------- */
+      renderOperationsScreen() {
+        const ops = ['addition', 'subtraction', 'multiplication', 'division'];
+        ops.forEach(op => {
+          const completed = db.getCompletedStagesCount(op);
+          const avgPercent = db.getOperationAveragePercentage(op);
+          document.getElementById(`op-stages-${op}`).textContent = `${completed} / 10 etap`;
+          document.getElementById(`op-percent-${op}`).textContent = `${avgPercent}%`;
+          document.getElementById(`op-fill-${op}`).style.width = `${avgPercent}%`;
+        });
+      }
+
+      /* ---------- 2.4 STAGES SCREEN RENDER (5 States + Locking) ---------- */
+      renderStagesScreen() {
+        const opTitles = {
+          addition: '➕ Qo\'shish',
+          subtraction: '➖ Ayirish',
+          multiplication: '✖️ Ko\'paytirish',
+          division: '➗ Bo\'lish'
+        };
+        document.getElementById('stages-screen-title').textContent = opTitles[this.selectedOperation];
+
+        let opStars = 0;
+        const stagesList = db.data.math[this.selectedOperation];
+        stagesList.forEach(s => {
+          if (s.maxPercentage === 100) opStars += 3;
+          else if (s.maxPercentage >= 80) opStars += 2;
+          else if (s.maxPercentage >= 50) opStars += 1;
+        });
+        document.getElementById('stages-summary-stars').textContent = `⭐ ${opStars} / 30`;
+
+        const container = document.getElementById('stages-list-container');
+        container.innerHTML = '';
+
+        stagesList.forEach(stage => {
+          const isUnlocked = db.isStageUnlocked(this.selectedOperation, stage.stageNumber);
+          const card = document.createElement('div');
+          card.className = 'stage-card';
+
+          // Determine Micro-State
+          let stateClass = 'state-new';
+          let starsIcon = '⚪⚪⚪';
+          let subtitleText = `Rekord: 0% (Yangi)`;
+          let badgeText = 'Yangi';
+
+          if (!isUnlocked) {
+            card.classList.add('locked');
+            starsIcon = '🔒 Qulflangan';
+            subtitleText = 'Oldingi etapda kamida 50% to\'pla';
+            badgeText = 'Qulf';
+          } else if (stage.attempts === 0) {
+            stateClass = 'state-new';
+            starsIcon = '⚪⚪⚪';
+            subtitleText = 'Rekord: 0% (Yangi)';
+            badgeText = 'Boshlash';
+          } else if (stage.maxPercentage <= 40) {
+            stateClass = 'state-hard';
+            starsIcon = '🔴 Yana harakat qil!';
+            subtitleText = `Rekord: ${stage.maxPercentage}% | Urinish: ${stage.attempts} ta`;
+            badgeText = 'Qiyin';
+          } else if (stage.maxPercentage <= 70) {
+            stateClass = 'state-medium';
+            starsIcon = '⭐⚪⚪';
+            subtitleText = `Rekord: ${stage.maxPercentage}% | Urinish: ${stage.attempts} ta`;
+            badgeText = "O'rtacha";
+          } else if (stage.maxPercentage <= 90) {
+            stateClass = 'state-good';
+            starsIcon = '⭐⭐⚪';
+            subtitleText = `Rekord: ${stage.maxPercentage}% | Urinish: ${stage.attempts} ta`;
+            badgeText = 'Yaxshi';
+          } else if (stage.maxPercentage === 100) {
+            stateClass = 'state-perfect';
+            starsIcon = '⭐⭐⭐';
+            subtitleText = `Rekord: 100% (Mukammal!)`;
+            badgeText = '100% 🏆';
+          }
+
+          if (isUnlocked) {
+            card.classList.add(stateClass);
+          }
+
+          card.innerHTML = `
+            <div class="stage-left">
+              <div class="stage-number-box">${stage.stageNumber}</div>
+              <div class="stage-info-text">
+                <div class="stage-title">
+                  ${stage.stageNumber}-Etap ${stage.maxPercentage === 100 ? '🏆' : ''}
+                </div>
+                <div class="stage-subtitle">${subtitleText}</div>
+              </div>
+            </div>
+            <div class="stage-right">
+              <div class="stage-stars">${starsIcon}</div>
+              <div class="stage-badge">${badgeText}</div>
+            </div>
+          `;
+
+          card.addEventListener('click', () => {
+            if (!isUnlocked) {
+              sound.playLock();
+              card.classList.add('shake');
+              setTimeout(() => card.classList.remove('shake'), 450);
+              this.showToast("Avval oldingi etapda kamida 50% to'pla! 🔒", "⚠️");
+            } else {
+              this.startQuizGame(stage.stageNumber);
+            }
+          });
+
+          container.appendChild(card);
+        });
+      }
+
+      /* ---------- 2.5 QUIZ GAME FLOW ---------- */
+      startQuizGame(stageNumber) {
+        this.selectedStageNumber = stageNumber;
+        this.quizQuestions = MathGenerator.generateStageQuestions(this.selectedOperation, stageNumber);
+        this.quizIndex = 0;
+        this.quizCorrectCount = 0;
+        this.quizMistakes = [];
+        this.currentInput = '';
+        this.isQuestionLocked = false;
+
+        // Render 10 Dots
+        const dotsContainer = document.getElementById('quiz-progress-dots');
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < 10; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'progress-dot';
+          dot.id = `quiz-dot-${i}`;
+          dotsContainer.appendChild(dot);
+        }
+
+        this.navigateTo('screen-quiz');
+        this.renderCurrentQuestion();
+      }
+
+      renderCurrentQuestion() {
+        const q = this.quizQuestions[this.quizIndex];
+        this.currentInput = '';
+        this.isQuestionLocked = false;
+
+        // Header info
+        document.getElementById('quiz-question-counter').textContent = 
+          `${this.selectedStageNumber}-Etap | Misol: ${this.quizIndex + 1} / 10`;
+
+        // Update Dots
+        for (let i = 0; i < 10; i++) {
+          const dot = document.getElementById(`quiz-dot-${i}`);
+          dot.classList.remove('current');
+          if (i === this.quizIndex) {
+            dot.classList.add('current');
+          }
+        }
+
+        // Question card reset
+        const card = document.getElementById('quiz-question-card');
+        card.classList.remove('correct-anim', 'wrong-anim');
+        document.getElementById('quiz-operand-text').textContent = q.formula;
+        const inputBox = document.getElementById('quiz-input-box');
+        inputBox.textContent = '?';
+        inputBox.className = 'input-box-display';
+
+        // Feedback reset
+        const feedback = document.getElementById('quiz-feedback-box');
+        feedback.textContent = '';
+        feedback.className = 'feedback-box';
+        document.getElementById('btn-skip-wrong').style.display = 'none';
+
+        // Numpad unlock
+        document.getElementById('quiz-numpad').classList.remove('locked');
+        this.updateSubmitButton();
+      }
+
+      handleNumpadInput(key) {
+        if (this.isQuestionLocked) return;
+
+        sound.playTap();
+
+        if (key === 'del') {
+          if (this.currentInput.length > 0) {
+            this.currentInput = this.currentInput.slice(0, -1);
+          }
+        } else if (key === 'submit') {
+          if (this.currentInput.length > 0) {
+            this.submitAnswer();
+          }
+        } else {
+          // Max 3 digits (2nd grade arithmetic <= 100)
+          if (this.currentInput.length >= 3) return;
+
+          // Leading zero handling: 0 then 5 becomes 5
+          if (this.currentInput === '0') {
+            this.currentInput = key;
+          } else {
+            this.currentInput += key;
+          }
+        }
+
+        // Update display
+        const box = document.getElementById('quiz-input-box');
+        if (this.currentInput.length > 0) {
+          box.textContent = this.currentInput;
+          box.classList.add('filled');
+        } else {
+          box.textContent = '?';
+          box.classList.remove('filled');
+        }
+
+        this.updateSubmitButton();
+      }
+
+      updateSubmitButton() {
+        const btn = document.getElementById('btn-quiz-submit');
+        if (this.currentInput.length > 0 && !this.isQuestionLocked) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      }
+
+      submitAnswer() {
+        if (this.isQuestionLocked || this.currentInput.length === 0) return;
+        this.isQuestionLocked = true;
+        document.getElementById('quiz-numpad').classList.add('locked');
+
+        const q = this.quizQuestions[this.quizIndex];
+        const userAns = parseInt(this.currentInput, 10);
+        const isCorrect = userAns === q.answer;
+
+        const card = document.getElementById('quiz-question-card');
+        const box = document.getElementById('quiz-input-box');
+        const feedback = document.getElementById('quiz-feedback-box');
+        const dot = document.getElementById(`quiz-dot-${this.quizIndex}`);
+
+        if (isCorrect) {
+          /* --- ANSWER_CORRECT (0.9s anim) --- */
+          sound.playCorrect();
+          this.quizCorrectCount++;
+          card.classList.add('correct-anim');
+          box.className = 'input-box-display correct';
+          feedback.className = 'feedback-box correct';
+          feedback.textContent = "🎉 Barakalla, to'g'ri!";
+          dot.className = 'progress-dot correct';
+          dot.textContent = '✓';
+
+          setTimeout(() => {
+            this.advanceToNextQuestion();
+          }, 900);
+        } else {
+          /* --- ANSWER_WRONG (Shake, Red, Explanation, Skip option) --- */
+          sound.playWrong();
+          this.quizMistakes.push({
+            formula: q.formula,
+            userAns: userAns,
+            correctAns: q.answer
+          });
+
+          card.classList.add('wrong-anim', 'shake');
+          setTimeout(() => card.classList.remove('shake'), 450);
+
+          box.className = 'input-box-display wrong';
+          feedback.className = 'feedback-box wrong';
+          feedback.textContent = `❌ Xato! Sen ${userAns} yozding. To'g'ri javob: ${q.answer}`;
+          dot.className = 'progress-dot wrong';
+          dot.textContent = '✕';
+
+          // Show skip button so Savarbek can advance right away if ready
+          const skipBtn = document.getElementById('btn-skip-wrong');
+          skipBtn.style.display = 'inline-flex';
+
+          this.wrongTimer = setTimeout(() => {
+            this.advanceToNextQuestion();
+          }, 2000);
+        }
+      }
+
+      advanceToNextQuestion() {
+        if (this.wrongTimer) {
+          clearTimeout(this.wrongTimer);
+          this.wrongTimer = null;
+        }
+
+        this.quizIndex++;
+        if (this.quizIndex < 10) {
+          this.renderCurrentQuestion();
+        } else {
+          this.finishQuizSession();
+        }
+      }
+
+      /* ---------- 2.6 RESULT SCREEN RENDER ---------- */
+      finishQuizSession() {
+        const currentPercentage = this.quizCorrectCount * 10;
+        const res = db.saveStageResult(this.selectedOperation, this.selectedStageNumber, currentPercentage);
+
+        const badgeIcon = document.getElementById('result-badge-icon');
+        const headline = document.getElementById('result-headline');
+        const scorePercent = document.getElementById('result-score-percent');
+        const comparisonPill = document.getElementById('result-comparison-text');
+        const starsDisplay = document.getElementById('result-stars-display');
+        const summaryLine = document.getElementById('result-summary-line');
+
+        scorePercent.textContent = `${currentPercentage}%`;
+        summaryLine.textContent = `10 ta misoldan ${this.quizCorrectCount} tasini to'g'ri yechding!`;
+
+        // Stars display
+        let starsStr = '⚪⚪⚪';
+        if (currentPercentage === 100) starsStr = '⭐⭐⭐';
+        else if (currentPercentage >= 80) starsStr = '⭐⭐⚪';
+        else if (currentPercentage >= 50) starsStr = '⭐⚪⚪';
+        starsDisplay.textContent = starsStr;
+
+        // 3 Scenarios
+        if (res.isPerfect) {
+          // Scenario C: 100% Mukammal natija
+          badgeIcon.textContent = '🏆';
+          headline.textContent = "BARAKALLA, SAVARBEK!";
+          comparisonPill.className = 'result-comparison-pill new-record';
+          comparisonPill.textContent = "🌟 100% Mukammal zabt etding!";
+          sound.playFanfare();
+          this.confetti.fire(120);
+        } else if (res.isNewRecord) {
+          // Scenario A: Yangi rekord
+          badgeIcon.textContent = '🥇';
+          headline.textContent = "YANGI REKORD!";
+          comparisonPill.className = 'result-comparison-pill new-record';
+          comparisonPill.textContent = `Oldingi eng yuqori natijang: ${res.oldMax}% edi`;
+          sound.playFanfare();
+          this.confetti.fire(90);
+        } else {
+          // Scenario B: Oldingi rekorddan past yoki teng
+          badgeIcon.textContent = currentPercentage >= 50 ? '👍' : '💪';
+          headline.textContent = currentPercentage >= 50 ? "Yaxshi Natija!" : "Yana Harakat Qil!";
+          comparisonPill.className = 'result-comparison-pill kept-record';
+          comparisonPill.textContent = `🛡️ Eng yuqori rekording: ${res.oldMax}% (Saqlandi)`;
+        }
+
+        // Mistakes Review Block
+        const mistakesBlock = document.getElementById('result-mistakes-block');
+        const mistakesList = document.getElementById('result-mistakes-list');
+        mistakesList.innerHTML = '';
+
+        if (this.quizMistakes.length > 0) {
+          mistakesBlock.style.display = 'flex';
+          this.quizMistakes.forEach((m, idx) => {
+            const item = document.createElement('div');
+            item.className = 'mistake-item';
+            item.innerHTML = `
+              <span>${idx + 1}) <b>${m.formula} ${m.correctAns}</b></span>
+              <span class="wrong-ans">Sening javobing: ${m.userAns} ❌</span>
+            `;
+            mistakesList.appendChild(item);
+          });
+        } else {
+          mistakesBlock.style.display = 'none';
+        }
+
+        // Next stage button logic
+        const nextBtn = document.getElementById('btn-next-stage');
+        if (this.selectedStageNumber < 10 && currentPercentage >= 50) {
+          nextBtn.style.display = 'flex';
+          nextBtn.innerHTML = `<span>➡️ ${this.selectedStageNumber + 1}-Etapga o'tish</span>`;
+        } else {
+          nextBtn.style.display = 'none';
+        }
+
+        this.navigateTo('screen-result');
+      }
+
+      /* ---------- EVENTS & BUTTON LISTENERS ---------- */
+      initEvents() {
+        // Sound toggle
+        document.getElementById('btn-toggle-sound').addEventListener('click', () => {
+          db.data.soundEnabled = !db.data.soundEnabled;
+          sound.enabled = db.data.soundEnabled;
+          db.save();
+          document.getElementById('sound-icon').textContent = sound.enabled ? '🔊' : '🔇';
+          if (sound.enabled) sound.playTap();
+        });
+
+        // Home screen cards
+        document.getElementById('card-open-math').addEventListener('click', () => {
+          this.navigateTo('screen-operations');
+        });
+
+        document.getElementById('card-open-english').addEventListener('click', () => {
+          sound.playTap();
+          document.getElementById('modal-english').classList.add('active');
+        });
+
+        document.getElementById('btn-close-english-modal').addEventListener('click', () => {
+          sound.playTap();
+          document.getElementById('modal-english').classList.remove('active');
+        });
+
+        // Navigation back buttons
+        document.getElementById('btn-back-to-home').addEventListener('click', () => {
+          this.navigateTo('screen-home');
+        });
+
+        document.getElementById('btn-back-to-ops').addEventListener('click', () => {
+          this.navigateTo('screen-operations');
+        });
+
+        // Operation Card clicks
+        document.querySelectorAll('.op-card').forEach(card => {
+          card.addEventListener('click', () => {
+            this.selectedOperation = card.dataset.op;
+            this.navigateTo('screen-stages');
+          });
+        });
+
+        // Numpad key clicks
+        document.getElementById('quiz-numpad').addEventListener('click', (e) => {
+          const btn = e.target.closest('.numpad-btn');
+          if (btn) {
+            const key = btn.dataset.key;
+            this.handleNumpadInput(key);
+          }
+        });
+
+        // Physical Keyboard listener for PC/laptop users
+        window.addEventListener('keydown', (e) => {
+          if (this.currentScreen !== 'screen-quiz') return;
+          if (e.key >= '0' && e.key <= '9') {
+            this.handleNumpadInput(e.key);
+          } else if (e.key === 'Backspace') {
+            this.handleNumpadInput('del');
+          } else if (e.key === 'Enter') {
+            this.handleNumpadInput('submit');
+          }
+        });
+
+        // Skip wrong answer button
+        document.getElementById('btn-skip-wrong').addEventListener('click', () => {
+          this.advanceToNextQuestion();
+        });
+
+        // Quiz exit confirmation modal
+        document.getElementById('btn-exit-quiz').addEventListener('click', () => {
+          sound.playTap();
+          document.getElementById('modal-exit-confirm').classList.add('active');
+        });
+
+        document.getElementById('btn-exit-cancel').addEventListener('click', () => {
+          sound.playTap();
+          document.getElementById('modal-exit-confirm').classList.remove('active');
+        });
+
+        document.getElementById('btn-exit-confirm').addEventListener('click', () => {
+          sound.playTap();
+          document.getElementById('modal-exit-confirm').classList.remove('active');
+          this.navigateTo('screen-stages');
+        });
+
+        // Result screen action buttons
+        document.getElementById('btn-retry-stage').addEventListener('click', () => {
+          this.startQuizGame(this.selectedStageNumber);
+        });
+
+        document.getElementById('btn-next-stage').addEventListener('click', () => {
+          if (this.selectedStageNumber < 10) {
+            this.startQuizGame(this.selectedStageNumber + 1);
+          }
+        });
+
+        document.getElementById('btn-back-stages-from-result').addEventListener('click', () => {
+          this.navigateTo('screen-stages');
+        });
+
+        // Settings / Parental gate modal
+        document.getElementById('btn-open-settings').addEventListener('click', () => {
+          sound.playTap();
+          // Generate new adult math challenge
+          const challenges = [
+            { q: "125 × 4 = ?", a: 500 },
+            { q: "250 + 350 = ?", a: 600 },
+            { q: "720 ÷ 8 = ?", a: 90 },
+            { q: "450 - 180 = ?", a: 270 },
+            { q: "150 × 3 = ?", a: 450 }
+          ];
+          const chosen = challenges[Math.floor(Math.random() * challenges.length)];
+          this.parentChallengeAnswer = chosen.a;
+          document.getElementById('parent-math-question').textContent = chosen.q;
+          document.getElementById('parent-math-answer').value = '';
+          document.getElementById('modal-settings').classList.add('active');
+        });
+
+        document.getElementById('btn-close-settings').addEventListener('click', () => {
+          sound.playTap();
+          document.getElementById('modal-settings').classList.remove('active');
+        });
+
+        document.getElementById('btn-confirm-reset-db').addEventListener('click', () => {
+          const inputVal = parseInt(document.getElementById('parent-math-answer').value, 10);
+          if (inputVal === this.parentChallengeAnswer) {
+            db.resetAll();
+            document.getElementById('modal-settings').classList.remove('active');
+            this.showToast("Barcha natijalar muvaffaqiyatli tozalandi! 🧹", "✅");
+            this.renderHomeScreen();
+          } else {
+            sound.playWrong();
+            this.showToast("Noto'g'ri javob! Natijalar xavfsiz saqlandi 🛡️", "❌");
+          }
+        });
+      }
+    }
+
+    // Launch App when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      window.app = new AppController();
+    });
+  </script>
+</body>
+</html>

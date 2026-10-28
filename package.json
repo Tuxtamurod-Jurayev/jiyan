@@ -1,0 +1,21 @@
+{
+  "name": "savarbek-edu",
+  "version": "1.0.0",
+  "description": "Savarbek Edu — 2-sinf o'quvchisi Savarbek uchun interaktiv matematika mobil veb-ilovasi",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static build ready'",
+    "start": "npx serve .",
+    "test": "node test_math.js"
+  },
+  "keywords": [
+    "savarbek",
+    "edu",
+    "math",
+    "kids",
+    "game",
+    "education"
+  ],
+  "author": "Google Deepmind Antigravity Pair Programmer",
+  "license": "MIT"
+}
