@@ -353,13 +353,13 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
 
         return selected.map(item => {
           if (category === 'vocabulary') {
-            const wrongUz = stageData.items.filter(x => x.en !== item.en).map(x => x.uz);
+            const wrongUz = Array.from(new Set(stageData.items.filter(x => x.en !== item.en).map(x => x.uz)));
             const chosenDistractorsUz = EnglishGenerator.shuffle(wrongUz).slice(0, 3);
-            const optionsUz = EnglishGenerator.shuffle([item.uz, ...chosenDistractorsUz]);
+            const optionsUz = EnglishGenerator.shuffle(Array.from(new Set([item.uz, ...chosenDistractorsUz])));
 
-            const wrongRu = stageData.items.filter(x => x.en !== item.en).map(x => x.ru || x.uz);
+            const wrongRu = Array.from(new Set(stageData.items.filter(x => x.en !== item.en).map(x => x.ru || x.uz)));
             const chosenDistractorsRu = EnglishGenerator.shuffle(wrongRu).slice(0, 3);
-            const optionsRu = EnglishGenerator.shuffle([item.ru || item.uz, ...chosenDistractorsRu]);
+            const optionsRu = EnglishGenerator.shuffle(Array.from(new Set([item.ru || item.uz, ...chosenDistractorsRu])));
 
             return {
               type: 'vocabulary',
@@ -374,15 +374,15 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
               speakText: item.en
             };
           } else if (category === 'listening') {
-            const wrongUz = stageData.items.filter(x => x.audio !== item.audio).map(x => \`\${x.emoji} \${x.uz}\`);
+            const wrongUz = Array.from(new Set(stageData.items.filter(x => x.audio !== item.audio).map(x => \`\${x.emoji} \${x.uz}\`)));
             const chosenDistractorsUz = EnglishGenerator.shuffle(wrongUz).slice(0, 3);
             const correctTextUz = \`\${item.emoji} \${item.uz}\`;
-            const optionsUz = EnglishGenerator.shuffle([correctTextUz, ...chosenDistractorsUz]);
+            const optionsUz = EnglishGenerator.shuffle(Array.from(new Set([correctTextUz, ...chosenDistractorsUz])));
 
-            const wrongRu = stageData.items.filter(x => x.audio !== item.audio).map(x => \`\${x.emoji} \${x.ru || x.uz}\`);
+            const wrongRu = Array.from(new Set(stageData.items.filter(x => x.audio !== item.audio).map(x => \`\${x.emoji} \${x.ru || x.uz}\`)));
             const chosenDistractorsRu = EnglishGenerator.shuffle(wrongRu).slice(0, 3);
             const correctTextRu = \`\${item.emoji} \${item.ru || item.uz}\`;
-            const optionsRu = EnglishGenerator.shuffle([correctTextRu, ...chosenDistractorsRu]);
+            const optionsRu = EnglishGenerator.shuffle(Array.from(new Set([correctTextRu, ...chosenDistractorsRu])));
 
             return {
               type: 'listening',
@@ -632,7 +632,8 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
         document.getElementById('home-eng-progress-fill').style.width = \`\${engPct}%\`;
 
         const stars = db.getTotalStars();
-        document.getElementById('home-total-stars').textContent = \`\${stars} / 240\`;
+        const totalStarsEl = document.getElementById('home-total-stars');
+        if (totalStarsEl) totalStarsEl.textContent = \`\${stars} / 240\`;
       }
 
       renderMathOperations() {
@@ -752,9 +753,23 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
           if (i === this.mathIndex) dot.classList.add('current');
         }
 
-        document.getElementById('math-num1').textContent = q.num1;
-        document.getElementById('math-num2').textContent = q.num2;
-        document.getElementById('math-op-sign').textContent = q.sign;
+        // Display full expression (e.g. "16 ÷ 2", "4 × 3", "12 + 5")
+        let expressionText = '';
+        if (q.formula) {
+          expressionText = q.formula.replace(/=\s*$/, '').trim();
+        } else if (q.num1 !== undefined && q.num2 !== undefined) {
+          expressionText = \`\${q.num1} \${q.sign || '+'} \${q.num2}\`;
+        }
+
+        const exprEl = document.getElementById('math-expression-display');
+        if (exprEl) exprEl.textContent = expressionText;
+
+        const num1El = document.getElementById('math-num1');
+        if (num1El) num1El.textContent = q.num1 !== undefined ? q.num1 : '';
+        const num2El = document.getElementById('math-num2');
+        if (num2El) num2El.textContent = q.num2 !== undefined ? q.num2 : '';
+        const opSignEl = document.getElementById('math-op-sign');
+        if (opSignEl) opSignEl.textContent = q.sign !== undefined ? q.sign : '';
 
         const displayBox = document.getElementById('math-answer-display');
         displayBox.textContent = '?';
@@ -835,11 +850,13 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
           card.classList.add('wrong-anim');
           displayBox.classList.add('wrong');
           dot.classList.add('wrong');
-          feedback.textContent = \`\${this.t('wrongAlert')} \${q.answer}\`;
+
+          const formulaClean = q.formula ? q.formula.replace(/=\s*$/, '').trim() : \`\${q.num1} \${q.sign || '+'} \${q.num2}\`;
+          feedback.textContent = \`\${this.t('wrongAlert')} \${formulaClean} = \${q.answer}\`;
           feedback.classList.add('wrong');
 
           document.getElementById('btn-skip-wrong').style.display = 'inline-flex';
-          this.wrongTimer = setTimeout(() => this.advanceMathQuestion(), 2200);
+          this.wrongTimer = setTimeout(() => this.advanceMathQuestion(), 2400);
         }
       }
 
@@ -1522,6 +1539,16 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
             } else if (e.key === ' ' || e.key === 'r' || e.key === 'R') {
               const playBtn = document.getElementById('btn-eng-audio-main') || document.getElementById('btn-speak-word');
               if (playBtn) playBtn.click();
+            } else if (/^[a-zA-Z]$/.test(e.key)) {
+              const targetLetter = e.key.toUpperCase();
+              const availableTiles = Array.from(document.querySelectorAll('#spelling-tiles-row .letter-tile:not(.used)'));
+              const matchedTile = availableTiles.find(t => t.textContent.trim().toUpperCase() === targetLetter);
+              if (matchedTile) matchedTile.click();
+            } else if (e.key === 'Backspace') {
+              const filledSlots = Array.from(document.querySelectorAll('.spelling-slot.filled'));
+              if (filledSlots.length > 0) {
+                filledSlots[filledSlots.length - 1].click();
+              }
             }
           }
         });

@@ -33,10 +33,6 @@ function getHTML(ICONS) {
             <span class="lang-flag" id="lang-btn-flag">🇺🇿</span>
             <span class="lang-code" id="lang-btn-code">UZ</span>
           </button>
-          <div class="stars-badge">
-            ${ICONS.flaticonStar}
-            <span id="home-total-stars">0 / 240</span>
-          </div>
           <button class="icon-btn" id="btn-toggle-sound" title="Ovozni o'chirish/yoqish">
             <span id="sound-icon">${ICONS.soundOn}</span>
           </button>
@@ -206,11 +202,12 @@ function getHTML(ICONS) {
       <div class="quiz-center-area">
         <div class="question-card" id="quiz-question-card">
           <div class="math-formula">
-            <span id="math-num1">12</span>
-            <span id="math-op-sign" style="color: var(--primary);">+</span>
-            <span id="math-num2">5</span>
-            <span>=</span>
+            <span id="math-expression-display">12 + 5</span>
+            <span class="math-equals" style="color: var(--primary); margin: 0 4px;">=</span>
             <div class="input-box-display" id="math-answer-display">?</div>
+            <span id="math-num1" style="display:none;"></span>
+            <span id="math-op-sign" style="display:none;"></span>
+            <span id="math-num2" style="display:none;"></span>
           </div>
           <div class="feedback-box" id="quiz-feedback-box"></div>
           <button class="btn-skip-wrong" id="btn-skip-wrong" style="display: none;">

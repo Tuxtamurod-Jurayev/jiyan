@@ -18,41 +18,41 @@ class MathGenerator {
         const sum = MathGenerator.randomInt(2, 10);
         a = MathGenerator.randomInt(1, sum - 1);
         b = sum - a;
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 2: {
         const ones = MathGenerator.randomInt(0, 8);
         a = 10 + ones;
         b = MathGenerator.randomInt(1, 9 - ones);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 3: {
         do {
           a = MathGenerator.randomInt(3, 9);
           b = MathGenerator.randomInt(3, 9);
         } while (a + b <= 10 || a + b > 18);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 4: {
         const tensA = MathGenerator.randomInt(1, 8);
         const tensB = MathGenerator.randomInt(1, 10 - tensA);
         a = tensA * 10;
         b = tensB * 10;
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 5: {
         const tens = MathGenerator.randomInt(2, 9);
         const ones = MathGenerator.randomInt(0, 8);
         a = tens * 10 + ones;
         b = MathGenerator.randomInt(1, 9 - ones);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 6: {
         const tens = MathGenerator.randomInt(1, 8);
         const ones = MathGenerator.randomInt(2, 9);
         a = tens * 10 + ones;
         b = MathGenerator.randomInt(10 - ones, 9);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 7: {
         const tensA = MathGenerator.randomInt(1, 7);
@@ -61,7 +61,7 @@ class MathGenerator {
         const maxTensB = 9 - tensA;
         const tensB = MathGenerator.randomInt(1, maxTensB);
         b = tensB * 10;
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 8: {
         const tensA = MathGenerator.randomInt(1, 7);
@@ -70,7 +70,7 @@ class MathGenerator {
         const onesB = MathGenerator.randomInt(1, 9 - onesA);
         a = tensA * 10 + onesA;
         b = tensB * 10 + onesB;
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 9: {
         let attempts = 0;
@@ -79,17 +79,17 @@ class MathGenerator {
           b = MathGenerator.randomInt(12, 69);
           attempts++;
         } while (((a % 10) + (b % 10) < 10 || a + b > 100) && attempts < 100);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 10: {
         a = MathGenerator.randomInt(5, 35);
         b = MathGenerator.randomInt(5, 35);
         const maxC = 100 - a - b;
         c = MathGenerator.randomInt(5, Math.min(35, maxC));
-        return { formula: `${a} + ${b} + ${c} =`, answer: a + b + c, key: `${a}+${b}+${c}` };
+        return { formula: `${a} + ${b} + ${c} =`, answer: a + b + c, key: `${a}+${b}+${c}`, num1: `${a} + ${b}`, num2: c, sign: '+' };
       }
       default:
-        return { formula: `5 + 5 =`, answer: 10, key: `5+5` };
+        return { formula: `5 + 5 =`, answer: 10, key: `5+5`, num1: 5, num2: 5, sign: '+' };
     }
   }
 
@@ -99,40 +99,40 @@ class MathGenerator {
       case 1: {
         a = MathGenerator.randomInt(2, 10);
         b = MathGenerator.randomInt(1, a - 1);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 2: {
         const ones = MathGenerator.randomInt(1, 9);
         a = 10 + ones;
         b = MathGenerator.randomInt(1, ones);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 3: {
         const ones = MathGenerator.randomInt(1, 8);
         a = 10 + ones;
         b = MathGenerator.randomInt(ones + 1, 9);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 4: {
         const tensA = MathGenerator.randomInt(2, 10);
         const tensB = MathGenerator.randomInt(1, tensA - 1);
         a = tensA * 10;
         b = tensB * 10;
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 5: {
         const tens = MathGenerator.randomInt(2, 9);
         const ones = MathGenerator.randomInt(1, 9);
         a = tens * 10 + ones;
         b = MathGenerator.randomInt(1, ones);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 6: {
         const tens = MathGenerator.randomInt(2, 9);
         const ones = MathGenerator.randomInt(0, 8);
         a = tens * 10 + ones;
         b = MathGenerator.randomInt(ones + 1, 9);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 7: {
         const tensA = MathGenerator.randomInt(2, 9);
@@ -140,7 +140,7 @@ class MathGenerator {
         a = tensA * 10 + onesA;
         const tensB = MathGenerator.randomInt(1, tensA - 1);
         b = tensB * 10;
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 8: {
         const tensA = MathGenerator.randomInt(2, 9);
@@ -149,7 +149,7 @@ class MathGenerator {
         const onesB = MathGenerator.randomInt(0, onesA);
         a = tensA * 10 + onesA;
         b = tensB * 10 + onesB;
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 9: {
         let attempts = 0;
@@ -158,22 +158,22 @@ class MathGenerator {
           b = MathGenerator.randomInt(12, a - 1);
           attempts++;
         } while (((a % 10) >= (b % 10) || a <= b) && attempts < 100);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 10: {
         if (Math.random() > 0.4) {
           a = 100;
           b = MathGenerator.randomInt(11, 89);
-          return { formula: `100 - ${b} =`, answer: 100 - b, key: `100-${b}` };
+          return { formula: `100 - ${b} =`, answer: 100 - b, key: `100-${b}`, num1: 100, num2: b, sign: '-' };
         } else {
           a = MathGenerator.randomInt(60, 100);
           b = MathGenerator.randomInt(10, Math.floor(a / 2));
           c = MathGenerator.randomInt(5, a - b - 5);
-          return { formula: `${a} - ${b} - ${c} =`, answer: a - b - c, key: `${a}-${b}-${c}` };
+          return { formula: `${a} - ${b} - ${c} =`, answer: a - b - c, key: `${a}-${b}-${c}`, num1: `${a} - ${b}`, num2: c, sign: '-' };
         }
       }
       default:
-        return { formula: `10 - 4 =`, answer: 6, key: `10-4` };
+        return { formula: `10 - 4 =`, answer: 6, key: `10-4`, num1: 10, num2: 4, sign: '-' };
     }
   }
 
@@ -206,7 +206,10 @@ class MathGenerator {
     return {
       formula: `${op1} × ${op2} =`,
       answer: op1 * op2,
-      key: `${op1}*${op2}`
+      key: `${op1}*${op2}`,
+      num1: op1,
+      num2: op2,
+      sign: '×'
     };
   }
 
@@ -236,7 +239,10 @@ class MathGenerator {
     return {
       formula: `${c} ÷ ${a} =`,
       answer: b,
-      key: `${c}/${a}`
+      key: `${c}/${a}`,
+      num1: c,
+      num2: a,
+      sign: '÷'
     };
   }
 
@@ -269,8 +275,32 @@ class MathGenerator {
       }
     }
 
+    // Safety fallback: if 10 unique questions weren't reached, fill remaining
+    while (questions.length < 10) {
+      let q = null;
+      switch (operation) {
+        case 'addition':
+          q = MathGenerator.generateAddition(stageNum);
+          break;
+        case 'subtraction':
+          q = MathGenerator.generateSubtraction(stageNum);
+          break;
+        case 'multiplication':
+          q = MathGenerator.generateMultiplication(stageNum, questions.length);
+          break;
+        case 'division':
+          q = MathGenerator.generateDivision(stageNum, questions.length);
+          break;
+      }
+      if (q) questions.push(q);
+    }
+
     return questions;
   }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { MathGenerator };
 }
 
 // RUN TESTS

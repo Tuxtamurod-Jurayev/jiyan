@@ -1537,19 +1537,6 @@
             <span class="lang-flag" id="lang-btn-flag">🇺🇿</span>
             <span class="lang-code" id="lang-btn-code">UZ</span>
           </button>
-          <div class="stars-badge">
-            <svg viewBox="0 0 32 32" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FDE047"/>
-      <stop offset="100%" stop-color="#F59E0B"/>
-    </linearGradient>
-  </defs>
-  <polygon points="16 2 20.3 11.2 30 12.5 22.8 19.2 24.7 29 16 24.2 7.3 29 9.2 19.2 2 12.5 11.7 11.2" fill="url(#starGrad)" stroke="#D97706" stroke-width="1.2" stroke-linejoin="round"/>
-  <polygon points="16 2 20.3 11.2 30 12.5 22.8 19.2 16 16" fill="#FEF08A" opacity="0.6"/>
-</svg>
-            <span id="home-total-stars">0 / 240</span>
-          </div>
           <button class="icon-btn" id="btn-toggle-sound" title="Ovozni o'chirish/yoqish">
             <span id="sound-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>
           </button>
@@ -1809,11 +1796,12 @@
       <div class="quiz-center-area">
         <div class="question-card" id="quiz-question-card">
           <div class="math-formula">
-            <span id="math-num1">12</span>
-            <span id="math-op-sign" style="color: var(--primary);">+</span>
-            <span id="math-num2">5</span>
-            <span>=</span>
+            <span id="math-expression-display">12 + 5</span>
+            <span class="math-equals" style="color: var(--primary); margin: 0 4px;">=</span>
             <div class="input-box-display" id="math-answer-display">?</div>
+            <span id="math-num1" style="display:none;"></span>
+            <span id="math-op-sign" style="display:none;"></span>
+            <span id="math-num2" style="display:none;"></span>
           </div>
           <div class="feedback-box" id="quiz-feedback-box"></div>
           <button class="btn-skip-wrong" id="btn-skip-wrong" style="display: none;">
@@ -6301,41 +6289,41 @@
         const sum = MathGenerator.randomInt(2, 10);
         a = MathGenerator.randomInt(1, sum - 1);
         b = sum - a;
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 2: {
         const ones = MathGenerator.randomInt(0, 8);
         a = 10 + ones;
         b = MathGenerator.randomInt(1, 9 - ones);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 3: {
         do {
           a = MathGenerator.randomInt(3, 9);
           b = MathGenerator.randomInt(3, 9);
         } while (a + b <= 10 || a + b > 18);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 4: {
         const tensA = MathGenerator.randomInt(1, 8);
         const tensB = MathGenerator.randomInt(1, 10 - tensA);
         a = tensA * 10;
         b = tensB * 10;
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 5: {
         const tens = MathGenerator.randomInt(2, 9);
         const ones = MathGenerator.randomInt(0, 8);
         a = tens * 10 + ones;
         b = MathGenerator.randomInt(1, 9 - ones);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 6: {
         const tens = MathGenerator.randomInt(1, 8);
         const ones = MathGenerator.randomInt(2, 9);
         a = tens * 10 + ones;
         b = MathGenerator.randomInt(10 - ones, 9);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 7: {
         const tensA = MathGenerator.randomInt(1, 7);
@@ -6344,7 +6332,7 @@
         const maxTensB = 9 - tensA;
         const tensB = MathGenerator.randomInt(1, maxTensB);
         b = tensB * 10;
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 8: {
         const tensA = MathGenerator.randomInt(1, 7);
@@ -6353,7 +6341,7 @@
         const onesB = MathGenerator.randomInt(1, 9 - onesA);
         a = tensA * 10 + onesA;
         b = tensB * 10 + onesB;
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 9: {
         let attempts = 0;
@@ -6362,17 +6350,17 @@
           b = MathGenerator.randomInt(12, 69);
           attempts++;
         } while (((a % 10) + (b % 10) < 10 || a + b > 100) && attempts < 100);
-        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}` };
+        return { formula: `${a} + ${b} =`, answer: a + b, key: `${a}+${b}`, num1: a, num2: b, sign: '+' };
       }
       case 10: {
         a = MathGenerator.randomInt(5, 35);
         b = MathGenerator.randomInt(5, 35);
         const maxC = 100 - a - b;
         c = MathGenerator.randomInt(5, Math.min(35, maxC));
-        return { formula: `${a} + ${b} + ${c} =`, answer: a + b + c, key: `${a}+${b}+${c}` };
+        return { formula: `${a} + ${b} + ${c} =`, answer: a + b + c, key: `${a}+${b}+${c}`, num1: `${a} + ${b}`, num2: c, sign: '+' };
       }
       default:
-        return { formula: `5 + 5 =`, answer: 10, key: `5+5` };
+        return { formula: `5 + 5 =`, answer: 10, key: `5+5`, num1: 5, num2: 5, sign: '+' };
     }
   }
 
@@ -6382,40 +6370,40 @@
       case 1: {
         a = MathGenerator.randomInt(2, 10);
         b = MathGenerator.randomInt(1, a - 1);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 2: {
         const ones = MathGenerator.randomInt(1, 9);
         a = 10 + ones;
         b = MathGenerator.randomInt(1, ones);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 3: {
         const ones = MathGenerator.randomInt(1, 8);
         a = 10 + ones;
         b = MathGenerator.randomInt(ones + 1, 9);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 4: {
         const tensA = MathGenerator.randomInt(2, 10);
         const tensB = MathGenerator.randomInt(1, tensA - 1);
         a = tensA * 10;
         b = tensB * 10;
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 5: {
         const tens = MathGenerator.randomInt(2, 9);
         const ones = MathGenerator.randomInt(1, 9);
         a = tens * 10 + ones;
         b = MathGenerator.randomInt(1, ones);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 6: {
         const tens = MathGenerator.randomInt(2, 9);
         const ones = MathGenerator.randomInt(0, 8);
         a = tens * 10 + ones;
         b = MathGenerator.randomInt(ones + 1, 9);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 7: {
         const tensA = MathGenerator.randomInt(2, 9);
@@ -6423,7 +6411,7 @@
         a = tensA * 10 + onesA;
         const tensB = MathGenerator.randomInt(1, tensA - 1);
         b = tensB * 10;
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 8: {
         const tensA = MathGenerator.randomInt(2, 9);
@@ -6432,7 +6420,7 @@
         const onesB = MathGenerator.randomInt(0, onesA);
         a = tensA * 10 + onesA;
         b = tensB * 10 + onesB;
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 9: {
         let attempts = 0;
@@ -6441,22 +6429,22 @@
           b = MathGenerator.randomInt(12, a - 1);
           attempts++;
         } while (((a % 10) >= (b % 10) || a <= b) && attempts < 100);
-        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}` };
+        return { formula: `${a} - ${b} =`, answer: a - b, key: `${a}-${b}`, num1: a, num2: b, sign: '-' };
       }
       case 10: {
         if (Math.random() > 0.4) {
           a = 100;
           b = MathGenerator.randomInt(11, 89);
-          return { formula: `100 - ${b} =`, answer: 100 - b, key: `100-${b}` };
+          return { formula: `100 - ${b} =`, answer: 100 - b, key: `100-${b}`, num1: 100, num2: b, sign: '-' };
         } else {
           a = MathGenerator.randomInt(60, 100);
           b = MathGenerator.randomInt(10, Math.floor(a / 2));
           c = MathGenerator.randomInt(5, a - b - 5);
-          return { formula: `${a} - ${b} - ${c} =`, answer: a - b - c, key: `${a}-${b}-${c}` };
+          return { formula: `${a} - ${b} - ${c} =`, answer: a - b - c, key: `${a}-${b}-${c}`, num1: `${a} - ${b}`, num2: c, sign: '-' };
         }
       }
       default:
-        return { formula: `10 - 4 =`, answer: 6, key: `10-4` };
+        return { formula: `10 - 4 =`, answer: 6, key: `10-4`, num1: 10, num2: 4, sign: '-' };
     }
   }
 
@@ -6489,7 +6477,10 @@
     return {
       formula: `${op1} × ${op2} =`,
       answer: op1 * op2,
-      key: `${op1}*${op2}`
+      key: `${op1}*${op2}`,
+      num1: op1,
+      num2: op2,
+      sign: '×'
     };
   }
 
@@ -6519,7 +6510,10 @@
     return {
       formula: `${c} ÷ ${a} =`,
       answer: b,
-      key: `${c}/${a}`
+      key: `${c}/${a}`,
+      num1: c,
+      num2: a,
+      sign: '÷'
     };
   }
 
@@ -6552,42 +6546,29 @@
       }
     }
 
+    // Safety fallback: if 10 unique questions weren't reached, fill remaining
+    while (questions.length < 10) {
+      let q = null;
+      switch (operation) {
+        case 'addition':
+          q = MathGenerator.generateAddition(stageNum);
+          break;
+        case 'subtraction':
+          q = MathGenerator.generateSubtraction(stageNum);
+          break;
+        case 'multiplication':
+          q = MathGenerator.generateMultiplication(stageNum, questions.length);
+          break;
+        case 'division':
+          q = MathGenerator.generateDivision(stageNum, questions.length);
+          break;
+      }
+      if (q) questions.push(q);
+    }
+
     return questions;
   }
 }
-
-// RUN TESTS
-console.log("=== TESTING ALL 40 STAGES ===");
-const ops = ['addition', 'subtraction', 'multiplication', 'division'];
-let totalPassed = 0;
-
-ops.forEach(op => {
-  console.log(`\nTesting Operation: ${op.toUpperCase()}`);
-  for (let stage = 1; stage <= 10; stage++) {
-    const questions = MathGenerator.generateStageQuestions(op, stage);
-    if (questions.length !== 10) {
-      console.error(`FAILED: ${op} stage ${stage} produced ${questions.length} questions, expected 10!`);
-      process.exit(1);
-    }
-
-    // Verify answers are integers >= 0 and <= 100
-    questions.forEach((q, idx) => {
-      if (typeof q.answer !== 'number' || isNaN(q.answer)) {
-        console.error(`FAILED: ${op} stage ${stage} question ${idx} has invalid answer:`, q);
-        process.exit(1);
-      }
-      if (q.answer < 0 || q.answer > 100) {
-        console.error(`FAILED: ${op} stage ${stage} question ${idx} answer out of bounds [0, 100]:`, q);
-        process.exit(1);
-      }
-    });
-
-    console.log(`  ✓ Stage ${stage}: 10 questions OK (e.g. "${questions[0].formula} [${questions[0].answer}]", "${questions[1].formula} [${questions[1].answer}]")`);
-    totalPassed++;
-  }
-});
-
-console.log(`\n🎉 ALL 40 STAGES PASSED! (${totalPassed} / 40 tested successfully)`);
 
     // ============================================================================
     // ENGLISH QUESTION GENERATOR (Bilingual UZ & RU)
@@ -6610,13 +6591,13 @@ console.log(`\n🎉 ALL 40 STAGES PASSED! (${totalPassed} / 40 tested successful
 
         return selected.map(item => {
           if (category === 'vocabulary') {
-            const wrongUz = stageData.items.filter(x => x.en !== item.en).map(x => x.uz);
+            const wrongUz = Array.from(new Set(stageData.items.filter(x => x.en !== item.en).map(x => x.uz)));
             const chosenDistractorsUz = EnglishGenerator.shuffle(wrongUz).slice(0, 3);
-            const optionsUz = EnglishGenerator.shuffle([item.uz, ...chosenDistractorsUz]);
+            const optionsUz = EnglishGenerator.shuffle(Array.from(new Set([item.uz, ...chosenDistractorsUz])));
 
-            const wrongRu = stageData.items.filter(x => x.en !== item.en).map(x => x.ru || x.uz);
+            const wrongRu = Array.from(new Set(stageData.items.filter(x => x.en !== item.en).map(x => x.ru || x.uz)));
             const chosenDistractorsRu = EnglishGenerator.shuffle(wrongRu).slice(0, 3);
-            const optionsRu = EnglishGenerator.shuffle([item.ru || item.uz, ...chosenDistractorsRu]);
+            const optionsRu = EnglishGenerator.shuffle(Array.from(new Set([item.ru || item.uz, ...chosenDistractorsRu])));
 
             return {
               type: 'vocabulary',
@@ -6631,15 +6612,15 @@ console.log(`\n🎉 ALL 40 STAGES PASSED! (${totalPassed} / 40 tested successful
               speakText: item.en
             };
           } else if (category === 'listening') {
-            const wrongUz = stageData.items.filter(x => x.audio !== item.audio).map(x => `${x.emoji} ${x.uz}`);
+            const wrongUz = Array.from(new Set(stageData.items.filter(x => x.audio !== item.audio).map(x => `${x.emoji} ${x.uz}`)));
             const chosenDistractorsUz = EnglishGenerator.shuffle(wrongUz).slice(0, 3);
             const correctTextUz = `${item.emoji} ${item.uz}`;
-            const optionsUz = EnglishGenerator.shuffle([correctTextUz, ...chosenDistractorsUz]);
+            const optionsUz = EnglishGenerator.shuffle(Array.from(new Set([correctTextUz, ...chosenDistractorsUz])));
 
-            const wrongRu = stageData.items.filter(x => x.audio !== item.audio).map(x => `${x.emoji} ${x.ru || x.uz}`);
+            const wrongRu = Array.from(new Set(stageData.items.filter(x => x.audio !== item.audio).map(x => `${x.emoji} ${x.ru || x.uz}`)));
             const chosenDistractorsRu = EnglishGenerator.shuffle(wrongRu).slice(0, 3);
             const correctTextRu = `${item.emoji} ${item.ru || item.uz}`;
-            const optionsRu = EnglishGenerator.shuffle([correctTextRu, ...chosenDistractorsRu]);
+            const optionsRu = EnglishGenerator.shuffle(Array.from(new Set([correctTextRu, ...chosenDistractorsRu])));
 
             return {
               type: 'listening',
@@ -6889,7 +6870,8 @@ console.log(`\n🎉 ALL 40 STAGES PASSED! (${totalPassed} / 40 tested successful
         document.getElementById('home-eng-progress-fill').style.width = `${engPct}%`;
 
         const stars = db.getTotalStars();
-        document.getElementById('home-total-stars').textContent = `${stars} / 240`;
+        const totalStarsEl = document.getElementById('home-total-stars');
+        if (totalStarsEl) totalStarsEl.textContent = `${stars} / 240`;
       }
 
       renderMathOperations() {
@@ -7009,9 +6991,23 @@ console.log(`\n🎉 ALL 40 STAGES PASSED! (${totalPassed} / 40 tested successful
           if (i === this.mathIndex) dot.classList.add('current');
         }
 
-        document.getElementById('math-num1').textContent = q.num1;
-        document.getElementById('math-num2').textContent = q.num2;
-        document.getElementById('math-op-sign').textContent = q.sign;
+        // Display full expression (e.g. "16 ÷ 2", "4 × 3", "12 + 5")
+        let expressionText = '';
+        if (q.formula) {
+          expressionText = q.formula.replace(/=s*$/, '').trim();
+        } else if (q.num1 !== undefined && q.num2 !== undefined) {
+          expressionText = `${q.num1} ${q.sign || '+'} ${q.num2}`;
+        }
+
+        const exprEl = document.getElementById('math-expression-display');
+        if (exprEl) exprEl.textContent = expressionText;
+
+        const num1El = document.getElementById('math-num1');
+        if (num1El) num1El.textContent = q.num1 !== undefined ? q.num1 : '';
+        const num2El = document.getElementById('math-num2');
+        if (num2El) num2El.textContent = q.num2 !== undefined ? q.num2 : '';
+        const opSignEl = document.getElementById('math-op-sign');
+        if (opSignEl) opSignEl.textContent = q.sign !== undefined ? q.sign : '';
 
         const displayBox = document.getElementById('math-answer-display');
         displayBox.textContent = '?';
@@ -7092,11 +7088,13 @@ console.log(`\n🎉 ALL 40 STAGES PASSED! (${totalPassed} / 40 tested successful
           card.classList.add('wrong-anim');
           displayBox.classList.add('wrong');
           dot.classList.add('wrong');
-          feedback.textContent = `${this.t('wrongAlert')} ${q.answer}`;
+
+          const formulaClean = q.formula ? q.formula.replace(/=s*$/, '').trim() : `${q.num1} ${q.sign || '+'} ${q.num2}`;
+          feedback.textContent = `${this.t('wrongAlert')} ${formulaClean} = ${q.answer}`;
           feedback.classList.add('wrong');
 
           document.getElementById('btn-skip-wrong').style.display = 'inline-flex';
-          this.wrongTimer = setTimeout(() => this.advanceMathQuestion(), 2200);
+          this.wrongTimer = setTimeout(() => this.advanceMathQuestion(), 2400);
         }
       }
 
@@ -7779,6 +7777,16 @@ console.log(`\n🎉 ALL 40 STAGES PASSED! (${totalPassed} / 40 tested successful
             } else if (e.key === ' ' || e.key === 'r' || e.key === 'R') {
               const playBtn = document.getElementById('btn-eng-audio-main') || document.getElementById('btn-speak-word');
               if (playBtn) playBtn.click();
+            } else if (/^[a-zA-Z]$/.test(e.key)) {
+              const targetLetter = e.key.toUpperCase();
+              const availableTiles = Array.from(document.querySelectorAll('#spelling-tiles-row .letter-tile:not(.used)'));
+              const matchedTile = availableTiles.find(t => t.textContent.trim().toUpperCase() === targetLetter);
+              if (matchedTile) matchedTile.click();
+            } else if (e.key === 'Backspace') {
+              const filledSlots = Array.from(document.querySelectorAll('.spelling-slot.filled'));
+              if (filledSlots.length > 0) {
+                filledSlots[filledSlots.length - 1].click();
+              }
             }
           }
         });
