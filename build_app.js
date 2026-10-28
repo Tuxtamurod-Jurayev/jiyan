@@ -38,6 +38,12 @@ const htmlContent = `<!DOCTYPE html>
   <title>Savarbek Edu — 2-sinf Matematika va Ingliz tili</title>
   <meta name="description" content="Savarbek Edu v2.0 — 2-sinf o'quvchisi Savarbek uchun interaktiv matematika va ingliz tili o'yini">
   <meta name="theme-color" content="#4F46E5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Savarbek Edu">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%236366F1'/%3E%3Cstop offset='100%25' stop-color='%234F46E5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M16 6l2.5 5.5 6 .9-4.3 4.2 1 6-5.2-2.8-5.2 2.8 1-6-4.3-4.2 6-.9z' fill='%23FCD34D'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -108,6 +114,13 @@ const htmlContent = `<!DOCTYPE html>
       flex-direction: column;
       overflow: hidden;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    button, .btn, .num-key, .option-btn, .eng-choice-btn, .letter-btn, .action-card, .stage-card, .category-card {
+      touch-action: manipulation;
+      cursor: pointer;
     }
 
     @media (min-width: 481px) {
@@ -2575,8 +2588,15 @@ const htmlContent = `<!DOCTYPE html>
         }
       }
 
+      vibrate(pattern) {
+        if ('vibrate' in navigator) {
+          try { navigator.vibrate(pattern); } catch (e) {}
+        }
+      }
+
       playTap() {
         if (!this.enabled) return;
+        this.vibrate(15);
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
@@ -2595,6 +2615,7 @@ const htmlContent = `<!DOCTYPE html>
 
       playCorrect() {
         if (!this.enabled) return;
+        this.vibrate([35, 45, 45]);
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
@@ -2615,6 +2636,7 @@ const htmlContent = `<!DOCTYPE html>
 
       playWrong() {
         if (!this.enabled) return;
+        this.vibrate([70, 40, 70]);
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
@@ -2633,6 +2655,7 @@ const htmlContent = `<!DOCTYPE html>
 
       playFanfare() {
         if (!this.enabled) return;
+        this.vibrate([50, 35, 50, 35, 90]);
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
@@ -2653,6 +2676,7 @@ const htmlContent = `<!DOCTYPE html>
 
       playLock() {
         if (!this.enabled) return;
+        this.vibrate(35);
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
@@ -2672,16 +2696,26 @@ const htmlContent = `<!DOCTYPE html>
       speakEnglish(text, slow = false) {
         if (!this.enabled) return;
         if (!('speechSynthesis' in window)) return;
-        window.speechSynthesis.cancel();
-        const cleanText = text.replace(/[\\[\\]\\_\\-\\(\\)]/g, ' ').trim();
-        const utterance = new SpeechSynthesisUtterance(cleanText);
-        utterance.lang = 'en-US';
-        utterance.rate = slow ? 0.6 : 0.88;
-        window.speechSynthesis.speak(utterance);
+        try {
+          window.speechSynthesis.cancel();
+          const cleanText = text.replace(/[\\[\\]\\_\\-\\(\\)]/g, ' ').trim();
+          const utterance = new SpeechSynthesisUtterance(cleanText);
+          utterance.lang = 'en-US';
+          utterance.rate = slow ? 0.62 : 0.88;
+          utterance.pitch = 1.05;
+          window.__activeUtterance = utterance;
+          window.speechSynthesis.speak(utterance);
+        } catch (e) {
+          console.warn('Speech error:', e);
+        }
       }
     }
 
     const sound = new SoundEngine();
+
+    ['touchstart', 'touchend', 'mousedown', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, () => sound.init(), { once: true, passive: true });
+    });
 
     class ConfettiEngine {
       constructor(canvasId) {
@@ -4370,6 +4404,15 @@ const htmlContent = `<!DOCTYPE html>
             if (e.key >= '0' && e.key <= '9') this.handleMathNumpadInput(e.key);
             else if (e.key === 'Backspace') this.handleMathNumpadInput('del');
             else if (e.key === 'Enter') this.handleMathNumpadInput('submit');
+          } else if (this.currentScreen === 'screen-eng-quiz') {
+            if (['1', '2', '3', '4'].includes(e.key)) {
+              const opts = document.querySelectorAll('#eng-choice-options .eng-choice-btn, #eng-grammar-options .eng-choice-btn');
+              const idx = parseInt(e.key, 10) - 1;
+              if (opts && opts[idx]) opts[idx].click();
+            } else if (e.key === ' ' || e.key === 'r' || e.key === 'R') {
+              const playBtn = document.getElementById('btn-eng-audio-main') || document.querySelector('.btn-listen-again');
+              if (playBtn) playBtn.click();
+            }
           }
         });
 
@@ -4463,5 +4506,52 @@ const htmlContent = `<!DOCTYPE html>
 </html>
 `;
 
+// Ensure public directory exists for Vercel and static hosting
+if (!fs.existsSync('public')) {
+  fs.mkdirSync('public', { recursive: true });
+}
+
+// Write to root
 fs.writeFileSync('index.html', htmlContent, 'utf8');
-console.log('Successfully generated index.html with crisp vector icons & modern animations! Size:', htmlContent.length);
+
+// Write to public/
+fs.writeFileSync('public/index.html', htmlContent, 'utf8');
+
+// Generate manifest.json for PWA support
+const manifest = {
+  name: "Savarbek Edu",
+  short_name: "Savarbek Edu",
+  description: "2-sinf o'quvchisi Savarbek uchun interaktiv matematika va ingliz tili mobil veb-ilovasi",
+  start_url: "/",
+  display: "standalone",
+  orientation: "portrait",
+  background_color: "#F8FAFC",
+  theme_color: "#4F46E5",
+  icons: [
+    {
+      src: "/icon.svg",
+      sizes: "any",
+      type: "image/svg+xml",
+      purpose: "any maskable"
+    }
+  ]
+};
+fs.writeFileSync('public/manifest.json', JSON.stringify(manifest, null, 2), 'utf8');
+
+// Generate robots.txt
+fs.writeFileSync('public/robots.txt', "User-agent: *\nAllow: /\n", 'utf8');
+
+// Generate icon.svg
+const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#4338CA"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="42" fill="url(#bgGrad)"/>
+  <polygon points="96 28 116 75 168 81 129 116 140 168 96 141 52 168 63 116 24 81 76 75" fill="#FBBF24" stroke="#F59E0B" stroke-width="4" stroke-linejoin="round"/>
+</svg>`;
+fs.writeFileSync('public/icon.svg', iconSvg, 'utf8');
+
+console.log('Successfully generated index.html and public/ directory with PWA assets! Size:', htmlContent.length);

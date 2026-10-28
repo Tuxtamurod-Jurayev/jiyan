@@ -1,11 +1,11 @@
 {
   "name": "savarbek-edu",
   "version": "1.0.0",
-  "description": "Savarbek Edu — 2-sinf o'quvchisi Savarbek uchun interaktiv matematika mobil veb-ilovasi",
+  "description": "Savarbek Edu — 2-sinf o'quvchisi Savarbek uchun interaktiv matematika va ingliz tili mobil veb-ilovasi",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'Static build ready'",
-    "start": "npx serve .",
+    "build": "node build_app.js",
+    "start": "npx serve public",
     "test": "node test_all.js"
   },
   "keywords": [
