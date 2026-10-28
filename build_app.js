@@ -1,6 +1,35 @@
 const fs = require('fs');
 const { ENGLISH_DATA } = require('./english_data_structure.js');
 
+// Helper for inline SVGs
+const ICONS = {
+  star: `<svg viewBox="0 0 24 24" width="18" height="18" fill="#F59E0B" stroke="#D97706" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  starWhite: `<svg viewBox="0 0 24 24" width="16" height="16" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  soundOn: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`,
+  soundOff: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`,
+  settings: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+  back: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>`,
+  exit: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+  check: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+  delete: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>`,
+  speaker: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`,
+  speakerBig: `<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`,
+  plus: `<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
+  minus: `<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
+  multiply: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+  divide: `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><circle cx="12" cy="6" r="2.2" fill="currentColor"/><circle cx="12" cy="18" r="2.2" fill="currentColor"/></svg>`,
+  book: `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
+  headphones: `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>`,
+  puzzle: `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19.439 7.85c0-1.571-.84-2.85-1.875-2.85s-1.875 1.279-1.875 2.85v.15H11.5v-2.35c1.571 0 2.85-.84 2.85-1.875S13.071 1.9 11.5 1.9s-2.85 1.279-2.85 2.85V8H4.461C3.102 8 2 9.102 2 10.461v4.189h.15c1.571 0 2.85.84 2.85 1.875s-1.279 1.875-2.85 1.875H2v4.139C2 23.898 3.102 25 4.461 25h4.189v-.15c0-1.571.84-2.85 1.875-2.85s1.875 1.279 1.875 2.85V25h4.189c1.359 0 2.461-1.102 2.461-2.461v-4.139h-.15c-1.571 0-2.85-.84-2.85-1.875s1.279-1.875 2.85-1.875h.15V8.339c0-.27-.219-.489-.489-.489z"/></svg>`,
+  grammar: `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+  trophy: `<svg viewBox="0 0 24 24" width="68" height="68" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H8v4h8v-4h-1c-.55 0-1-.45-1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z" fill="#FEF3C7"/></svg>`,
+  retry: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>`,
+  next: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
+  list: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`,
+  lock: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+  target: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6366F1" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`
+};
+
 const htmlContent = `<!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -43,6 +72,7 @@ const htmlContent = `<!DOCTYPE html>
       --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
       --shadow-md: 0 6px 16px rgba(0,0,0,0.06);
       --shadow-lg: 0 12px 28px rgba(0,0,0,0.1);
+      --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     * {
@@ -100,8 +130,8 @@ const htmlContent = `<!DOCTYPE html>
       flex-direction: column;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: scale(0.98);
+      transition: opacity 0.28s ease, transform 0.28s var(--transition-spring);
+      transform: scale(0.97) translateY(8px);
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
@@ -111,7 +141,7 @@ const htmlContent = `<!DOCTYPE html>
     .screen.active {
       opacity: 1;
       pointer-events: auto;
-      transform: scale(1);
+      transform: scale(1) translateY(0);
       z-index: 10;
     }
 
@@ -139,6 +169,7 @@ const htmlContent = `<!DOCTYPE html>
       align-items: center;
       padding: 48px 24px;
       text-align: center;
+      position: relative;
     }
 
     .splash-top {
@@ -155,15 +186,15 @@ const htmlContent = `<!DOCTYPE html>
       width: 140px;
       height: 140px;
       margin-bottom: 24px;
-      animation: floatMascot 3s ease-in-out infinite;
+      animation: floatMascot 3.2s ease-in-out infinite;
     }
 
     .splash-mascot-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle, rgba(253, 224, 71, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+      background: radial-gradient(circle, rgba(253, 224, 71, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
       border-radius: 50%;
-      animation: pulseGlow 2s ease-in-out infinite alternate;
+      animation: pulseGlow 2.2s ease-in-out infinite alternate;
     }
 
     .splash-mascot {
@@ -173,7 +204,7 @@ const htmlContent = `<!DOCTYPE html>
       align-items: center;
       justify-content: center;
       font-size: 84px;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.35));
     }
 
     .splash-title {
@@ -199,7 +230,7 @@ const htmlContent = `<!DOCTYPE html>
       font-weight: 700;
       color: #FEF08A;
       margin-bottom: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
     }
 
     .splash-quote-box {
@@ -261,16 +292,17 @@ const htmlContent = `<!DOCTYPE html>
 
     @keyframes pulseGlow {
       0% { transform: scale(0.9); opacity: 0.4; }
-      100% { transform: scale(1.15); opacity: 0.8; }
+      100% { transform: scale(1.18); opacity: 0.85; }
     }
 
     /* ========== 2. APP HEADER ========== */
     .app-header {
-      padding: 16px 20px;
+      padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #FFFFFF;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
       border-bottom: 2px solid var(--border-color);
       flex-shrink: 0;
       position: sticky;
@@ -307,50 +339,82 @@ const htmlContent = `<!DOCTYPE html>
     .stars-badge {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       background: #FFFBEB;
       border: 1.5px solid #FCD34D;
       color: #B45309;
       font-weight: 800;
       font-size: 14px;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: var(--radius-full);
       box-shadow: var(--shadow-sm);
+      transition: transform 0.2s var(--transition-spring);
+    }
+
+    .stars-badge svg {
+      animation: starGleam 2.5s ease-in-out infinite;
+    }
+
+    @keyframes starGleam {
+      0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 1px #FBBF24); }
+      50% { transform: scale(1.15) rotate(6deg); filter: drop-shadow(0 0 4px #F59E0B); }
     }
 
     .icon-btn {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: var(--radius-md);
-      background: #F1F5F9;
-      border: 1.5px solid var(--border-color);
+      background: #FFFFFF;
+      border: 2px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s var(--transition-spring);
       color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      border-color: #CBD5E1;
+      background: #F8FAFC;
     }
 
     .icon-btn:active {
-      transform: scale(0.92);
+      transform: translateY(2px) scale(0.95);
       background: #E2E8F0;
+    }
+
+    #btn-open-settings:hover svg {
+      animation: gearSpin 0.7s var(--transition-spring);
+    }
+
+    @keyframes gearSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(180deg); }
     }
 
     .btn-back {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #F1F5F9;
-      border: 1.5px solid var(--border-color);
+      background: #FFFFFF;
+      border: 2px solid var(--border-color);
       padding: 8px 14px;
       border-radius: var(--radius-md);
       font-size: 14px;
       font-weight: 800;
       color: var(--text-main);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s var(--transition-spring);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-back:hover {
+      transform: translateX(-3px);
+      border-color: #CBD5E1;
+      background: #F8FAFC;
     }
 
     .btn-back:active {
@@ -376,14 +440,19 @@ const htmlContent = `<!DOCTYPE html>
     .banner-card {
       background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
       color: #FFFFFF;
-      padding: 20px;
+      padding: 22px;
       border-radius: var(--radius-lg);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 10px 20px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 12px 24px rgba(79, 70, 229, 0.28);
       position: relative;
       overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .banner-card:hover {
+      transform: translateY(-2px);
     }
 
     .banner-card::before {
@@ -391,30 +460,31 @@ const htmlContent = `<!DOCTYPE html>
       position: absolute;
       top: -30px;
       right: -30px;
-      width: 120px;
-      height: 120px;
-      background: rgba(255, 255, 255, 0.1);
+      width: 130px;
+      height: 130px;
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 50%;
     }
 
     .banner-text h3 {
-      font-size: 19px;
+      font-size: 20px;
       margin-bottom: 4px;
     }
 
     .banner-text p {
       font-size: 13px;
-      opacity: 0.9;
+      opacity: 0.92;
       font-weight: 600;
     }
 
     .banner-icon {
-      font-size: 48px;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      font-size: 52px;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
+      animation: floatMascot 3.5s ease-in-out infinite;
     }
 
     .section-label {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -434,28 +504,42 @@ const htmlContent = `<!DOCTYPE html>
       border: 2.5px solid var(--border-color);
       border-bottom: 5px solid var(--border-color);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.22s var(--transition-spring);
       display: flex;
       flex-direction: column;
       gap: 14px;
       box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-4px) scale(1.012);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.08);
     }
 
     .subject-card:active {
-      transform: translateY(2px);
+      transform: translateY(2px) scale(0.99);
       border-bottom-width: 2.5px;
     }
 
     .subject-card.math {
-      border-color: #6366F1;
+      border-color: #818CF8;
       border-bottom-color: #4F46E5;
       background: linear-gradient(to bottom, #FFFFFF, #F8FAFC);
+    }
+    .subject-card.math:hover {
+      border-color: #6366F1;
+      box-shadow: 0 14px 28px rgba(79, 70, 229, 0.16);
     }
 
     .subject-card.english {
       border-color: #38BDF8;
       border-bottom-color: #0284C7;
       background: linear-gradient(to bottom, #FFFFFF, #F0F9FF);
+    }
+    .subject-card.english:hover {
+      border-color: #0284C7;
+      box-shadow: 0 14px 28px rgba(2, 132, 199, 0.16);
     }
 
     .subject-card-header {
@@ -465,25 +549,30 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .subject-icon-box {
-      width: 58px;
-      height: 58px;
+      width: 60px;
+      height: 60px;
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 32px;
       flex-shrink: 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.25s var(--transition-spring);
+    }
+
+    .subject-card:hover .subject-icon-box {
+      transform: scale(1.1) rotate(4deg);
     }
 
     .math .subject-icon-box {
-      background: #EEF2FF;
+      background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
       border: 2px solid #C7D2FE;
     }
 
     .english .subject-icon-box {
-      background: #E0F2FE;
-      border: 2px solid #BAE6FD;
+      background: linear-gradient(135deg, #E0F2FE, #BAE6FD);
+      border: 2px solid #7DD3FC;
     }
 
     .subject-details {
@@ -528,28 +617,39 @@ const htmlContent = `<!DOCTYPE html>
       background: #E2E8F0;
       border-radius: var(--radius-full);
       overflow: hidden;
+      position: relative;
     }
 
     .subject-progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #6366F1, #10B981);
+      background: linear-gradient(90deg, #6366F1, #10B981, #6366F1);
+      background-size: 200% 100%;
+      animation: shimmerEffect 2.8s linear infinite;
       border-radius: var(--radius-full);
       transition: width 0.4s ease;
     }
 
     .english .subject-progress-fill {
-      background: linear-gradient(90deg, #0284C7, #38BDF8);
+      background: linear-gradient(90deg, #0284C7, #38BDF8, #0284C7);
+      background-size: 200% 100%;
+      animation: shimmerEffect 2.8s linear infinite;
+    }
+
+    @keyframes shimmerEffect {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     .home-footer-stats {
       margin-top: auto;
-      padding: 16px;
+      padding: 16px 20px;
       background: #FFFFFF;
       border: 2px solid var(--border-color);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      box-shadow: var(--shadow-sm);
     }
 
     .stat-pill {
@@ -581,80 +681,97 @@ const htmlContent = `<!DOCTYPE html>
       border: 2.5px solid var(--border-color);
       border-bottom: 5px solid var(--border-color);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.22s var(--transition-spring);
       display: flex;
       align-items: center;
       gap: 18px;
       box-shadow: var(--shadow-sm);
     }
 
+    .op-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+
     .op-card:active {
-      transform: translateY(2px);
+      transform: translateY(2px) scale(0.99);
       border-bottom-width: 2.5px;
     }
 
     .op-icon {
-      width: 60px;
-      height: 60px;
+      width: 62px;
+      height: 62px;
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      font-weight: 900;
       flex-shrink: 0;
       color: #FFFFFF;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.14);
+      transition: transform 0.22s var(--transition-spring);
+    }
+
+    .op-card:hover .op-icon {
+      transform: scale(1.12) rotate(5deg);
     }
 
     /* Math Theme Colors */
     .op-card.addition .op-icon {
       background: linear-gradient(135deg, #10B981, #059669);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 6px 14px rgba(16, 185, 129, 0.35);
     }
     .op-card.addition { border-color: #A7F3D0; border-bottom-color: #059669; }
+    .op-card.addition:hover { border-color: #10B981; }
 
     .op-card.subtraction .op-icon {
       background: linear-gradient(135deg, #0EA5E9, #0284C7);
-      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
+      box-shadow: 0 6px 14px rgba(14, 165, 233, 0.35);
     }
     .op-card.subtraction { border-color: #BAE6FD; border-bottom-color: #0284C7; }
+    .op-card.subtraction:hover { border-color: #0EA5E9; }
 
     .op-card.multiplication .op-icon {
       background: linear-gradient(135deg, #F59E0B, #D97706);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+      box-shadow: 0 6px 14px rgba(245, 158, 11, 0.35);
     }
     .op-card.multiplication { border-color: #FDE68A; border-bottom-color: #D97706; }
+    .op-card.multiplication:hover { border-color: #F59E0B; }
 
     .op-card.division .op-icon {
       background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.35);
+      box-shadow: 0 6px 14px rgba(139, 92, 246, 0.35);
     }
     .op-card.division { border-color: #DDD6FE; border-bottom-color: #7C3AED; }
+    .op-card.division:hover { border-color: #8B5CF6; }
 
     /* English Category Colors */
     .op-card.vocabulary .op-icon {
       background: linear-gradient(135deg, #EC4899, #DB2777);
-      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.35);
+      box-shadow: 0 6px 14px rgba(236, 72, 153, 0.35);
     }
     .op-card.vocabulary { border-color: #FBCFE8; border-bottom-color: #DB2777; }
+    .op-card.vocabulary:hover { border-color: #EC4899; }
 
     .op-card.listening .op-icon {
       background: linear-gradient(135deg, #3B82F6, #2563EB);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+      box-shadow: 0 6px 14px rgba(59, 130, 246, 0.35);
     }
     .op-card.listening { border-color: #BFDBFE; border-bottom-color: #2563EB; }
+    .op-card.listening:hover { border-color: #3B82F6; }
 
     .op-card.spelling .op-icon {
       background: linear-gradient(135deg, #10B981, #059669);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 6px 14px rgba(16, 185, 129, 0.35);
     }
     .op-card.spelling { border-color: #A7F3D0; border-bottom-color: #059669; }
+    .op-card.spelling:hover { border-color: #10B981; }
 
     .op-card.grammar .op-icon {
       background: linear-gradient(135deg, #F59E0B, #D97706);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+      box-shadow: 0 6px 14px rgba(245, 158, 11, 0.35);
     }
     .op-card.grammar { border-color: #FDE68A; border-bottom-color: #D97706; }
+    .op-card.grammar:hover { border-color: #F59E0B; }
 
     .op-info {
       flex: 1;
@@ -678,7 +795,7 @@ const htmlContent = `<!DOCTYPE html>
     .op-badge {
       font-size: 12px;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: var(--radius-full);
       background: #F1F5F9;
       color: var(--text-muted);
@@ -705,7 +822,7 @@ const htmlContent = `<!DOCTYPE html>
     .op-progress-fill {
       height: 100%;
       border-radius: var(--radius-full);
-      transition: width 0.3s ease;
+      transition: width 0.35s ease;
     }
 
     .addition .op-progress-fill { background: #10B981; }
@@ -734,6 +851,7 @@ const htmlContent = `<!DOCTYPE html>
       display: flex;
       align-items: center;
       justify-content: space-between;
+      box-shadow: var(--shadow-sm);
     }
 
     .stages-grid {
@@ -749,7 +867,7 @@ const htmlContent = `<!DOCTYPE html>
       border: 2.5px solid var(--border-color);
       border-bottom: 5px solid var(--border-color);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.22s var(--transition-spring);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -757,12 +875,17 @@ const htmlContent = `<!DOCTYPE html>
       position: relative;
     }
 
+    .stage-card:not(.locked):hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+
     .stage-card:active {
-      transform: translateY(2px);
+      transform: translateY(2px) scale(0.99);
       border-bottom-width: 2.5px;
     }
 
-    /* 5 Micro-States of Stage Cards */
+    /* 5 Micro-States */
     .stage-card.state-new {
       background: #FFFFFF;
       border-color: #93C5FD;
@@ -795,7 +918,7 @@ const htmlContent = `<!DOCTYPE html>
       background: linear-gradient(135deg, #FEFCE8 0%, #F0FDF4 100%);
       border-color: #FBBF24;
       border-bottom-color: #10B981;
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.22);
     }
     .stage-card.state-perfect .stage-badge { background: #FEF3C7; color: #B45309; font-weight: 900; }
 
@@ -804,6 +927,7 @@ const htmlContent = `<!DOCTYPE html>
       border-color: #CBD5E1;
       border-bottom-color: #94A3B8;
       opacity: 0.65;
+      cursor: not-allowed;
     }
 
     .stage-left {
@@ -823,6 +947,7 @@ const htmlContent = `<!DOCTYPE html>
       font-size: 18px;
       font-weight: 900;
       color: var(--text-main);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
     }
 
     .stage-info-text {
@@ -854,14 +979,15 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .stage-stars {
-      font-size: 15px;
-      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
     }
 
     .stage-badge {
       font-size: 12px;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: var(--radius-full);
     }
 
@@ -875,7 +1001,7 @@ const htmlContent = `<!DOCTYPE html>
       animation: shakeAnimation 0.45s ease-in-out;
     }
 
-    /* ========== 6. MATH QUIZ GAME SCREEN ========== */
+    /* ========== 6. QUIZ COMMON STYLES ========== */
     #screen-quiz, #screen-eng-quiz {
       background: #F8FAFC;
       display: flex;
@@ -909,13 +1035,17 @@ const htmlContent = `<!DOCTYPE html>
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 4px;
-      transition: all 0.15s ease;
+      gap: 6px;
+      transition: all 0.2s var(--transition-spring);
+    }
+
+    .btn-exit-quiz:hover {
+      transform: scale(1.04);
+      background: #FEE2E2;
     }
 
     .btn-exit-quiz:active {
-      transform: scale(0.92);
-      background: #FEE2E2;
+      transform: scale(0.94);
     }
 
     .quiz-counter-tag {
@@ -923,9 +1053,9 @@ const htmlContent = `<!DOCTYPE html>
       font-weight: 800;
       color: var(--primary);
       background: var(--primary-light);
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: var(--radius-full);
-      border: 1px solid #C7D2FE;
+      border: 1.5px solid #C7D2FE;
     }
 
     .progress-dots-row {
@@ -941,7 +1071,7 @@ const htmlContent = `<!DOCTYPE html>
       height: 12px;
       border-radius: var(--radius-full);
       background: #E2E8F0;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s var(--transition-spring);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -952,8 +1082,8 @@ const htmlContent = `<!DOCTYPE html>
 
     .progress-dot.current {
       background: #3B82F6;
-      transform: scaleY(1.35);
-      box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+      transform: scaleY(1.4);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
       animation: pulseDot 1s infinite alternate;
     }
 
@@ -961,8 +1091,8 @@ const htmlContent = `<!DOCTYPE html>
     .progress-dot.wrong { background: #EF4444; }
 
     @keyframes pulseDot {
-      0% { opacity: 0.7; }
-      100% { opacity: 1; }
+      0% { opacity: 0.75; transform: scaleY(1.2); }
+      100% { opacity: 1; transform: scaleY(1.45); }
     }
 
     .quiz-center-area {
@@ -978,29 +1108,35 @@ const htmlContent = `<!DOCTYPE html>
       width: 100%;
       background: #FFFFFF;
       border-radius: var(--radius-lg);
-      padding: 24px 20px;
+      padding: 26px 20px;
       border: 3px solid var(--border-color);
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      transition: all 0.25s ease;
-      min-height: 180px;
+      transition: all 0.25s var(--transition-spring);
+      min-height: 190px;
+      animation: cardPopIn 0.35s var(--transition-spring);
+    }
+
+    @keyframes cardPopIn {
+      0% { opacity: 0; transform: scale(0.94) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .question-card.correct-anim {
       border-color: #10B981;
       background: #F0FDF4;
-      transform: scale(1.02);
-      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+      transform: scale(1.025);
+      box-shadow: 0 10px 28px rgba(16, 185, 129, 0.25);
     }
 
     .question-card.wrong-anim {
       border-color: #EF4444;
       background: #FEF2F2;
-      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
+      box-shadow: 0 10px 28px rgba(239, 68, 68, 0.25);
     }
 
     .math-formula {
@@ -1016,9 +1152,9 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .input-box-display {
-      min-width: 80px;
-      height: 64px;
-      padding: 0 16px;
+      min-width: 84px;
+      height: 66px;
+      padding: 0 18px;
       border-radius: var(--radius-md);
       background: #F8FAFC;
       border: 3px dashed var(--primary);
@@ -1028,7 +1164,7 @@ const htmlContent = `<!DOCTYPE html>
       font-size: 38px;
       font-weight: 900;
       color: var(--primary);
-      transition: all 0.15s ease;
+      transition: all 0.18s var(--transition-spring);
     }
 
     .input-box-display.filled {
@@ -1036,6 +1172,7 @@ const htmlContent = `<!DOCTYPE html>
       background: #EEF2FF;
       color: var(--primary-dark);
       border-color: var(--primary);
+      transform: scale(1.04);
     }
 
     .input-box-display.correct {
@@ -1054,7 +1191,7 @@ const htmlContent = `<!DOCTYPE html>
 
     .feedback-box {
       margin-top: 14px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       min-height: 28px;
       display: flex;
@@ -1063,23 +1200,32 @@ const htmlContent = `<!DOCTYPE html>
       text-align: center;
     }
 
-    .feedback-box.correct { color: #15803D; animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-    .feedback-box.wrong { color: #B91C1C; animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .feedback-box.correct { color: #15803D; animation: popIn 0.3s var(--transition-spring); }
+    .feedback-box.wrong { color: #B91C1C; animation: popIn 0.3s var(--transition-spring); }
 
     .btn-skip-wrong {
-      margin-top: 10px;
-      background: #EF4444;
+      margin-top: 12px;
+      background: linear-gradient(135deg, #EF4444, #DC2626);
       color: #FFFFFF;
       font-size: 13px;
       font-weight: 800;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: var(--radius-full);
       border: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 3px 8px rgba(239, 68, 68, 0.4);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+      transition: all 0.2s var(--transition-spring);
+    }
+
+    .btn-skip-wrong:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-skip-wrong:active {
+      transform: scale(0.95);
     }
 
     @keyframes popIn {
@@ -1111,7 +1257,13 @@ const htmlContent = `<!DOCTYPE html>
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.1s ease;
+      transition: all 0.12s ease;
+    }
+
+    .numpad-btn:hover {
+      background: #F1F5F9;
+      border-color: #94A3B8;
+      transform: translateY(-2px);
     }
 
     .numpad-btn:active {
@@ -1121,12 +1273,16 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .numpad-btn.btn-delete {
-      font-size: 17px;
+      font-size: 16px;
       background: #FFF1F2;
       border-color: #FECDD3;
       border-bottom-color: #F43F5E;
       color: #E11D48;
-      gap: 4px;
+      gap: 6px;
+    }
+    .numpad-btn.btn-delete:hover {
+      background: #FFE4E6;
+      border-color: #F43F5E;
     }
 
     .numpad-btn.btn-submit {
@@ -1136,16 +1292,22 @@ const htmlContent = `<!DOCTYPE html>
       border-bottom-color: #94A3B8;
       color: #94A3B8;
       cursor: not-allowed;
-      gap: 4px;
+      gap: 6px;
     }
 
     .numpad-btn.btn-submit.active {
-      background: #10B981;
+      background: linear-gradient(135deg, #10B981, #059669);
       border-color: #34D399;
-      border-bottom-color: #059669;
+      border-bottom-color: #047857;
       color: #FFFFFF;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+      animation: pulseButton 1.5s infinite alternate;
+    }
+
+    @keyframes pulseButton {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.02); }
     }
 
     .numpad-btn.btn-submit.active:active {
@@ -1159,7 +1321,6 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     /* ========== 7. ENGLISH QUIZ SPECIAL MECHANICS ========== */
-    /* Common English Prompt in card */
     .eng-prompt-box {
       display: flex;
       flex-direction: column;
@@ -1169,8 +1330,9 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .eng-prompt-emoji {
-      font-size: 56px;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+      font-size: 58px;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+      animation: floatMascot 3.2s ease-in-out infinite;
     }
 
     .eng-prompt-word {
@@ -1179,7 +1341,7 @@ const htmlContent = `<!DOCTYPE html>
       color: var(--primary);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .eng-prompt-subtext {
@@ -1189,82 +1351,98 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .btn-speak-inline {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: var(--radius-full);
       background: #EEF2FF;
-      border: 1.5px solid #C7D2FE;
+      border: 2px solid #C7D2FE;
       color: #4F46E5;
-      font-size: 16px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s var(--transition-spring);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-speak-inline:hover {
+      transform: scale(1.12);
+      background: #E0E7FF;
+      border-color: #818CF8;
     }
 
     .btn-speak-inline:active {
-      transform: scale(0.9);
+      transform: scale(0.92);
       background: #C7D2FE;
     }
 
-    /* Mechanic B: Listening Central Audio Controls */
+    /* Mechanic B: Listening Audio Button with Ripple Pulse */
     .listening-center-controls {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
       padding: 10px 0;
     }
 
     .btn-audio-main {
-      width: 86px;
-      height: 86px;
+      width: 90px;
+      height: 90px;
       border-radius: var(--radius-full);
       background: linear-gradient(135deg, #3B82F6, #1D4ED8);
       border: none;
       color: #FFFFFF;
-      font-size: 38px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      animation: audioPulse 2s infinite;
+      box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
+      transition: all 0.2s var(--transition-spring);
+      animation: audioPulseWave 2s infinite;
+    }
+
+    .btn-audio-main:hover {
+      transform: scale(1.08);
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.55);
     }
 
     .btn-audio-main:active {
       transform: scale(0.92);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     }
 
-    @keyframes audioPulse {
-      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
-      70% { box-shadow: 0 0 0 16px rgba(59, 130, 246, 0); }
+    @keyframes audioPulseWave {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      70% { box-shadow: 0 0 0 18px rgba(59, 130, 246, 0); }
       100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
     }
 
     .btn-audio-slow {
       background: #EFF6FF;
-      border: 1.5px solid #BFDBFE;
+      border: 2px solid #BFDBFE;
       color: #1D4ED8;
       font-size: 13px;
       font-weight: 800;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: var(--radius-full);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: all 0.2s var(--transition-spring);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-audio-slow:hover {
+      transform: scale(1.05);
+      background: #DBEAFE;
+      border-color: #60A5FA;
     }
 
     .btn-audio-slow:active {
       transform: scale(0.94);
-      background: #DBEAFE;
     }
 
-    /* English Option Buttons (Mechanic A, B, D) */
+    /* Option Buttons (Mechanic A, B, D) */
     .eng-options-container {
       background: #FFFFFF;
       border-top: 2px solid var(--border-color);
@@ -1275,7 +1453,7 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .eng-opt-btn {
-      min-height: 54px;
+      min-height: 56px;
       background: #F8FAFC;
       border: 2px solid #CBD5E1;
       border-bottom: 4px solid #94A3B8;
@@ -1287,11 +1465,17 @@ const htmlContent = `<!DOCTYPE html>
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 14px;
+      padding: 10px 16px;
       cursor: pointer;
-      transition: all 0.1s ease;
+      transition: all 0.15s var(--transition-spring);
       text-align: center;
       gap: 8px;
+    }
+
+    .eng-opt-btn:hover {
+      transform: translateY(-2px);
+      border-color: #93C5FD;
+      background: #F0F9FF;
     }
 
     .eng-opt-btn:active {
@@ -1305,6 +1489,7 @@ const htmlContent = `<!DOCTYPE html>
       border-color: #86EFAC !important;
       border-bottom-color: #10B981 !important;
       color: #15803D !important;
+      transform: scale(1.02);
     }
 
     .eng-opt-btn.wrong {
@@ -1332,8 +1517,8 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .spelling-slot {
-      width: 44px;
-      height: 52px;
+      width: 46px;
+      height: 54px;
       border-radius: var(--radius-sm);
       background: #F1F5F9;
       border: 2.5px dashed #94A3B8;
@@ -1345,14 +1530,25 @@ const htmlContent = `<!DOCTYPE html>
       font-weight: 900;
       color: var(--primary);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s var(--transition-spring);
+    }
+
+    .spelling-slot:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
     }
 
     .spelling-slot.filled {
       background: #EEF2FF;
       border-style: solid;
       border-color: var(--primary);
-      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.15);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.18);
+      animation: slotPop 0.25s var(--transition-spring);
+    }
+
+    @keyframes slotPop {
+      0% { transform: scale(0.85); }
+      100% { transform: scale(1); }
     }
 
     .spelling-slot.correct {
@@ -1386,8 +1582,8 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .letter-tile {
-      width: 50px;
-      height: 56px;
+      width: 52px;
+      height: 58px;
       border-radius: var(--radius-md);
       background: #FFFFFF;
       border: 2px solid #CBD5E1;
@@ -1400,17 +1596,24 @@ const htmlContent = `<!DOCTYPE html>
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.1s ease;
+      transition: all 0.15s var(--transition-spring);
+      box-shadow: var(--shadow-sm);
     }
 
-    .letter-tile:active {
+    .letter-tile:hover:not(.used) {
+      transform: translateY(-4px) scale(1.06);
+      border-color: var(--primary);
+      box-shadow: 0 8px 16px rgba(79, 70, 229, 0.18);
+    }
+
+    .letter-tile:active:not(.used) {
       transform: translateY(2px);
       border-bottom-width: 2px;
       background: #F1F5F9;
     }
 
     .letter-tile.used {
-      opacity: 0.25;
+      opacity: 0.22;
       pointer-events: none;
       border-bottom-width: 2px;
       background: #E2E8F0;
@@ -1425,13 +1628,28 @@ const htmlContent = `<!DOCTYPE html>
 
     .btn-spelling-del {
       background: #FFF1F2;
-      border: 1.5px solid #FECDD3;
+      border: 2px solid #FECDD3;
+      border-bottom: 3.5px solid #F43F5E;
       color: #E11D48;
       font-size: 14px;
       font-weight: 800;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: var(--radius-md);
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-spelling-del:hover {
+      background: #FFE4E6;
+      transform: translateY(-2px);
+    }
+
+    .btn-spelling-del:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
     }
 
     /* Mechanic D: Grammar Sentence Card */
@@ -1440,23 +1658,24 @@ const htmlContent = `<!DOCTYPE html>
       font-size: 24px;
       font-weight: 800;
       color: var(--text-main);
-      line-height: 1.4;
+      line-height: 1.45;
       margin-bottom: 8px;
     }
 
     .grammar-blank-tag {
       display: inline-block;
-      padding: 2px 12px;
+      padding: 2px 14px;
       background: #EEF2FF;
       border: 2px dashed var(--primary);
       border-radius: var(--radius-sm);
       color: var(--primary);
       min-width: 70px;
+      transition: all 0.2s ease;
     }
 
     .grammar-rule-box {
-      margin-top: 10px;
-      padding: 10px 14px;
+      margin-top: 12px;
+      padding: 12px 16px;
       background: #FEF3C7;
       border: 1.5px solid #FCD34D;
       border-radius: var(--radius-md);
@@ -1464,11 +1683,11 @@ const htmlContent = `<!DOCTYPE html>
       font-weight: 700;
       color: #92400E;
       text-align: left;
-      line-height: 1.4;
+      line-height: 1.45;
       display: flex;
       align-items: flex-start;
       gap: 8px;
-      animation: popIn 0.3s ease;
+      animation: popIn 0.3s var(--transition-spring);
     }
 
     /* ========== 8. RESULT SCREENS ========== */
@@ -1495,7 +1714,7 @@ const htmlContent = `<!DOCTYPE html>
     .result-icon-badge {
       font-size: 64px;
       margin-bottom: 12px;
-      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: popIn 0.5s var(--transition-spring);
     }
 
     .result-headline {
@@ -1536,8 +1755,9 @@ const htmlContent = `<!DOCTYPE html>
     }
 
     .result-stars-row {
-      font-size: 32px;
-      letter-spacing: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       margin-bottom: 8px;
     }
 
@@ -1557,7 +1777,7 @@ const htmlContent = `<!DOCTYPE html>
       color: #BE123C;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .mistakes-list {
@@ -1594,9 +1814,9 @@ const htmlContent = `<!DOCTYPE html>
 
     .btn-action-primary {
       height: 54px;
-      background: #10B981;
+      background: linear-gradient(135deg, #10B981, #059669);
       border: none;
-      border-bottom: 4px solid #059669;
+      border-bottom: 4px solid #047857;
       border-radius: var(--radius-md);
       font-family: var(--font-heading);
       font-size: 17px;
@@ -1607,8 +1827,13 @@ const htmlContent = `<!DOCTYPE html>
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      transition: all 0.1s ease;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      transition: all 0.15s var(--transition-spring);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+
+    .btn-action-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.45);
     }
 
     .btn-action-primary:active {
@@ -1631,7 +1856,13 @@ const htmlContent = `<!DOCTYPE html>
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      transition: all 0.1s ease;
+      transition: all 0.15s var(--transition-spring);
+    }
+
+    .btn-action-secondary:hover {
+      transform: translateY(-2px);
+      background: #F8FAFC;
+      border-color: #94A3B8;
     }
 
     .btn-action-secondary:active {
@@ -1643,8 +1874,8 @@ const htmlContent = `<!DOCTYPE html>
     .modal-backdrop {
       position: absolute;
       inset: 0;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(4px);
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(6px);
       z-index: 100;
       display: flex;
       align-items: center;
@@ -1652,7 +1883,7 @@ const htmlContent = `<!DOCTYPE html>
       padding: 24px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.25s ease;
     }
 
     .modal-backdrop.active {
@@ -1669,7 +1900,7 @@ const htmlContent = `<!DOCTYPE html>
       box-shadow: 0 20px 40px rgba(0,0,0,0.25);
       border: 3px solid var(--border-color);
       transform: scale(0.92);
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.25s var(--transition-spring);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1704,7 +1935,7 @@ const htmlContent = `<!DOCTYPE html>
       justify-content: center;
       cursor: pointer;
       border: none;
-      transition: all 0.1s ease;
+      transition: all 0.15s ease;
     }
 
     .btn-modal:active { transform: translateY(2px); }
@@ -1728,7 +1959,7 @@ const htmlContent = `<!DOCTYPE html>
       gap: 8px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       z-index: 200;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.3s var(--transition-spring);
       pointer-events: none;
       text-align: center;
       width: max-content;
@@ -1765,11 +1996,9 @@ const htmlContent = `<!DOCTYPE html>
 </head>
 <body>
 
-  <!-- Main Mobile App Wrapper -->
   <div id="app-container">
     <canvas id="confetti-canvas"></canvas>
 
-    <!-- Toast Notification Banner -->
     <div id="toast-notification">
       <span id="toast-icon">🚀</span>
       <span id="toast-text">Xabar</span>
@@ -1802,7 +2031,7 @@ const htmlContent = `<!DOCTYPE html>
     </div>
 
     <!-- =====================================================================
-         SCREEN 2: HOME SCREEN (Matematika | Ingliz tili)
+         SCREEN 2: HOME SCREEN
          ===================================================================== -->
     <div id="screen-home" class="screen">
       <header class="app-header">
@@ -1812,11 +2041,11 @@ const htmlContent = `<!DOCTYPE html>
         </div>
         <div class="header-actions">
           <div class="stars-badge">
-            <span>⭐</span>
+            ${ICONS.star}
             <span id="home-total-stars">0 / 240</span>
           </div>
           <button class="icon-btn" id="btn-toggle-sound" title="Ovozni o'chirish/yoqish">
-            <span id="sound-icon">🔊</span>
+            <span id="sound-icon">${ICONS.soundOn}</span>
           </button>
         </div>
       </header>
@@ -1882,23 +2111,23 @@ const htmlContent = `<!DOCTYPE html>
 
         <div class="home-footer-stats">
           <div class="stat-pill">
-            <span>🎯</span>
+            ${ICONS.target}
             <span>Jami misollar & so'zlar: <b id="home-total-solved">0 ta</b></span>
           </div>
           <button class="icon-btn" id="btn-open-settings" title="Ota-ona sozlamalari">
-            <span>⚙️</span>
+            ${ICONS.settings}
           </button>
         </div>
       </div>
     </div>
 
     <!-- =====================================================================
-         SCREEN 3: MATH OPERATIONS SCREEN (4 ta amal)
+         SCREEN 3: MATH OPERATIONS SCREEN
          ===================================================================== -->
     <div id="screen-operations" class="screen">
       <header class="app-header">
         <button class="btn-back" id="btn-back-to-home">
-          <span>⬅️</span>
+          ${ICONS.back}
           <span>Orqaga</span>
         </button>
         <div class="screen-title">Matematika</div>
@@ -1907,7 +2136,7 @@ const htmlContent = `<!DOCTYPE html>
 
       <div class="operations-content">
         <div class="op-card addition" data-op="addition">
-          <div class="op-icon">➕</div>
+          <div class="op-icon">${ICONS.plus}</div>
           <div class="op-info">
             <div class="op-header-row">
               <div class="op-title">Qo'shish</div>
@@ -1924,7 +2153,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
 
         <div class="op-card subtraction" data-op="subtraction">
-          <div class="op-icon">➖</div>
+          <div class="op-icon">${ICONS.minus}</div>
           <div class="op-info">
             <div class="op-header-row">
               <div class="op-title">Ayirish</div>
@@ -1941,7 +2170,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
 
         <div class="op-card multiplication" data-op="multiplication">
-          <div class="op-icon">✖️</div>
+          <div class="op-icon">${ICONS.multiply}</div>
           <div class="op-info">
             <div class="op-header-row">
               <div class="op-title">Ko'paytirish</div>
@@ -1958,7 +2187,7 @@ const htmlContent = `<!DOCTYPE html>
         </div>
 
         <div class="op-card division" data-op="division">
-          <div class="op-icon">➗</div>
+          <div class="op-icon">${ICONS.divide}</div>
           <div class="op-info">
             <div class="op-header-row">
               <div class="op-title">Bo'lish</div>
@@ -1977,12 +2206,12 @@ const htmlContent = `<!DOCTYPE html>
     </div>
 
     <!-- =====================================================================
-         SCREEN 4: MATH STAGES SCREEN (10 ta Etap ro'yxati)
+         SCREEN 4: MATH STAGES SCREEN
          ===================================================================== -->
     <div id="screen-stages" class="screen">
       <header class="app-header">
         <button class="btn-back" id="btn-back-to-ops">
-          <span>⬅️</span>
+          ${ICONS.back}
           <span>Amallar</span>
         </button>
         <div class="screen-title" id="stages-screen-title">Qo'shish</div>
@@ -1994,7 +2223,10 @@ const htmlContent = `<!DOCTYPE html>
           <span style="font-weight: 800; font-size: 14px; color: var(--text-muted);">
             Bosqichni tanla va misollarni yech:
           </span>
-          <span id="stages-summary-stars" style="font-weight: 900; color: #D97706;">⭐ 0 / 30</span>
+          <span id="stages-summary-stars" style="font-weight: 900; color: #D97706; display: flex; align-items: center; gap: 4px;">
+            ${ICONS.star}
+            <span id="stages-summary-stars-val">0 / 30</span>
+          </span>
         </div>
         <div class="stages-grid" id="stages-list-container"></div>
       </div>
@@ -2007,7 +2239,7 @@ const htmlContent = `<!DOCTYPE html>
       <div class="quiz-top-bar">
         <div class="quiz-meta-row">
           <button class="btn-exit-quiz" id="btn-exit-quiz">
-            <span>✖️</span>
+            ${ICONS.exit}
             <span>Chiqish</span>
           </button>
           <div class="quiz-counter-tag" id="quiz-question-counter">1-Etap | Misol: 1 / 10</div>
@@ -2023,7 +2255,8 @@ const htmlContent = `<!DOCTYPE html>
           </div>
           <div class="feedback-box" id="quiz-feedback-box"></div>
           <button class="btn-skip-wrong" id="btn-skip-wrong" style="display: none;">
-            <span>Tushundim, keyingisi ➡️</span>
+            <span>Tushundim, keyingisi</span>
+            ${ICONS.next}
           </button>
         </div>
       </div>
@@ -2038,9 +2271,15 @@ const htmlContent = `<!DOCTYPE html>
         <button class="numpad-btn" data-key="7">7</button>
         <button class="numpad-btn" data-key="8">8</button>
         <button class="numpad-btn" data-key="9">9</button>
-        <button class="numpad-btn btn-delete" data-key="del">⌫ O'chirish</button>
+        <button class="numpad-btn btn-delete" data-key="del">
+          ${ICONS.delete}
+          <span>O'chirish</span>
+        </button>
         <button class="numpad-btn" data-key="0">0</button>
-        <button class="numpad-btn btn-submit" id="btn-quiz-submit" data-key="submit">✅ TEKSHIRISH</button>
+        <button class="numpad-btn btn-submit" id="btn-quiz-submit" data-key="submit">
+          ${ICONS.check}
+          <span>TEKSHIRISH</span>
+        </button>
       </div>
     </div>
 
@@ -2049,13 +2288,13 @@ const htmlContent = `<!DOCTYPE html>
          ===================================================================== -->
     <div id="screen-result" class="screen">
       <div class="result-card-main" id="result-card-main">
-        <div class="result-icon-badge" id="result-badge-icon">🏆</div>
+        <div class="result-icon-badge" id="result-badge-icon">${ICONS.trophy}</div>
         <div class="result-headline" id="result-headline">YANGI REKORD!</div>
         <div class="result-score-tag" id="result-score-percent">90%</div>
         <div class="result-comparison-pill new-record" id="result-comparison-text">
           Oldingi eng yuqori natijang: 70% edi
         </div>
-        <div class="result-stars-row" id="result-stars-display">⭐⭐⭐</div>
+        <div class="result-stars-row" id="result-stars-display"></div>
         <div style="font-size: 14px; font-weight: 700; color: var(--text-muted);" id="result-summary-line">
           10 ta misoldan 9 tasini to'g'ri yechding!
         </div>
@@ -2071,24 +2310,27 @@ const htmlContent = `<!DOCTYPE html>
 
       <div class="result-actions">
         <button class="btn-action-primary" id="btn-next-stage">
-          <span>➡️ Keyingi etapga o'tish</span>
+          ${ICONS.next}
+          <span>Keyingi etapga o'tish</span>
         </button>
         <button class="btn-action-secondary" id="btn-retry-stage">
-          <span>🔄 Yana urinib ko'rish</span>
+          ${ICONS.retry}
+          <span>Yana urinib ko'rish</span>
         </button>
         <button class="btn-action-secondary" id="btn-back-stages-from-result">
-          <span>📋 Bosqichlarga qaytish</span>
+          ${ICONS.list}
+          <span>Bosqichlarga qaytish</span>
         </button>
       </div>
     </div>
 
     <!-- =====================================================================
-         SCREEN 7: ENGLISH CATEGORIES SCREEN (4 ta bo'lim)
+         SCREEN 7: ENGLISH CATEGORIES SCREEN
          ===================================================================== -->
     <div id="screen-eng-categories" class="screen">
       <header class="app-header">
         <button class="btn-back" id="btn-back-eng-to-home">
-          <span>⬅️</span>
+          ${ICONS.back}
           <span>Orqaga</span>
         </button>
         <div class="screen-title">🇬🇧 Ingliz tili</div>
@@ -2096,9 +2338,8 @@ const htmlContent = `<!DOCTYPE html>
       </header>
 
       <div class="operations-content">
-        <!-- 1. Lug'at -->
         <div class="op-card vocabulary" data-cat="vocabulary">
-          <div class="op-icon">📚</div>
+          <div class="op-icon">${ICONS.book}</div>
           <div class="op-info">
             <div class="op-header-row">
               <div class="op-title">So'z boyligi</div>
@@ -2114,9 +2355,8 @@ const htmlContent = `<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- 2. Tinglab topish -->
         <div class="op-card listening" data-cat="listening">
-          <div class="op-icon">🎧</div>
+          <div class="op-icon">${ICONS.headphones}</div>
           <div class="op-info">
             <div class="op-header-row">
               <div class="op-title">Eshitib topish</div>
@@ -2132,9 +2372,8 @@ const htmlContent = `<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- 3. So'z terish -->
         <div class="op-card spelling" data-cat="spelling">
-          <div class="op-icon">🧩</div>
+          <div class="op-icon">${ICONS.puzzle}</div>
           <div class="op-info">
             <div class="op-header-row">
               <div class="op-title">Harflardan so'z yasash</div>
@@ -2150,9 +2389,8 @@ const htmlContent = `<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- 4. Grammatika -->
         <div class="op-card grammar" data-cat="grammar">
-          <div class="op-icon">📝</div>
+          <div class="op-icon">${ICONS.grammar}</div>
           <div class="op-info">
             <div class="op-header-row">
               <div class="op-title">Qoidalar va Gaplar</div>
@@ -2171,12 +2409,12 @@ const htmlContent = `<!DOCTYPE html>
     </div>
 
     <!-- =====================================================================
-         SCREEN 8: ENGLISH STAGES SCREEN (10 ta Etap ro'yxati)
+         SCREEN 8: ENGLISH STAGES SCREEN
          ===================================================================== -->
     <div id="screen-eng-stages" class="screen">
       <header class="app-header">
         <button class="btn-back" id="btn-back-to-eng-cats">
-          <span>⬅️</span>
+          ${ICONS.back}
           <span>Bo'limlar</span>
         </button>
         <div class="screen-title" id="eng-stages-screen-title">So'z boyligi</div>
@@ -2188,20 +2426,23 @@ const htmlContent = `<!DOCTYPE html>
           <span style="font-weight: 800; font-size: 14px; color: var(--text-muted);">
             Etapni tanla va yulduzlarni yig':
           </span>
-          <span id="eng-stages-summary-stars" style="font-weight: 900; color: #D97706;">⭐ 0 / 30</span>
+          <span id="eng-stages-summary-stars" style="font-weight: 900; color: #D97706; display: flex; align-items: center; gap: 4px;">
+            ${ICONS.star}
+            <span id="eng-stages-summary-stars-val">0 / 30</span>
+          </span>
         </div>
         <div class="stages-grid" id="eng-stages-list-container"></div>
       </div>
     </div>
 
     <!-- =====================================================================
-         SCREEN 9: ENGLISH QUIZ GAME SCREEN (4 ta Mexanika)
+         SCREEN 9: ENGLISH QUIZ GAME SCREEN
          ===================================================================== -->
     <div id="screen-eng-quiz" class="screen">
       <div class="quiz-top-bar">
         <div class="quiz-meta-row">
           <button class="btn-exit-quiz" id="btn-exit-eng-quiz">
-            <span>✖️</span>
+            ${ICONS.exit}
             <span>Chiqish</span>
           </button>
           <div class="quiz-counter-tag" id="eng-quiz-question-counter">1-Etap | Savol: 1 / 10</div>
@@ -2209,23 +2450,18 @@ const htmlContent = `<!DOCTYPE html>
         <div class="progress-dots-row" id="eng-quiz-progress-dots"></div>
       </div>
 
-      <!-- Question Card: Dynamic for 4 Mechanics -->
       <div class="quiz-center-area">
         <div class="question-card" id="eng-quiz-question-card">
-          <div id="eng-quiz-card-content">
-            <!-- Dynamically populated per mechanic -->
-          </div>
+          <div id="eng-quiz-card-content"></div>
           <div class="feedback-box" id="eng-quiz-feedback-box"></div>
           <button class="btn-skip-wrong" id="btn-eng-skip-wrong" style="display: none;">
-            <span>Tushundim, keyingisi ➡️</span>
+            <span>Tushundim, keyingisi</span>
+            ${ICONS.next}
           </button>
         </div>
       </div>
 
-      <!-- Touch Options or Letter Tiles Bank -->
-      <div id="eng-quiz-bottom-panel">
-        <!-- Dynamically rendered (Options grid or Spelling Tiles) -->
-      </div>
+      <div id="eng-quiz-bottom-panel"></div>
     </div>
 
     <!-- =====================================================================
@@ -2233,13 +2469,13 @@ const htmlContent = `<!DOCTYPE html>
          ===================================================================== -->
     <div id="screen-eng-result" class="screen">
       <div class="result-card-main" id="eng-result-card-main">
-        <div class="result-icon-badge" id="eng-result-badge-icon">🏆</div>
+        <div class="result-icon-badge" id="eng-result-badge-icon">${ICONS.trophy}</div>
         <div class="result-headline" id="eng-result-headline">YANGI REKORD!</div>
         <div class="result-score-tag" id="eng-result-score-percent">90%</div>
         <div class="result-comparison-pill new-record" id="eng-result-comparison-text">
           Oldingi eng yuqori natijang: 70% edi
         </div>
-        <div class="result-stars-row" id="eng-result-stars-display">⭐⭐⭐</div>
+        <div class="result-stars-row" id="eng-result-stars-display"></div>
         <div style="font-size: 14px; font-weight: 700; color: var(--text-muted);" id="eng-result-summary-line">
           10 ta savoldan 9 tasini to'g'ri topding!
         </div>
@@ -2255,19 +2491,22 @@ const htmlContent = `<!DOCTYPE html>
 
       <div class="result-actions">
         <button class="btn-action-primary" id="btn-eng-next-stage">
-          <span>➡️ Keyingi etapga o'tish</span>
+          ${ICONS.next}
+          <span>Keyingi etapga o'tish</span>
         </button>
         <button class="btn-action-secondary" id="btn-eng-retry-stage">
-          <span>🔄 Yana urinib ko'rish</span>
+          ${ICONS.retry}
+          <span>Yana urinib ko'rish</span>
         </button>
         <button class="btn-action-secondary" id="btn-eng-back-stages">
-          <span>📋 Bosqichlarga qaytish</span>
+          ${ICONS.list}
+          <span>Bosqichlarga qaytish</span>
         </button>
       </div>
     </div>
 
     <!-- =====================================================================
-         EXIT CONFIRM MODAL
+         MODALS
          ===================================================================== -->
     <div class="modal-backdrop" id="modal-exit-confirm">
       <div class="modal-card">
@@ -2283,9 +2522,6 @@ const htmlContent = `<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- =====================================================================
-         PARENTAL SETTINGS MODAL
-         ===================================================================== -->
     <div class="modal-backdrop" id="modal-settings">
       <div class="modal-card">
         <div class="modal-icon">⚙️</div>
@@ -2313,9 +2549,16 @@ const htmlContent = `<!DOCTYPE html>
   </div>
 
   <script>
-    /* ==========================================================================
-       1. SOUND EFFECTS & WEB SPEECH API
-       ========================================================================== */
+    const ICONS_JS = {
+      star: \`${ICONS.star}\`,
+      starWhite: \`${ICONS.starWhite}\`,
+      soundOn: \`${ICONS.soundOn}\`,
+      soundOff: \`${ICONS.soundOff}\`,
+      speaker: \`${ICONS.speaker}\`,
+      speakerBig: \`${ICONS.speakerBig}\`,
+      lock: \`${ICONS.lock}\`
+    };
+
     class SoundEngine {
       constructor() {
         this.ctx = null;
@@ -2440,9 +2683,6 @@ const htmlContent = `<!DOCTYPE html>
 
     const sound = new SoundEngine();
 
-    /* ==========================================================================
-       2. CONFETTI CELEBRATION ENGINE
-       ========================================================================== */
     class ConfettiEngine {
       constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
@@ -2511,14 +2751,7 @@ const htmlContent = `<!DOCTYPE html>
       }
     }
 
-    /* ==========================================================================
-       3. ENGLISH DATABASE CONTENT (4 Categories x 10 Stages = 40 Stages)
-       ========================================================================== */
     const ENGLISH_DATA = ${JSON.stringify(ENGLISH_DATA, null, 2)};
-
-    /* ==========================================================================
-       4. DATABASE & LOCALSTORAGE MANAGER (savarbek_edu_v1)
-       ========================================================================== */
     const DB_KEY = 'savarbek_edu_v1';
 
     class DatabaseManager {
@@ -2598,76 +2831,53 @@ const htmlContent = `<!DOCTYPE html>
         return fresh;
       }
 
-      getMathStage(operation, stageNum) {
-        return this.data.math[operation][stageNum - 1];
-      }
+      getMathStage(op, num) { return this.data.math[op][num - 1]; }
+      getEngStage(cat, num) { return this.data.english[cat][num - 1]; }
 
-      getEngStage(category, stageNum) {
-        return this.data.english[category][stageNum - 1];
-      }
-
-      saveMathResult(operation, stageNum, currentPercentage) {
-        const stage = this.getMathStage(operation, stageNum);
+      saveMathResult(op, num, percent) {
+        const stage = this.getMathStage(op, num);
         const oldMax = stage.maxPercentage;
         stage.attempts += 1;
-        stage.lastPercentage = currentPercentage;
+        stage.lastPercentage = percent;
         this.data.totalQuestionsSolved += 10;
-
         let isNewRecord = false;
-        if (currentPercentage > oldMax) {
-          stage.maxPercentage = currentPercentage;
+        if (percent > oldMax) {
+          stage.maxPercentage = percent;
           stage.updatedAt = new Date().toISOString();
           isNewRecord = true;
         }
-
         this.save();
-        return {
-          oldMax,
-          currentPercentage,
-          isNewRecord,
-          isPerfect: currentPercentage === 100,
-          attempts: stage.attempts
-        };
+        return { oldMax, currentPercentage: percent, isNewRecord, isPerfect: percent === 100, attempts: stage.attempts };
       }
 
-      saveEngResult(category, stageNum, currentPercentage) {
-        const stage = this.getEngStage(category, stageNum);
+      saveEngResult(cat, num, percent) {
+        const stage = this.getEngStage(cat, num);
         const oldMax = stage.maxPercentage;
         stage.attempts += 1;
-        stage.lastPercentage = currentPercentage;
+        stage.lastPercentage = percent;
         this.data.totalQuestionsSolved += 10;
-
         let isNewRecord = false;
-        if (currentPercentage > oldMax) {
-          stage.maxPercentage = currentPercentage;
+        if (percent > oldMax) {
+          stage.maxPercentage = percent;
           stage.updatedAt = new Date().toISOString();
           isNewRecord = true;
         }
-
         this.save();
-        return {
-          oldMax,
-          currentPercentage,
-          isNewRecord,
-          isPerfect: currentPercentage === 100,
-          attempts: stage.attempts
-        };
+        return { oldMax, currentPercentage: percent, isNewRecord, isPerfect: percent === 100, attempts: stage.attempts };
       }
 
       getOverallMathPercentage() {
         let sum = 0;
-        const ops = ['addition', 'subtraction', 'multiplication', 'division'];
-        ops.forEach(op => {
-          this.data.math[op].forEach(stage => { sum += stage.maxPercentage; });
+        ['addition', 'subtraction', 'multiplication', 'division'].forEach(op => {
+          this.data.math[op].forEach(s => sum += s.maxPercentage);
         });
         return Math.round(sum / 40);
       }
 
       getOverallEnglishPercentage() {
         let sum = 0;
-        const cats = ['vocabulary', 'listening', 'spelling', 'grammar'];
-        cats.forEach(cat => {
-          this.data.english[cat].forEach(stage => { sum += stage.maxPercentage; });
+        ['vocabulary', 'listening', 'spelling', 'grammar'].forEach(cat => {
+          this.data.english[cat].forEach(s => sum += s.maxPercentage);
         });
         return Math.round(sum / 40);
       }
@@ -2694,17 +2904,14 @@ const htmlContent = `<!DOCTYPE html>
 
       getTotalStars() {
         let stars = 0;
-        const ops = ['addition', 'subtraction', 'multiplication', 'division'];
-        ops.forEach(op => {
+        ['addition', 'subtraction', 'multiplication', 'division'].forEach(op => {
           this.data.math[op].forEach(s => {
             if (s.maxPercentage === 100) stars += 3;
             else if (s.maxPercentage >= 80) stars += 2;
             else if (s.maxPercentage >= 50) stars += 1;
           });
         });
-
-        const cats = ['vocabulary', 'listening', 'spelling', 'grammar'];
-        cats.forEach(cat => {
+        ['vocabulary', 'listening', 'spelling', 'grammar'].forEach(cat => {
           this.data.english[cat].forEach(s => {
             if (s.maxPercentage === 100) stars += 3;
             else if (s.maxPercentage >= 80) stars += 2;
@@ -2714,42 +2921,37 @@ const htmlContent = `<!DOCTYPE html>
         return stars;
       }
 
-      isMathStageUnlocked(operation, stageNum) {
-        if (stageNum === 1) return true;
-        return this.getMathStage(operation, stageNum - 1).maxPercentage >= 50;
+      isMathStageUnlocked(op, num) {
+        if (num === 1) return true;
+        return this.getMathStage(op, num - 1).maxPercentage >= 50;
       }
 
-      isEngStageUnlocked(category, stageNum) {
-        if (stageNum === 1) return true;
-        return this.getEngStage(category, stageNum - 1).maxPercentage >= 50;
+      isEngStageUnlocked(cat, num) {
+        if (num === 1) return true;
+        return this.getEngStage(cat, num - 1).maxPercentage >= 50;
       }
     }
 
     const db = new DatabaseManager();
 
-    /* ==========================================================================
-       5. MATH GENERATOR ALGORITHMS
-       ========================================================================== */
     class MathGenerator {
       static randomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
 
-      static generateStageQuestions(operation, stageNum) {
+      static generateStageQuestions(op, stageNum) {
         const questions = [];
         const seenKeys = new Set();
         let attemptsCount = 0;
-
         while (questions.length < 10 && attemptsCount < 500) {
           attemptsCount++;
           let q = null;
-          switch (operation) {
+          switch (op) {
             case 'addition': q = MathGenerator.generateAddition(stageNum); break;
             case 'subtraction': q = MathGenerator.generateSubtraction(stageNum); break;
             case 'multiplication': q = MathGenerator.generateMultiplication(stageNum); break;
             case 'division': q = MathGenerator.generateDivision(stageNum); break;
           }
-
           if (q && !seenKeys.has(q.key)) {
             seenKeys.add(q.key);
             questions.push(q);
@@ -2978,9 +3180,6 @@ const htmlContent = `<!DOCTYPE html>
       }
     }
 
-    /* ==========================================================================
-       6. ENGLISH QUIZ GENERATOR (Smart Distractors & 4 Mechanics)
-       ========================================================================== */
     class EnglishGenerator {
       static shuffle(arr) {
         const a = [...arr];
@@ -2999,7 +3198,6 @@ const htmlContent = `<!DOCTYPE html>
 
         return selected.map(item => {
           if (category === 'vocabulary') {
-            // Smart distractors from same stage items
             const wrongOptions = stageData.items
               .filter(x => x.en !== item.en)
               .map(x => x.uz);
@@ -3016,7 +3214,6 @@ const htmlContent = `<!DOCTYPE html>
               speakText: item.en
             };
           } else if (category === 'listening') {
-            // Audio test with smart distractors
             const wrongOptions = stageData.items
               .filter(x => x.audio !== item.audio)
               .map(x => \`\${x.emoji} \${x.uz}\`);
@@ -3034,7 +3231,6 @@ const htmlContent = `<!DOCTYPE html>
               speakText: item.audio
             };
           } else if (category === 'spelling') {
-            // Word letter tiles with 1-2 random distractor letters
             const cleanWord = item.word.toUpperCase();
             const correctLetters = cleanWord.split('');
             const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -3069,9 +3265,6 @@ const htmlContent = `<!DOCTYPE html>
       }
     }
 
-    /* ==========================================================================
-       7. MOTIVATIONAL QUOTES
-       ========================================================================== */
     const MOTIVATIONAL_QUOTES = [
       "Bugun yangi marralarni zabt etamiz, Savarbek! 🚀",
       "Har bir yechilgan misol seni yanada kuchli qiladi! 💪",
@@ -3091,15 +3284,11 @@ const htmlContent = `<!DOCTYPE html>
       "Zukko va epchil Savarbek bilan o'qish juda qiziq! 🧩"
     ];
 
-    /* ==========================================================================
-       8. MAIN APPLICATION CONTROLLER
-       ========================================================================== */
     class AppController {
       constructor() {
         this.confetti = new ConfettiEngine('confetti-canvas');
         this.currentScreen = 'screen-splash';
         
-        // Math state
         this.selectedMathOp = 'addition';
         this.selectedMathStage = 1;
         this.mathQuestions = [];
@@ -3109,7 +3298,6 @@ const htmlContent = `<!DOCTYPE html>
         this.mathCurrentInput = '';
         this.mathQuestionLocked = false;
 
-        // English state
         this.selectedEngCat = 'vocabulary';
         this.selectedEngStage = 1;
         this.engQuestions = [];
@@ -3117,13 +3305,10 @@ const htmlContent = `<!DOCTYPE html>
         this.engCorrectCount = 0;
         this.engMistakes = [];
         this.engQuestionLocked = false;
-        this.spellingFilledSlots = []; // For spelling mechanic
+        this.spellingFilledSlots = [];
         this.spellingUsedTileIndices = new Set();
 
-        // Parental gatekeeper
         this.parentChallengeAnswer = 500;
-
-        // Splash screen state
         this.splashRemainingMs = 5000;
         this.splashInterval = null;
         this.splashLastTimestamp = null;
@@ -3175,7 +3360,6 @@ const htmlContent = `<!DOCTYPE html>
         setTimeout(() => toast.classList.remove('show'), 2600);
       }
 
-      /* ---------- SPLASH SCREEN ---------- */
       startSplashTimer() {
         const lastIdx = db.data.lastQuoteIndex;
         let newIdx;
@@ -3222,9 +3406,8 @@ const htmlContent = `<!DOCTYPE html>
         });
       }
 
-      /* ---------- HOME SCREEN ---------- */
       renderHomeScreen() {
-        document.getElementById('sound-icon').textContent = db.data.soundEnabled ? '🔊' : '🔇';
+        document.getElementById('sound-icon').innerHTML = db.data.soundEnabled ? ICONS_JS.soundOn : ICONS_JS.soundOff;
         const totalStars = db.getTotalStars();
         document.getElementById('home-total-stars').textContent = \`\${totalStars} / 240\`;
 
@@ -3239,7 +3422,6 @@ const htmlContent = `<!DOCTYPE html>
         document.getElementById('home-total-solved').textContent = \`\${db.data.totalQuestionsSolved} ta\`;
       }
 
-      /* ---------- MATH SCREENS ---------- */
       renderMathOperations() {
         const ops = ['addition', 'subtraction', 'multiplication', 'division'];
         ops.forEach(op => {
@@ -3267,7 +3449,7 @@ const htmlContent = `<!DOCTYPE html>
           else if (s.maxPercentage >= 80) opStars += 2;
           else if (s.maxPercentage >= 50) opStars += 1;
         });
-        document.getElementById('stages-summary-stars').textContent = \`⭐ \${opStars} / 30\`;
+        document.getElementById('stages-summary-stars-val').textContent = \`\${opStars} / 30\`;
 
         const container = document.getElementById('stages-list-container');
         container.innerHTML = '';
@@ -3278,38 +3460,38 @@ const htmlContent = `<!DOCTYPE html>
           card.className = 'stage-card';
 
           let stateClass = 'state-new';
-          let starsIcon = '⚪⚪⚪';
+          let starsHtml = \`\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
           let subtitleText = 'Rekord: 0% (Yangi)';
           let badgeText = 'Boshlash';
 
           if (!isUnlocked) {
             card.classList.add('locked');
-            starsIcon = '🔒 Qulflangan';
+            starsHtml = \`\${ICONS_JS.lock} <span style="font-size: 12px; font-weight:800;">Qulf</span>\`;
             subtitleText = "Oldingi etapda kamida 50% to'pla";
             badgeText = 'Qulf';
           } else if (stage.attempts === 0) {
             stateClass = 'state-new';
-            starsIcon = '⚪⚪⚪';
+            starsHtml = \`\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
             subtitleText = 'Rekord: 0% (Yangi)';
             badgeText = 'Boshlash';
           } else if (stage.maxPercentage <= 40) {
             stateClass = 'state-hard';
-            starsIcon = '🔴 Yana harakat qil!';
+            starsHtml = \`<span style="color: #EF4444; font-size: 13px; font-weight: 800;">🔴 Yana harakat qil!</span>\`;
             subtitleText = \`Rekord: \${stage.maxPercentage}% | Urinish: \${stage.attempts} ta\`;
             badgeText = 'Qiyin';
           } else if (stage.maxPercentage <= 70) {
             stateClass = 'state-medium';
-            starsIcon = '⭐⚪⚪';
+            starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
             subtitleText = \`Rekord: \${stage.maxPercentage}% | Urinish: \${stage.attempts} ta\`;
             badgeText = "O'rtacha";
           } else if (stage.maxPercentage <= 90) {
             stateClass = 'state-good';
-            starsIcon = '⭐⭐⚪';
+            starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.star}\${ICONS_JS.starWhite}\`;
             subtitleText = \`Rekord: \${stage.maxPercentage}% | Urinish: \${stage.attempts} ta\`;
             badgeText = 'Yaxshi';
           } else if (stage.maxPercentage === 100) {
             stateClass = 'state-perfect';
-            starsIcon = '⭐⭐⭐';
+            starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.star}\${ICONS_JS.star}\`;
             subtitleText = 'Rekord: 100% (Mukammal!)';
             badgeText = '100% 🏆';
           }
@@ -3327,7 +3509,7 @@ const htmlContent = `<!DOCTYPE html>
               </div>
             </div>
             <div class="stage-right">
-              <div class="stage-stars">\${starsIcon}</div>
+              <div class="stage-stars">\${starsHtml}</div>
               <div class="stage-badge">\${badgeText}</div>
             </div>
           \`;
@@ -3491,7 +3673,6 @@ const htmlContent = `<!DOCTYPE html>
         const currentPercentage = this.mathCorrectCount * 10;
         const res = db.saveMathResult(this.selectedMathOp, this.selectedMathStage, currentPercentage);
 
-        const badgeIcon = document.getElementById('result-badge-icon');
         const headline = document.getElementById('result-headline');
         const scorePercent = document.getElementById('result-score-percent');
         const comparisonPill = document.getElementById('result-comparison-text');
@@ -3501,28 +3682,25 @@ const htmlContent = `<!DOCTYPE html>
         scorePercent.textContent = \`\${currentPercentage}%\`;
         summaryLine.textContent = \`10 ta misoldan \${this.mathCorrectCount} tasini to'g'ri yechding!\`;
 
-        let starsStr = '⚪⚪⚪';
-        if (currentPercentage === 100) starsStr = '⭐⭐⭐';
-        else if (currentPercentage >= 80) starsStr = '⭐⭐⚪';
-        else if (currentPercentage >= 50) starsStr = '⭐⚪⚪';
-        starsDisplay.textContent = starsStr;
+        let starsHtml = \`\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
+        if (currentPercentage === 100) starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.star}\${ICONS_JS.star}\`;
+        else if (currentPercentage >= 80) starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.star}\${ICONS_JS.starWhite}\`;
+        else if (currentPercentage >= 50) starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
+        starsDisplay.innerHTML = starsHtml;
 
         if (res.isPerfect) {
-          badgeIcon.textContent = '🏆';
           headline.textContent = "BARAKALLA, SAVARBEK!";
           comparisonPill.className = 'result-comparison-pill new-record';
           comparisonPill.textContent = "🌟 100% Mukammal zabt etding!";
           sound.playFanfare();
           this.confetti.fire(120);
         } else if (res.isNewRecord) {
-          badgeIcon.textContent = '🥇';
           headline.textContent = "YANGI REKORD!";
           comparisonPill.className = 'result-comparison-pill new-record';
           comparisonPill.textContent = \`Oldingi eng yuqori natijang: \${res.oldMax}% edi\`;
           sound.playFanfare();
           this.confetti.fire(90);
         } else {
-          badgeIcon.textContent = currentPercentage >= 50 ? '👍' : '💪';
           headline.textContent = currentPercentage >= 50 ? "Yaxshi Natija!" : "Yana Harakat Qil!";
           comparisonPill.className = 'result-comparison-pill kept-record';
           comparisonPill.textContent = \`🛡️ Eng yuqori rekording: \${res.oldMax}% (Saqlandi)\`;
@@ -3550,7 +3728,6 @@ const htmlContent = `<!DOCTYPE html>
         const nextBtn = document.getElementById('btn-next-stage');
         if (this.selectedMathStage < 10 && currentPercentage >= 50) {
           nextBtn.style.display = 'flex';
-          nextBtn.innerHTML = \`<span>➡️ \${this.selectedMathStage + 1}-Etapga o'tish</span>\`;
         } else {
           nextBtn.style.display = 'none';
         }
@@ -3586,7 +3763,7 @@ const htmlContent = `<!DOCTYPE html>
           else if (s.maxPercentage >= 80) catStars += 2;
           else if (s.maxPercentage >= 50) catStars += 1;
         });
-        document.getElementById('eng-stages-summary-stars').textContent = \`⭐ \${catStars} / 30\`;
+        document.getElementById('eng-stages-summary-stars-val').textContent = \`\${catStars} / 30\`;
 
         const container = document.getElementById('eng-stages-list-container');
         container.innerHTML = '';
@@ -3600,34 +3777,34 @@ const htmlContent = `<!DOCTYPE html>
           card.className = 'stage-card';
 
           let stateClass = 'state-new';
-          let starsIcon = '⚪⚪⚪';
+          let starsHtml = \`\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
           let subtitleText = \`\${meta.icon} \${meta.title} • 10 ta savol\`;
           let badgeText = 'Boshlash';
 
           if (!isUnlocked) {
             card.classList.add('locked');
-            starsIcon = '🔒 Qulflangan';
+            starsHtml = \`\${ICONS_JS.lock} <span style="font-size: 12px; font-weight:800;">Qulf</span>\`;
             subtitleText = "Oldingi etapda kamida 50% to'pla";
             badgeText = 'Qulf';
           } else if (stage.attempts === 0) {
             stateClass = 'state-new';
-            starsIcon = '⚪⚪⚪';
+            starsHtml = \`\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
             badgeText = 'Yangi';
           } else if (stage.maxPercentage <= 40) {
             stateClass = 'state-hard';
-            starsIcon = '🔴 Yana harakat qil!';
+            starsHtml = \`<span style="color: #EF4444; font-size: 13px; font-weight: 800;">🔴 Yana harakat qil!</span>\`;
             badgeText = \`\${stage.maxPercentage}%\`;
           } else if (stage.maxPercentage <= 70) {
             stateClass = 'state-medium';
-            starsIcon = '⭐⚪⚪';
+            starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
             badgeText = \`\${stage.maxPercentage}%\`;
           } else if (stage.maxPercentage <= 90) {
             stateClass = 'state-good';
-            starsIcon = '⭐⭐⚪';
+            starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.star}\${ICONS_JS.starWhite}\`;
             badgeText = \`\${stage.maxPercentage}%\`;
           } else if (stage.maxPercentage === 100) {
             stateClass = 'state-perfect';
-            starsIcon = '⭐⭐⭐';
+            starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.star}\${ICONS_JS.star}\`;
             badgeText = '100% 🏆';
           }
 
@@ -3644,7 +3821,7 @@ const htmlContent = `<!DOCTYPE html>
               </div>
             </div>
             <div class="stage-right">
-              <div class="stage-stars">\${starsIcon}</div>
+              <div class="stage-stars">\${starsHtml}</div>
               <div class="stage-badge">\${badgeText}</div>
             </div>
           \`;
@@ -3715,7 +3892,7 @@ const htmlContent = `<!DOCTYPE html>
               <div class="eng-prompt-emoji">\${q.emoji}</div>
               <div class="eng-prompt-word">
                 <span>\${q.word}</span>
-                <button class="btn-speak-inline" id="btn-speak-word" title="Talaffuzni eshitish">🔊</button>
+                <button class="btn-speak-inline" id="btn-speak-word" title="Talaffuzni eshitish">\${ICONS_JS.speaker}</button>
               </div>
               <div class="eng-prompt-subtext">O'zbekcha ma'nosi qaysi?</div>
             </div>
@@ -3726,10 +3903,8 @@ const htmlContent = `<!DOCTYPE html>
             sound.speakEnglish(q.speakText);
           });
 
-          // Pronounce on question display
           setTimeout(() => sound.speakEnglish(q.speakText), 250);
 
-          // 4 Option Buttons
           bottomPanel.innerHTML = \`
             <div class="eng-options-container">
               \${q.options.map(opt => \`<button class="eng-opt-btn" data-val="\${opt}">\${opt}</button>\`).join('')}
@@ -3744,11 +3919,10 @@ const htmlContent = `<!DOCTYPE html>
           });
 
         } else if (q.type === 'listening') {
-          // Listening Mechanic: word hidden, central pulsating audio button
           cardContent.innerHTML = \`
             <div class="eng-prompt-box">
               <div class="listening-center-controls">
-                <button class="btn-audio-main" id="btn-audio-play" title="Eshitish">🔊</button>
+                <button class="btn-audio-main" id="btn-audio-play" title="Eshitish">\${ICONS_JS.speakerBig}</button>
                 <button class="btn-audio-slow" id="btn-audio-slow">🐢 Sekin eshitish</button>
               </div>
               <div class="eng-prompt-subtext">Ovozni tingla va to'g'ri ma'noni top:</div>
@@ -3779,7 +3953,6 @@ const htmlContent = `<!DOCTYPE html>
           });
 
         } else if (q.type === 'spelling') {
-          // Spelling Mechanic: Slot boxes + Tile bank
           this.spellingFilledSlots = new Array(q.slotsCount).fill('');
           this.spellingUsedTileIndices.clear();
 
@@ -3788,7 +3961,7 @@ const htmlContent = `<!DOCTYPE html>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-size: 34px;">\${q.emoji}</span>
                 <span style="font-size: 20px; font-weight: 800; color: var(--text-main);">\${q.uz}</span>
-                <button class="btn-speak-inline" id="btn-spelling-speak">🔊</button>
+                <button class="btn-speak-inline" id="btn-spelling-speak">\${ICONS_JS.speaker}</button>
               </div>
               <div class="spelling-slots-row" id="spelling-slots-row">
                 \${Array.from({ length: q.slotsCount }).map((_, i) => \`
@@ -3811,7 +3984,10 @@ const htmlContent = `<!DOCTYPE html>
                 \`).join('')}
               </div>
               <div class="spelling-action-row">
-                <button class="btn-spelling-del" id="btn-spelling-backspace">⌫ Bitta o'chirish</button>
+                <button class="btn-spelling-del" id="btn-spelling-backspace">
+                  \${ICONS.delete}
+                  <span>O'chirish</span>
+                </button>
               </div>
             </div>
           \`;
@@ -3819,7 +3995,6 @@ const htmlContent = `<!DOCTYPE html>
           this.bindSpellingEvents(q);
 
         } else if (q.type === 'grammar') {
-          // Grammar Mechanic: Sentence with blank + Rule explanation on wrong
           cardContent.innerHTML = \`
             <div class="eng-prompt-box">
               <div style="font-size: 14px; font-weight: 700; color: var(--text-muted); margin-bottom: 2px;">
@@ -3953,7 +4128,6 @@ const htmlContent = `<!DOCTYPE html>
             const tileIdx = parseInt(tile.dataset.tileIndex, 10);
             const letter = tile.dataset.letter;
 
-            // Find first empty slot
             const emptyIdx = this.spellingFilledSlots.findIndex(s => s === '');
             if (emptyIdx === -1) return;
 
@@ -3966,7 +4140,6 @@ const htmlContent = `<!DOCTYPE html>
           });
         });
 
-        // Slot click to return letter
         slotEls.forEach(slot => {
           slot.addEventListener('click', () => {
             if (this.engQuestionLocked) return;
@@ -3986,7 +4159,6 @@ const htmlContent = `<!DOCTYPE html>
 
         document.getElementById('btn-spelling-backspace').addEventListener('click', () => {
           if (this.engQuestionLocked) return;
-          // Find last filled slot
           for (let i = this.spellingFilledSlots.length - 1; i >= 0; i--) {
             if (this.spellingFilledSlots[i] !== '') {
               sound.playTap();
@@ -4015,7 +4187,6 @@ const htmlContent = `<!DOCTYPE html>
           }
         });
 
-        // Check if all slots filled
         const allFilled = this.spellingFilledSlots.every(s => s && s.letter);
         if (allFilled) {
           this.validateSpellingWord(q);
@@ -4081,7 +4252,6 @@ const htmlContent = `<!DOCTYPE html>
         const currentPercentage = this.engCorrectCount * 10;
         const res = db.saveEngResult(this.selectedEngCat, this.selectedEngStage, currentPercentage);
 
-        const badgeIcon = document.getElementById('eng-result-badge-icon');
         const headline = document.getElementById('eng-result-headline');
         const scorePercent = document.getElementById('eng-result-score-percent');
         const comparisonPill = document.getElementById('eng-result-comparison-text');
@@ -4091,28 +4261,25 @@ const htmlContent = `<!DOCTYPE html>
         scorePercent.textContent = \`\${currentPercentage}%\`;
         summaryLine.textContent = \`10 ta savoldan \${this.engCorrectCount} tasini to'g'ri topding!\`;
 
-        let starsStr = '⚪⚪⚪';
-        if (currentPercentage === 100) starsStr = '⭐⭐⭐';
-        else if (currentPercentage >= 80) starsStr = '⭐⭐⚪';
-        else if (currentPercentage >= 50) starsStr = '⭐⚪⚪';
-        starsDisplay.textContent = starsStr;
+        let starsHtml = \`\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
+        if (currentPercentage === 100) starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.star}\${ICONS_JS.star}\`;
+        else if (currentPercentage >= 80) starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.star}\${ICONS_JS.starWhite}\`;
+        else if (currentPercentage >= 50) starsHtml = \`\${ICONS_JS.star}\${ICONS_JS.starWhite}\${ICONS_JS.starWhite}\`;
+        starsDisplay.innerHTML = starsHtml;
 
         if (res.isPerfect) {
-          badgeIcon.textContent = '🏆';
           headline.textContent = "BARAKALLA, SAVARBEK!";
           comparisonPill.className = 'result-comparison-pill new-record';
           comparisonPill.textContent = "🌟 100% Mukammal zabt etding!";
           sound.playFanfare();
           this.confetti.fire(120);
         } else if (res.isNewRecord) {
-          badgeIcon.textContent = '🥇';
           headline.textContent = "YANGI REKORD!";
           comparisonPill.className = 'result-comparison-pill new-record';
           comparisonPill.textContent = \`Oldingi eng yuqori natijang: \${res.oldMax}% edi\`;
           sound.playFanfare();
           this.confetti.fire(90);
         } else {
-          badgeIcon.textContent = currentPercentage >= 50 ? '👍' : '💪';
           headline.textContent = currentPercentage >= 50 ? "Yaxshi Natija!" : "Yana Harakat Qil!";
           comparisonPill.className = 'result-comparison-pill kept-record';
           comparisonPill.textContent = \`🛡️ Eng yuqori rekording: \${res.oldMax}% (Saqlandi)\`;
@@ -4129,7 +4296,7 @@ const htmlContent = `<!DOCTYPE html>
             item.className = 'mistake-item';
             item.innerHTML = \`
               <div style="display: flex; align-items: center; gap: 8px;">
-                <button class="btn-speak-inline mistake-audio-btn" data-audio="\${m.speakText}">🔊</button>
+                <button class="btn-speak-inline mistake-audio-btn" data-audio="\${m.speakText}">\${ICONS_JS.speaker}</button>
                 <span>\${idx + 1}) <b>\${m.correctAns}</b></span>
               </div>
               <span class="wrong-ans">Sening javobing: \${m.userAns} ❌</span>
@@ -4149,7 +4316,6 @@ const htmlContent = `<!DOCTYPE html>
         const nextBtn = document.getElementById('btn-eng-next-stage');
         if (this.selectedEngStage < 10 && currentPercentage >= 50) {
           nextBtn.style.display = 'flex';
-          nextBtn.innerHTML = \`<span>➡️ \${this.selectedEngStage + 1}-Etapga o'tish</span>\`;
         } else {
           nextBtn.style.display = 'none';
         }
@@ -4157,18 +4323,15 @@ const htmlContent = `<!DOCTYPE html>
         this.navigateTo('screen-eng-result');
       }
 
-      /* ---------- EVENTS ---------- */
       initEvents() {
-        // Sound toggle
         document.getElementById('btn-toggle-sound').addEventListener('click', () => {
           db.data.soundEnabled = !db.data.soundEnabled;
           sound.enabled = db.data.soundEnabled;
           db.save();
-          document.getElementById('sound-icon').textContent = sound.enabled ? '🔊' : '🔇';
+          document.getElementById('sound-icon').innerHTML = sound.enabled ? ICONS_JS.soundOn : ICONS_JS.soundOff;
           if (sound.enabled) sound.playTap();
         });
 
-        // Home card navigations
         document.getElementById('card-open-math').addEventListener('click', () => {
           this.navigateTo('screen-operations');
         });
@@ -4177,15 +4340,12 @@ const htmlContent = `<!DOCTYPE html>
           this.navigateTo('screen-eng-categories');
         });
 
-        // Math back buttons
         document.getElementById('btn-back-to-home').addEventListener('click', () => this.navigateTo('screen-home'));
         document.getElementById('btn-back-to-ops').addEventListener('click', () => this.navigateTo('screen-operations'));
 
-        // English back buttons
         document.getElementById('btn-back-eng-to-home').addEventListener('click', () => this.navigateTo('screen-home'));
         document.getElementById('btn-back-to-eng-cats').addEventListener('click', () => this.navigateTo('screen-eng-categories'));
 
-        // Math Op Card clicks
         document.querySelectorAll('.op-card[data-op]').forEach(card => {
           card.addEventListener('click', () => {
             this.selectedMathOp = card.dataset.op;
@@ -4193,7 +4353,6 @@ const htmlContent = `<!DOCTYPE html>
           });
         });
 
-        // English Category Card clicks
         document.querySelectorAll('.op-card[data-cat]').forEach(card => {
           card.addEventListener('click', () => {
             this.selectedEngCat = card.dataset.cat;
@@ -4201,13 +4360,11 @@ const htmlContent = `<!DOCTYPE html>
           });
         });
 
-        // Math Numpad
         document.getElementById('quiz-numpad').addEventListener('click', (e) => {
           const btn = e.target.closest('.numpad-btn');
           if (btn) this.handleMathNumpadInput(btn.dataset.key);
         });
 
-        // Physical keyboard for PC
         window.addEventListener('keydown', (e) => {
           if (this.currentScreen === 'screen-quiz') {
             if (e.key >= '0' && e.key <= '9') this.handleMathNumpadInput(e.key);
@@ -4219,7 +4376,6 @@ const htmlContent = `<!DOCTYPE html>
         document.getElementById('btn-skip-wrong').addEventListener('click', () => this.advanceMathQuestion());
         document.getElementById('btn-eng-skip-wrong').addEventListener('click', () => this.advanceEngQuestion());
 
-        // Exit Confirm Modals
         document.getElementById('btn-exit-quiz').addEventListener('click', () => {
           sound.playTap();
           this.exitTargetScreen = 'screen-stages';
@@ -4243,7 +4399,6 @@ const htmlContent = `<!DOCTYPE html>
           this.navigateTo(this.exitTargetScreen || 'screen-home');
         });
 
-        // Math Result Buttons
         document.getElementById('btn-retry-stage').addEventListener('click', () => {
           this.startMathQuiz(this.selectedMathStage);
         });
@@ -4254,7 +4409,6 @@ const htmlContent = `<!DOCTYPE html>
           this.navigateTo('screen-stages');
         });
 
-        // English Result Buttons
         document.getElementById('btn-eng-retry-stage').addEventListener('click', () => {
           this.startEngQuiz(this.selectedEngStage);
         });
@@ -4265,7 +4419,6 @@ const htmlContent = `<!DOCTYPE html>
           this.navigateTo('screen-eng-stages');
         });
 
-        // Settings / Parental Gate
         document.getElementById('btn-open-settings').addEventListener('click', () => {
           sound.playTap();
           const challenges = [
@@ -4311,4 +4464,4 @@ const htmlContent = `<!DOCTYPE html>
 `;
 
 fs.writeFileSync('index.html', htmlContent, 'utf8');
-console.log('Successfully generated index.html! Size:', htmlContent.length);
+console.log('Successfully generated index.html with crisp vector icons & modern animations! Size:', htmlContent.length);
