@@ -657,6 +657,113 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
         };
         document.getElementById('stages-nav-title').textContent = opTitles[op] || this.t('mathOpsTitle');
 
+        const mathStageTopics = {
+          addition: {
+            uz: [
+              "20 gacha qo'shish",
+              "O'nlikdan o'tish (+)",
+              "Dumaloq o'nliklar (+)",
+              "O'nliklar bilan qo'shish",
+              "Ikki xonali sonlar (+)",
+              "100 gacha qo'shish",
+              "100 dan oshuvchi yig'indi",
+              "Katta sonlar yig'indisi",
+              "3 ta son yig'indisi",
+              "Chempionlar bosqichi 🏆"
+            ],
+            ru: [
+              "Сложение до 20",
+              "Переход через десяток (+)",
+              "Круглые десятки (+)",
+              "Сложение с десятками",
+              "Двузначные числа (+)",
+              "Сложение до 100",
+              "Сложение через 100",
+              "Большие двузначные числа",
+              "Сумма 3 чисел",
+              "Уровень чемпионов 🏆"
+            ]
+          },
+          subtraction: {
+            uz: [
+              "20 dan ayirish",
+              "O'nlikdan o'tish (-)",
+              "Dumaloq o'nliklar (-)",
+              "O'nliklarni ayirish",
+              "Ikki xonali sonlar (-)",
+              "O'nlikdan o'tib ayirish",
+              "100 dan ayirish",
+              "100 dan katta sonlar",
+              "Ketma-ket ayirish",
+              "Chempionlar bosqichi 🏆"
+            ],
+            ru: [
+              "Вычитание до 20",
+              "Переход через десяток (-)",
+              "Круглые десятки (-)",
+              "Вычитание десятков",
+              "Двузначные числа (-)",
+              "Вычитание с переходом",
+              "Вычитание из 100",
+              "Числа больше 100",
+              "Последовательное вычитание",
+              "Уровень чемпионов 🏆"
+            ]
+          },
+          multiplication: {
+            uz: [
+              "2 va 3 ga ko'paytirish",
+              "4 va 5 ga ko'paytirish",
+              "6 va 7 ga ko'paytirish",
+              "8 va 9 ga ko'paytirish",
+              "To'liq karra jadvali",
+              "10 va o'nliklarga (×)",
+              "11 va 12 ga ko'paytirish",
+              "Ikki xonali ko'paytirish",
+              "Yirik sonlar ko'paytmasi",
+              "Chempionlar bosqichi 🏆"
+            ],
+            ru: [
+              "Умножение на 2 и 3",
+              "Умножение на 4 и 5",
+              "Умножение на 6 и 7",
+              "Умножение на 8 и 9",
+              "Вся таблица умножения",
+              "Умножение на десятки",
+              "Умножение на 11 и 12",
+              "Двузначные множители",
+              "Умножение больших чисел",
+              "Уровень чемпионов 🏆"
+            ]
+          },
+          division: {
+            uz: [
+              "2 va 3 ga bo'lish",
+              "4 va 5 ga bo'lish",
+              "6 va 7 ga bo'lish",
+              "8 va 9 ga bo'lish",
+              "Aralash karra bo'lish",
+              "To'liq o'nliklarni (÷)",
+              "Ikki xonali bo'linuvchilar",
+              "Katta sonlarni bo'lish",
+              "100 gacha bo'lish",
+              "Chempionlar bosqichi 🏆"
+            ],
+            ru: [
+              "Деление на 2 и 3",
+              "Деление на 4 и 5",
+              "Деление на 6 и 7",
+              "Деление на 8 и 9",
+              "Деление по таблице",
+              "Деление круглых десятков",
+              "Двузначные делимые",
+              "Деление больших чисел",
+              "Деление чисел до 100",
+              "Уровень чемпионов 🏆"
+            ]
+          }
+        };
+
         const list = db.data.math[op] || [];
         let completed = 0;
         let sumPct = 0;
@@ -685,6 +792,10 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
             else { statusText = this.t('statusRepeat'); statusColor = '#EF4444'; }
           }
 
+          const langKey = this.currentLang === 'ru' ? 'ru' : 'uz';
+          const stageTopic = (mathStageTopics[op] && mathStageTopics[op][langKey] && mathStageTopics[op][langKey][i]) 
+            || \`\${opTitles[op]} • \${this.t('stageLabel')} \${stageNum}\`;
+
           const card = document.createElement('div');
           card.className = \`stage-card \${isLocked ? 'locked' : ''}\`;
           card.innerHTML = \`
@@ -693,7 +804,7 @@ function getClientJS(I18N, ENGLISH_DATA, ICONS, MathGeneratorCode) {
               \${isLocked ? ICONS_JS.lock : \`<span style="font-size: 11px; font-weight: 800; color: \${statusColor};">\${statusText}</span>\`}
             </div>
             <div class="stage-topic-title" style="min-height: 24px; font-size: 13px;">
-              \${opTitles[op]} • \${this.t('stageLabel')} \${stageNum}
+              \${stageTopic}
             </div>
             <div class="stage-meta-row">
               <span style="color: var(--text-muted); font-size: 11px;">\${this.t('record')} \${st.maxPercentage}%</span>
